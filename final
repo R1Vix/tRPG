@@ -3,16 +3,16 @@
 	<head>
 		<meta charset="utf-8">
 			<style>
-				table
-				{
-					border-collapse: collapse;
-				}
+            table
+            {
+                border-collapse: collapse;
+            }
             td
             {
-                border: 1px solid black;
+                border: 5px solid gray;
             }
-        </style>
-        <script>
+            </style>
+            <script>
             function start()
             {
                 let board="<table>"
@@ -21,7 +21,7 @@
                     board+="<tr>"
                     for(let j=0;j<20;j++)
                     {
-                        board+="<td width='80px' height='80px'></td>"
+                        board+="<td width='100px' height='100px'></td>"
                     }
                     board+="</tr>"
                 }
