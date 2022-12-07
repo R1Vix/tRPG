@@ -1,18 +1,32 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-			<style>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body
+            {
+                background-image: url(neturalBackground01.png);
+                background-repeat: no-repeat;
+            }
+            .flex 
+            {   
+                display: flex;
+                flex-wrap: wrap;
+            }
             table
             {
                 border-collapse: collapse;
             }
             td
             {
-                border: 5px solid gray;
+                border: 1px solid black;
+                width: 100px;
+                height: 100px;
+                box-sizing: border-box;
             }
-            </style>
-            <script>
+        </style>
+        <script>
+            let selectedFlag=1
             function start()
             {
                 let board="<table>"
@@ -21,17 +35,40 @@
                     board+="<tr>"
                     for(let j=0;j<20;j++)
                     {
-                        board+="<td width='100px' height='100px'></td>"
+                        board+="<td id='cell"+i+j+"' onclick='selected("+i+","+j+")' ></td>"
                     }
                     board+="</tr>"
                 }
                 board+="</table>"
                 document.getElementById("display").innerHTML=board
             }
+            function selected(x,y)
+            {
+                if(selectedFlag)
+                {
+                    selectedFlag=0
+                    for(let i=0;i<10;i++)
+                    {
+                        for(let j=0;j<20;j++)
+                        {             
+                            if((Math.abs(x-i)+Math.abs(y-j))<=3)
+                            {
+                                console.log( document.getElementById("cell"+i+j))
+                                document.getElementById("cell"+i+j).setAttribute("style","background-color:blue")
+                            }
+                        }
+                    }
+                    document.getElementById("cell"+x+y).setAttribute("style","background-color:darkblue")
+                }
+                else
+                {
+                    selectedFlag=1
+                }
+            }
             window.addEventListener("load",start,false)
         </script>
     </head>
     <body>
-        <div id="display"></div>
+        <div class="flex" id="display"></div>
     </body>
 </html>
