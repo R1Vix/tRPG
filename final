@@ -15,6 +15,8 @@
             }
             table
             {
+                padding: 0px;
+                margin: 0px;
                 border-collapse: collapse;
             }
             td
@@ -26,7 +28,7 @@
             }
         </style>
         <script>
-            let selectedFlag=1
+            let selectedFlag=1,characterX,characterY
             function start()
             {
                 let board="<table>"
@@ -35,7 +37,8 @@
                     board+="<tr>"
                     for(let j=0;j<20;j++)
                     {
-                        board+="<td id='cell"+i+j+"' onclick='selected("+i+","+j+")' ></td>"
+                        if(j==3&&i==3) board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")' ><img src='pikachu.png' width='100px' height='100px'></td>"
+                        else board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")' ></td>"
                     }
                     board+="</tr>"
                 }
@@ -44,25 +47,45 @@
             }
             function selected(x,y)
             {
-                if(selectedFlag)
+                if(selectedFlag&&document.getElementById("cell"+x+y).innerHTML!="")
                 {
+                    characterX=x
+                    characterY=y
                     selectedFlag=0
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
                         {             
-                            if((Math.abs(x-i)+Math.abs(y-j))<=3)
+                            if((Math.abs(x-j)+Math.abs(y-i))<=3)
                             {
-                                console.log( document.getElementById("cell"+i+j))
-                                document.getElementById("cell"+i+j).setAttribute("style","background-color:blue")
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color:blue")
                             }
                         }
                     }
                     document.getElementById("cell"+x+y).setAttribute("style","background-color:darkblue")
                 }
-                else
+                else if(selectedFlag==0)
                 {
-                    selectedFlag=1
+                    if((Math.abs(characterX-x)+Math.abs(characterY-y))<=3&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0)
+                    {
+                        selectedFlag=1
+                        move(x,y)
+                    }
+                }
+            }
+            function move(x,y)
+            {
+                document.getElementById("cell"+x+y).innerHTML="<img src='pikachu.png' width='100px' height='100px'>"
+                document.getElementById("cell"+characterX+characterY).innerHTML=""
+                for(let i=0;i<10;i++)
+                {
+                    for(let j=0;j<20;j++)
+                    {             
+                        if((Math.abs(characterX-j)+Math.abs(characterY-i))<=3)
+                        {
+                            document.getElementById("cell"+j+i).setAttribute("style","background-color:none")
+                        }
+                    }
                 }
             }
             window.addEventListener("load",start,false)
