@@ -26,10 +26,18 @@
                 height: 100px;
                 box-sizing: border-box;
             }
+            .characterImgSize
+            {
+                width: 100px;
+                height: 100px;
+            }
         </style>
         <script>
-            let selectedFlag=1,characterX,characterY
-            function start()
+            let selectedFlag=1,characterX,characterY,sample=new Object,characterStorage=new Array(20)
+            for (let i=0;i<characterStorage.length;i++) characterStorage[i]=new Array(10)
+            characterStorage[3][3]=sample
+            sample.mobility=5;sample.img="<img src='pikachu.png' class='characterImgSize'>"
+            function setup()
             {
                 let board="<table>"
                 for(let i=0;i<10;i++)
@@ -37,8 +45,8 @@
                     board+="<tr>"
                     for(let j=0;j<20;j++)
                     {
-                        if(j==3&&i==3) board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")' ><img src='pikachu.png' width='100px' height='100px'></td>"
-                        else board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")' ></td>"
+                        if(j==3&&i==3) board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")'>"+characterStorage[j][i].img+"</td>"
+                        else board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")'></td>"
                     }
                     board+="</tr>"
                 }
@@ -56,17 +64,17 @@
                     {
                         for(let j=0;j<20;j++)
                         {             
-                            if((Math.abs(x-j)+Math.abs(y-i))<=3)
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].mobility)
                             {
-                                document.getElementById("cell"+j+i).setAttribute("style","background-color:blue")
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5);")
                             }
                         }
                     }
-                    document.getElementById("cell"+x+y).setAttribute("style","background-color:darkblue")
+                    document.getElementById("cell"+x+y).setAttribute("style","background-color: rgba(1,1,122,0.7);")
                 }
                 else if(selectedFlag==0)
                 {
-                    if((Math.abs(characterX-x)+Math.abs(characterY-y))<=3&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0)
+                    if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].mobility&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0)
                     {
                         selectedFlag=1
                         move(x,y)
@@ -75,20 +83,22 @@
             }
             function move(x,y)
             {
-                document.getElementById("cell"+x+y).innerHTML="<img src='pikachu.png' width='100px' height='100px'>"
+                document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].img
                 document.getElementById("cell"+characterX+characterY).innerHTML=""
                 for(let i=0;i<10;i++)
                 {
                     for(let j=0;j<20;j++)
                     {             
-                        if((Math.abs(characterX-j)+Math.abs(characterY-i))<=3)
+                        if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility)
                         {
-                            document.getElementById("cell"+j+i).setAttribute("style","background-color:none")
+                            document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                         }
                     }
                 }
+                characterStorage[x][y]=characterStorage[characterX][characterY]
+                characterStorage[characterX][characterY]=null
             }
-            window.addEventListener("load",start,false)
+            window.addEventListener("load",setup,false)
         </script>
     </head>
     <body>
