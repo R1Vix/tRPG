@@ -5,8 +5,11 @@
         <style>
             body
             {
+                padding: 0px;
+                margin: 0px;
                 background-image: url(neturalBackground01.png);
                 background-repeat: no-repeat;
+                overflow-x: scroll
             }
             .flex 
             {   
@@ -18,9 +21,12 @@
                 padding: 0px;
                 margin: 0px;
                 border-collapse: collapse;
+                box-sizing: border-box;
             }
             td
             {
+                padding: 0px;
+                margin: 0px;
                 border: 1px solid black;
                 width: 100px;
                 height: 100px;
@@ -28,6 +34,8 @@
             }
             .characterImgSize
             {
+                padding: 0px;
+                margin: 0px;
                 width: 100px;
                 height: 100px;
             }
@@ -35,8 +43,45 @@
         <script>
             let selectedFlag=1,characterX,characterY,sample=new Object,characterStorage=new Array(20)
             for (let i=0;i<characterStorage.length;i++) characterStorage[i]=new Array(10)
+            sample=new unit("召喚師", "<img src='pikachu.png' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 3, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 5, [6, 9, 12], "至尊召喚師", "-", "當自己的HP高於2，且受到敵人致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "反擊", "-", "【若自身HP為100%， / 若自身HP高於50%， /】受到敵人攻擊時，可無視距離進行反擊", "痊癒", "-", "【奇數回合開始時，回復4HP / 回合開始時，回復4HP / 回合開始時，回復7HP】")
             characterStorage[3][3]=sample
-            sample.mobility=5;sample.img="<img src='pikachu.png' class='characterImgSize'>"
+            sample2=new unit("召喚師", "<img src='pikachu.png' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 3, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [6, 9, 12], "至尊召喚師", "-", "當自己的HP高於2，且受到敵人致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "反擊", "-", "【若自身HP為100%， / 若自身HP高於50%， /】受到敵人攻擊時，可無視距離進行反擊", "痊癒", "-", "【奇數回合開始時，回復4HP / 回合開始時，回復4HP / 回合開始時，回復7HP】")
+            characterStorage[5][5]=sample2
+            function unit(name, nameIcon, nameTitle, level, mv, hp, hpGrow, dmg, dmgGrow, spd, spdGrow, def, defGrow, res, resGrow, wep, wepTitle, wepRange, wepMt, wepAtk, skill1, skillIcon1, skillTitle1, skillLevel1, skill2, skillIcon2, skillTitle2, skillLevel2, skill3, skillIcon3, skillTitle3, skillLevel3)
+            {
+                this.unitName = name
+                this.unitIcon = nameIcon
+                this.nameDescription = nameTitle
+                this.unitLevel = level
+                this.mobility = mv
+                this.hitPoint = hp
+                this.hitPointGrowth = hpGrow
+                this.damage = dmg
+                this.damageGrowth = dmgGrow
+                this.speed = spd
+                this.speedGrowth = spdGrow
+                this.defense = def
+                this.defenseGrowth = defGrow
+                this.resistance = res
+                this.resistanceGrowth = resGrow
+                this.weaponName = wep
+                this.weaponDescripton = wepTitle
+                this.weaponRange = wepRange
+                this.weaponMight = wepMt
+                this.weaponAttack = wepAtk
+                this.skill1Name = skill1
+                this.skill1Icon = skillIcon1
+                this.skill1Description = skillTitle1
+                this.skill1Level = skillLevel1
+                this.skill2Name = skill2
+                this.skill2Icon = skillIcon2
+                this.skill2Description = skillTitle2
+                this.skill2Level = skillLevel2
+                this.skill3Name = skill3
+                this.skill3Icon = skillIcon3
+                this.skill3Description = skillTitle3
+                this.skill3Level = skillLevel3
+            }
             function setup()
             {
                 let board="<table>"
@@ -45,7 +90,7 @@
                     board+="<tr>"
                     for(let j=0;j<20;j++)
                     {
-                        if(j==3&&i==3) board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")'>"+characterStorage[j][i].img+"</td>"
+                        if(characterStorage[j][i]!=undefined) board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")'>"+characterStorage[j][i].unitIcon+"</td>"
                         else board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")'></td>"
                     }
                     board+="</tr>"
@@ -64,26 +109,36 @@
                     {
                         for(let j=0;j<20;j++)
                         {             
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].mobility)
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined)
                             {
-                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5);")
+                                
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
+                            }
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=undefined)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(255,0,0,0.5)")
                             }
                         }
                     }
-                    document.getElementById("cell"+x+y).setAttribute("style","background-color: rgba(1,1,122,0.7);")
+                    document.getElementById("cell"+x+y).setAttribute("style","background-color: rgba(1,1,122,0.7)")
                 }
                 else if(selectedFlag==0)
                 {
-                    if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].mobility&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0)
+                    if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].mobility&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y]==undefined)
                     {
                         selectedFlag=1
                         move(x,y)
+                    }
+                    else if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y]!=undefined)
+                    {
+                        selectedFlag=1
+                        attack(x,y)
                     }
                 }
             }
             function move(x,y)
             {
-                document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].img
+                document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].unitIcon
                 document.getElementById("cell"+characterX+characterY).innerHTML=""
                 for(let i=0;i<10;i++)
                 {
@@ -93,10 +148,30 @@
                         {
                             document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                         }
+                        if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=undefined)
+                        {
+                            document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                        }
                     }
                 }
                 characterStorage[x][y]=characterStorage[characterX][characterY]
-                characterStorage[characterX][characterY]=null
+                characterStorage[characterX][characterY]=undefined
+            }
+            function attack(x,y)
+            {
+                console.log(characterStorage[x][y].hitPoint)
+                characterStorage[x][y].hitPoint-=characterStorage[characterX][characterY].damage
+                console.log(characterStorage[x][y].hitPoint)
+                for(let i=0;i<10;i++)
+                {
+                    for(let j=0;j<20;j++)
+                    {             
+                        if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-j)+Math.abs(characterY-i))!=0&&characterStorage[j][i]!=undefined)
+                        {
+                            document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                        }
+                    }
+                }
             }
             window.addEventListener("load",setup,false)
         </script>
