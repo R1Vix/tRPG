@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <style>
+            body
+            {
+                padding: 0px;
+                margin: 0px;
+                background-image: url(neturalBackground01.png);
+                background-repeat: no-repeat;
+                overflow-x: scroll
+            }
+            table
+            {
+                padding: 0px;
+                margin: 0px;
+                border-collapse: collapse;
+                box-sizing: border-box;
+            }
+            td
+            {
+                padding: 0px;
+                margin: 0px;
+                border: 1px solid black;
+                width: 100px;
+                height: 100px;
+                box-sizing: border-box;
+            }
+            .characterImgSize
+            {
+                padding: 0px;
+                margin: 0px;
+                width: 100px;
+                height: 100px;
+            }
+        </style>
+        <script>
+            let selectedFlag=1,characterX,characterY,playerAction,allyAliveUnit,enemyAliveUnit,characterStorage=new Array(20)
+            for (let i=0;i<characterStorage.length;i++) characterStorage[i]=new Array(10)
+
+            summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 3, [6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 1)
+            characterStorage[18][6] = summoner
+
+            heavyInfantry = new unit("alpha", "重裝兵", "<img src='heavyInfantry.png' alt = '我方重裝兵' class='characterImgSize'>", "使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", 1, 0, 1, 25, 25, 0.7, 11, 0.65, 6, 0.5, 12, 0.6, 5, 0.4, "蒼海之斧", "蒼海之斧的武器敘述", 1, [6, 9, 12]	, "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "破防擊", "<img src='armorBreak.png' alt = '破防擊' class='characterSkillSize'>", ["攻擊時，在敵人防守及魔防 - 30% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 50% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 70% 的情況下給予傷害"], 1, "大地鼓舞", "<img src='honeAtkDef.png' alt = '大地鼓舞' class='characterSkillSize'>", ["回合開始時，周圍1格的我方單位攻擊、防禦 + 1", "回合開始時，周圍1格的我方單位攻擊、防禦 + 3", "回合開始時，周圍1格的我方單位攻擊、防禦 + 5"], 1)
+            characterStorage[17][5] = heavyInfantry
+
+            knight = new unit("alpha", "騎兵", "<img src='knight.png' alt = '我方騎兵' class='characterImgSize'>", "使用槍作為武器，機動性較高", 1, 0, 3, 21, 21, 0.45, 9, 0.5, 8, 0.45, 9, 0.45, 12, 0.6, "反攻槍", "反攻槍的武器敘述", 1, [6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "麗華", "<img src='blizzard.png' alt = '麗華' class='characterSkillSize'>", ["受到敵人攻擊時，戰鬥中的魔防 + 2", "受到敵人攻擊時，戰鬥中的魔防 + 4", "受到敵人攻擊時，戰鬥中的魔防 + 7"], 1)
+            characterStorage[18][5] = knight
+
+            archer = new unit("alpha", "弓箭手", "<img src='archer.png' alt = '我方弓箭手' class='characterImgSize'>", "使用弓作為武器，可攻擊較遠的距離", 1, 0, 2, 19, 19, 0.55, 8, 0.55, 8, 0.65, 7, 0.5, 6, 0.35, "白尾聖弓", "白尾聖弓的武器敘述", 2, [6, 9, 12], "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 7"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1)
+            characterStorage[19][4] = archer
+
+            mage = new unit("alpha", "魔刃", "<img src='mage.png' alt = '我方魔刃' class='characterImgSize'>", "使用黑魔法作為武器，以敵人的魔防計算傷害", 1, 0, 2, 19, 19, 0.55, 8, 0.55, 8, 0.55, 8, 0.55, 6, 0.45, "深邃黑暗", "深邃黑暗的武器敘述", 2, [6, 9, 12], "冰河", "<img src='iceberg.png' alt = '冰河' class='characterSkillSize'>", ["由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 80%"], 1, "生命的代價", "<img src='costOfLife.png' alt = '生命的代價' class='characterSkillSize'>", ["戰鬥中的攻擊、速度、防禦、魔防 + 1，戰鬥後給予自己 2 點傷害", "戰鬥中的攻擊、速度、防禦、魔防 + 2，戰鬥後給予自己 4 點傷害", "戰鬥中的攻擊、速度、防禦、魔防 + 4，戰鬥後給予自己 6 點傷害"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
+            characterStorage[19][5] = mage
+
+            monk = new unit("alpha", "僧侶", "<img src='monk.png' alt = '我方僧侶' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", 1, 0, 2, 19, 19, 0.6, 6, 0.5, 7, 0.45, 6, 0.45, 11, 0.65, "海神的祝福", "海神的祝福的武器敘述", 2, [6, 9, 12], "治癒杖", "<img src='heal.png' alt = '治癒杖' class='characterSkillSize'>", ["我方回合開始時，回復周圍 2 格內的我方單位 5 HP" , "我方回合開始時，回復周圍 2 格內的我方單位 10 HP", "我方回合開始時，回復周圍 2 格內的我方單位（自身攻擊的 50%）HP"], 1, "奉獻", "<img src='devotion.png' alt = '奉獻' class='characterSkillSize'>", ["攻擊時，回復所造成傷害的 25%", "攻擊時，回復所造成傷害的 50%", "攻擊時，回復所造成傷害的 75%"], 1, "天空鼓舞", "<img src='Hㄘㄟ.png' alt = 'honeSpdRes' class='characterSkillSize'>", ["回合開始時，周圍1格的我方單位速度、魔防 + 1", "回合開始時，周圍1格的我方單位速度、魔防 + 3", "回合開始時，周圍1格的我方單位速度、魔防 + 5"], 1)
+            characterStorage[19][6] = monk
+
+            boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [5, 8, 10], 0, 0, [23, 25, 27], [23, 25, 27], 0, [10, 13, 15], 0, [12, 14, 16], 0, [11, 12, 14], 0, [9, 10, 13], "始祖斬裂劍", "默靈的專屬武器，攻擊時，攻擊2次（被敵人攻擊時也可以攻擊2次）", 1, [6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 1)
+            characterStorage[1][8] = boss
+
+            assassin1 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客一' class='characterImgSize'>", "使用劍作為武器，能力平均", [4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "闇之鐵羽劍的武器敘述", 1, "技能一", "<img src='' alt = '' class='characterSkillSize'>", "技能一敘述", 1, "技能二", "<img src='' alt = '' class='characterSkillSize'>", "技能二敘述", 1, "技能三", "<img src='' alt = '' class='characterSkillSize'>", "技能三敘述", 1)
+            characterStorage[14][7] = assassin1
+
+            armoredInfantry1 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [4, 6, 9], 0, 1, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "绯炎大斧的武器敘述", 1, [6, 9, 12], "技能一", "<img src='' alt = '' class='characterSkillSize'>", "技能一敘述", 1, "技能二", "<img src='' alt = '' class='characterSkillSize'>", "技能二敘述", 1, "技能三", "<img src='' alt = '' class='characterSkillSize'>", "技能三敘述", 1)
+            characterStorage[15][2] = armoredInfantry1
+
+            cavalry1 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵一' class='characterImgSize'>", "使用槍作為武器，機動性極高", [4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "風火飛舞的靈槍的武器敘述", 1, [6, 9, 12], "技能一", "<img src='' alt = '' class='characterSkillSize'>", "技能一敘述", 1, "技能二", "<img src='' alt = '' class='characterSkillSize'>", "技能二敘述", 1, "技能三", "<img src='' alt = '' class='characterSkillSize'>", "技能三敘述", 1)
+            characterStorage[7][8] = cavalry1
+
+            longbowman1 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手一' class='characterImgSize'>", "使用弓作為武器，可以攻擊較遠的敵人", [4, 6, 9], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的鍊弓的武器敘述", 2, [6, 9, 12], "技能一", "<img src='' alt = '' class='characterSkillSize'>", "技能一敘述", 1, "技能二", "<img src='' alt = '' class='characterSkillSize'>", "技能二敘述", 1, "技能三", "<img src='' alt = '' class='characterSkillSize'>", "技能三敘述", 1)
+            characterStorage[14][3] = longbowman1
+
+            sorcerer1 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃一' class='characterImgSize'>", "使用黑魔法作為武器，以敵人的魔防計算傷害", [4, 6, 9], 0, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "絕無之書的武器敘述", 2, [6, 9, 12], "技能一", "<img src='' alt = '' class='characterSkillSize'>", "技能一敘述", 1, "技能二", "<img src='' alt = '' class='characterSkillSize'>", "技能二敘述", 1, "技能三", "<img src='' alt = '' class='characterSkillSize'>", "技能三敘述", 1)
+            characterStorage[10][1] = sorcerer1
+
+            monastic1 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶一' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", [4, 6, 9], 0, 0, 22, 22, 0.5, 9, 0.65, 12, 0.75, 7, 0.5, 9, 0.75, "落雷之符", "落雷之符的武器敘述", 2, [6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "技能二", "<img src='' alt = '' class='characterSkillSize'>", "技能二敘述", 1, "技能三", "<img src='' alt = '' class='characterSkillSize'>", "技能三敘述", 1)
+            characterStorage[13][7] = monastic1
+
+            function unit(team, name, nameIcon, nameTitle, level, exp, mv, hp, hpMax, hpGrow, dmg, dmgGrow, spd, spdGrow, def, defGrow, res, resGrow, wep, wepTitle, wepRange, wepMt, wepAtk, skill1, skillIcon1, skillTitle1, skillLevel1, skill2, skillIcon2, skillTitle2, skillLevel2, skill3, skillIcon3, skillTitle3, skillLevel3)
+            {
+                this.attackActionPoint = 1
+                this.moveActionPoint = 1
+                this.side = team
+                this.unitName = name
+                this.unitIcon = nameIcon
+                this.nameDescription = nameTitle
+                this.unitLevel = level
+                this.experience = exp
+                this.mobility = mv
+                this.hitPoint = hp
+                this.hitPointMaxium = hpMax
+                this.hitPointGrowth = hpGrow
+                this.damage = dmg
+                this.damageGrowth = dmgGrow
+                this.speed = spd
+                this.speedGrowth = spdGrow
+                this.defense = def
+                this.defenseGrowth = defGrow
+                this.resistance = res
+                this.resistanceGrowth = resGrow
+                this.weaponName = wep
+                this.weaponDescripton = wepTitle
+                this.weaponRange = wepRange
+                this.weaponMight = wepMt
+                this.weaponAttack = wepAtk
+                this.skill1Name = skill1
+                this.skill1Icon = skillIcon1
+                this.skill1Description = skillTitle1
+                this.skill1Level = skillLevel1
+                this.skill2Name = skill2
+                this.skill2Icon = skillIcon2
+                this.skill2Description = skillTitle2
+                this.skill2Level = skillLevel2
+                this.skill3Name = skill3
+                this.skill3Icon = skillIcon3
+                this.skill3Description = skillTitle3
+                this.skill3Level = skillLevel3
+            }
+
+            function setup()
+            {
+                let board="<table>"
+                for(let i=0;i<10;i++)
+                {
+                    board+="<tr>"
+                    for(let j=0;j<20;j++)
+                    {
+                        if(characterStorage[j][i]!=undefined) board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")'>"+characterStorage[j][i].unitIcon+"</td>"
+                        else board+="<td id='cell"+j+i+"' onclick='selected("+j+","+i+")'></td>"
+                    }
+                    board+="</tr>"
+                }
+                board+="</table>"
+                document.getElementById("display").innerHTML=board
+                aliveUnit=6
+                playerAction=aliveUnit
+            }
+
+            function selected(x,y)
+            {
+                if(selectedFlag&&document.getElementById("cell"+x+y).innerHTML!=""&&(characterStorage[x][y].moveActionPoint||characterStorage[x][y].attackActionPoint))
+                {
+                    characterX=x
+                    characterY=y
+                    selectedFlag=0
+                    for(let i=0;i<10;i++)
+                    {
+                        for(let j=0;j<20;j++)
+                        {             
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]==undefined&&characterStorage[characterX][characterY].attackActionPoint)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(241,130,141,0.5)")
+                            }
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined&&characterStorage[characterX][characterY].moveActionPoint)
+                            {                            
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
+                            }
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side!=characterStorage[characterX][characterY].side&&characterStorage[characterX][characterY].attackActionPoint)
+                            {                            
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(255,0,0,0.5)")
+                            }
+                        }
+                    }
+                    if(characterStorage[x][y].moveActionPoint||characterStorage[x][y].attackActionPoint)
+                    {
+                        document.getElementById("cell"+x+y).setAttribute("style","background-color: rgba(1,1,122,0.7)")
+                    }                    
+                }
+                else if(!selectedFlag&&(characterStorage[characterX][characterY].moveActionPoint||characterStorage[characterX][characterY].attackActionPoint))
+                {         
+                    if(characterStorage[characterX][characterY].side=="beta")    
+                    {
+                        if(characterStorage[x][y]!=undefined)
+                        {
+                            selectedFlag=1
+                            for(let i=0;i<10;i++)
+                            {
+                                for(let j=0;j<20;j++)
+                                {             
+                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange)
+                                    {
+                                        document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                    }
+                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility)
+                                    {                            
+                                        document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                    }
+                                }
+                            }
+                            selected(x,y)
+                        }
+                    }       
+                    else
+                    {
+                        if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].mobility&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y]==undefined&&characterStorage[characterX][characterY].moveActionPoint)
+                        {
+                            move(x,y)
+                        }
+                        if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y].side=="beta"&&characterStorage[characterX][characterY].attackActionPoint)
+                        {                        
+                            attack(x,y)
+                        }
+                    }
+                }
+            }
+
+            function move(x,y)
+            {
+                let checkEnemy=0
+                if(characterStorage[characterX][characterY].attackActionPoint)
+                {
+                    document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].unitIcon
+                    document.getElementById("cell"+characterX+characterY).innerHTML=""
+                    characterStorage[characterX][characterY].moveActionPoint--
+                    characterStorage[x][y]=characterStorage[characterX][characterY]
+                    characterStorage[characterX][characterY]=undefined
+                    for(let i=0;i<10;i++)
+                    {
+                        for(let j=0;j<20;j++)
+                        {             
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[x][y].mobility)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[x][y].weaponRange)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]==undefined)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(241,130,141,0.5)")
+                            }
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
+                            {                            
+                                checkEnemy++
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(255,0,0,0.5)")
+                            }
+                        }
+                    }
+                    document.getElementById("cell"+x+y).setAttribute("style","background-color: rgba(1,1,122,0.7)")
+                    characterX=x
+                    characterY=y
+                    if(!checkEnemy)
+                    {
+                        setTimeout(function()
+                        {
+                            selectedFlag=1
+                            characterStorage[characterX][characterY].attackActionPoint--
+                            for(let i=0;i<10;i++)
+                            {
+                                for(let j=0;j<20;j++)
+                                {             
+                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[x][y].weaponRange)
+                                    {
+                                        document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                    }
+                                }
+                            }
+                        },1000)
+                        playerAction--
+                        if(playerAction<=0) setTimeout(function(){enemyTurn()},2000) 
+                    }                    
+                }
+                else
+                {
+                    document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].unitIcon
+                    document.getElementById("cell"+characterX+characterY).innerHTML=""
+                    for(let i=0;i<10;i++)
+                    {
+                        for(let j=0;j<20;j++)
+                        {             
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]==undefined)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
+                            {                            
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                        }
+                    }
+                    characterStorage[characterX][characterY].moveActionPoint--
+                    characterStorage[x][y]=characterStorage[characterX][characterY]
+                    characterStorage[characterX][characterY]=undefined
+                    selectedFlag=1
+                    playerAction--
+                    if(playerAction<=0) setTimeout(function(){enemyTurn()},2000)
+                }
+            }
+
+            function attack(x,y)
+            {
+                if(characterStorage[characterX][characterY].moveActionPoint)
+                {
+                    console.log(characterStorage[x][y].hitPoint)
+                    characterStorage[x][y].hitPoint-=characterStorage[characterX][characterY].damage                    
+                    console.log(characterStorage[x][y].hitPoint)                    
+                    for(let i=0;i<10;i++)
+                    {
+                        for(let j=0;j<20;j++)
+                        {             
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
+                            }
+                        }
+                    }
+                    checkAlive(x,y)
+                    characterStorage[characterX][characterY].attackActionPoint--
+                }
+                else
+                {
+                    console.log(characterStorage[x][y].hitPoint)
+                    characterStorage[x][y].hitPoint-=characterStorage[characterX][characterY].damage
+                    checkAlive(x,y)
+                    console.log(characterStorage[x][y].hitPoint)
+                    for(let i=0;i<10;i++)
+                    {
+                        for(let j=0;j<20;j++)
+                        {             
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                        }
+                    }
+                    characterStorage[characterX][characterY].attackActionPoint--
+                    selectedFlag=1
+                    playerAction--
+                    if(playerAction<=0) setTimeout(function(){enemyTurn()},2000)
+                }
+            }
+
+            function checkAlive(x,y)
+            {
+                if(characterStorage[x][y].hitPoint<=0&&characterStorage[x][y].side=="alpha")
+                {
+                    allyAliveUnit--
+                    characterStorage[x][y]=undefined
+                    document.getElementById("cell"+x+y).innerHTML=""
+                    if(allyAliveUnit<=0) console.log("defeat")
+                } 
+                else if(characterStorage[x][y].hitPoint<=0&&characterStorage[x][y].side=="beta")
+                {
+                    enemyAliveUnit--
+                    characterStorage[x][y]=undefined
+                    document.getElementById("cell"+x+y).innerHTML=""
+                    if(enemyAliveUnit<=0) console.log("victory")
+                } 
+            }
+
+            function enemyTurn()
+            {
+                console.log("Enemy's turn")
+                setTimeout(function(){playerTurn()},2000)
+            }
+
+            function playerTurn()
+            {
+                playerAction=allyAliveUnit
+                for(let i=0;i<10;i++)
+                {
+                    for(let j=0;j<20;j++)
+                    {            
+                        if(characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="alpha")
+                        {
+                            characterStorage[j][i].attackActionPoint=1
+                            characterStorage[j][i].moveActionPoint=1                            
+                        }                         
+                    }
+                }
+                console.log("Your turn")
+            }
+
+            window.addEventListener("load",setup,false)
+        </script>
+    </head>
+    <body>
+        <div id="display"></div>
+    </body>
+</html>
