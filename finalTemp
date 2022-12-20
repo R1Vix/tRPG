@@ -6,17 +6,14 @@
             body
             {
                 padding: 0px;
-                margin: 0px;
-                background-image: url(neturalBackground01.png);
+                margin: 0px;                
                 background-repeat: no-repeat;
-                overflow-x: scroll
             }
             table
             {
                 padding: 0px;
                 margin: 0px;
                 border-collapse: collapse;
-                box-sizing: border-box;
             }
             td
             {
@@ -25,7 +22,6 @@
                 border: 1px solid black;
                 width: 100px;
                 height: 100px;
-                box-sizing: border-box;
             }
             .characterImgSize
             {
@@ -33,6 +29,11 @@
                 margin: 0px;
                 width: 100px;
                 height: 100px;
+            }
+            .button
+            {
+                width: 100px;
+                height: 50px;
             }
         </style>
         <script>
@@ -57,7 +58,7 @@
             monk = new unit("alpha", "僧侶", "<img src='monk.png' alt = '我方僧侶' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", 1, 0, 2, 19, 19, 0.6, 6, 0.5, 7, 0.45, 6, 0.45, 11, 0.65, "海神的祝福", "海神的祝福的武器敘述", 2, [6, 9, 12], "治癒杖", "<img src='heal.png' alt = '治癒杖' class='characterSkillSize'>", ["我方回合開始時，回復周圍 2 格內的我方單位 5 HP" , "我方回合開始時，回復周圍 2 格內的我方單位 10 HP", "我方回合開始時，回復周圍 2 格內的我方單位（自身攻擊的 50%）HP"], 1, "奉獻", "<img src='devotion.png' alt = '奉獻' class='characterSkillSize'>", ["攻擊時，回復所造成傷害的 25%", "攻擊時，回復所造成傷害的 50%", "攻擊時，回復所造成傷害的 75%"], 1, "天空鼓舞", "<img src='Hㄘㄟ.png' alt = 'honeSpdRes' class='characterSkillSize'>", ["回合開始時，周圍1格的我方單位速度、魔防 + 1", "回合開始時，周圍1格的我方單位速度、魔防 + 3", "回合開始時，周圍1格的我方單位速度、魔防 + 5"], 1)
             characterStorage[19][6] = monk
 
-            boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [5, 8, 10], 0, 0, [23, 25, 27], [23, 25, 27], 0, [10, 13, 15], 0, [12, 14, 16], 0, [11, 12, 14], 0, [9, 10, 13], "始祖斬裂劍", "默靈的專屬武器，攻擊時，攻擊2次（被敵人攻擊時也可以攻擊2次）", 1, [6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 1)
+            boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [5, 8, 10], 0, 0, [23, 25, 27], [23, 25, 27], 0, [10, 13, 15], 0, [12, 14, 16], 0, [11, 12, 14], 0, [9, 10, 13], "始祖斬裂劍", "默靈的專屬武器，攻擊時，攻擊2次（被敵人攻擊時也可以攻擊2次）", [6, 10, 14], 1, "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 1)
             characterStorage[1][8] = boss
 
             assassin1 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客一' class='characterImgSize'>", "使用劍作為武器，能力平均", [4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "闇之鐵羽劍的武器敘述", 1, "技能一", "<img src='' alt = '' class='characterSkillSize'>", "技能一敘述", 1, "技能二", "<img src='' alt = '' class='characterSkillSize'>", "技能二敘述", 1, "技能三", "<img src='' alt = '' class='characterSkillSize'>", "技能三敘述", 1)
@@ -119,9 +120,16 @@
                 this.skill3Level = skillLevel3
             }
 
-            function setup()
+            function cover()
+            {
+                document.getElementById("display").innerHTML="<input type='button' id='startButton' value='start' class='button'>"
+                document.getElementById("startButton").addEventListener("click",game,false)
+            }
+
+            function game()
             {
                 let board="<table>"
+                document.getElementById("body").setAttribute("style","background-image: url(neturalBackground01.png)")
                 for(let i=0;i<10;i++)
                 {
                     board+="<tr>"
@@ -134,8 +142,8 @@
                 }
                 board+="</table>"
                 document.getElementById("display").innerHTML=board
-                aliveUnit=6
-                playerAction=aliveUnit
+                allyAliveUnit=6
+                playerAction=allyAliveUnit
             }
 
             function selected(x,y)
@@ -198,7 +206,7 @@
                         {
                             move(x,y)
                         }
-                        if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y].side=="beta"&&characterStorage[characterX][characterY].attackActionPoint)
+                        else if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y].side=="beta"&&characterStorage[characterX][characterY].attackActionPoint)
                         {                        
                             attack(x,y)
                         }
@@ -260,13 +268,11 @@
                             }
                         },1000)
                         playerAction--
-                        if(playerAction<=0) setTimeout(function(){enemyTurn()},2000) 
+                        if(playerAction<=0) setTimeout(function(){enemyTurn()},1000) 
                     }                    
                 }
                 else
                 {
-                    document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].unitIcon
-                    document.getElementById("cell"+characterX+characterY).innerHTML=""
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
@@ -275,22 +281,16 @@
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]==undefined)
-                            {
-                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
-                            }
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
-                            {                            
-                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
-                            }
                         }
                     }
+                    document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].unitIcon
+                    document.getElementById("cell"+characterX+characterY).innerHTML=""
                     characterStorage[characterX][characterY].moveActionPoint--
                     characterStorage[x][y]=characterStorage[characterX][characterY]
                     characterStorage[characterX][characterY]=undefined
                     selectedFlag=1
                     playerAction--
-                    if(playerAction<=0) setTimeout(function(){enemyTurn()},2000)
+                    if(playerAction<=0) setTimeout(function(){enemyTurn()},1000)
                 }
             }
 
@@ -300,7 +300,8 @@
                 {
                     console.log(characterStorage[x][y].hitPoint)
                     characterStorage[x][y].hitPoint-=characterStorage[characterX][characterY].damage                    
-                    console.log(characterStorage[x][y].hitPoint)                    
+                    console.log(characterStorage[x][y].hitPoint)      
+                    checkAlive(x,y)              
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
@@ -309,21 +310,20 @@
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
-                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility)
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
                             }
                         }
-                    }
-                    checkAlive(x,y)
+                    }           
                     characterStorage[characterX][characterY].attackActionPoint--
                 }
                 else
                 {
                     console.log(characterStorage[x][y].hitPoint)
                     characterStorage[x][y].hitPoint-=characterStorage[characterX][characterY].damage
-                    checkAlive(x,y)
                     console.log(characterStorage[x][y].hitPoint)
+                    checkAlive(x,y)
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
@@ -337,7 +337,7 @@
                     characterStorage[characterX][characterY].attackActionPoint--
                     selectedFlag=1
                     playerAction--
-                    if(playerAction<=0) setTimeout(function(){enemyTurn()},2000)
+                    if(playerAction<=0) setTimeout(function(){enemyTurn()},1000)
                 }
             }
 
@@ -361,8 +361,45 @@
 
             function enemyTurn()
             {
+                let attackFlag=0,waitTime=0
                 console.log("Enemy's turn")
-                setTimeout(function(){playerTurn()},2000)
+                for(let i=0;i<10;i++)
+                {
+                    for(let j=0;j<20;j++)
+                    {   
+                        if(characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
+                        {
+                            for(let k=0;k<10;k++)
+                            {
+                                for(let l=0;l<20;l++)
+                                {   
+                                    if((Math.abs(l-j)+Math.abs(k-i))<=characterStorage[j][i].weaponRange&&characterStorage[l][k]!=undefined&&characterStorage[l][k].side=="alpha")
+                                    {                                        
+                                        setTimeout(function()
+                                        {
+                                            console.log(characterStorage[l][k].hitPoint)
+                                            characterStorage[l][k].hitPoint-=characterStorage[j][i].damage
+                                            console.log(characterStorage[l][k].hitPoint)
+                                        },waitTime*1000)
+                                        attackFlag=1
+                                        waitTime++
+                                        break
+                                    }
+                                    //else if((Math.abs(l-j)+Math.abs(k-i))<=(characterStorage[j][i].mobility+[j][i].weaponRange)&&characterStorage[l][k]!=undefined&&characterStorage[l][k].side=="alpha")
+                                    {
+
+                                    }
+                                }
+                                if(attackFlag)
+                                {
+                                    attackFlag=0
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }                
+                setTimeout(function(){playerTurn()},waitTime*1000)
             }
 
             function playerTurn()
@@ -382,10 +419,10 @@
                 console.log("Your turn")
             }
 
-            window.addEventListener("load",setup,false)
+            window.addEventListener("load",cover,false)
         </script>
     </head>
-    <body>
-        <div id="display"></div>
+    <body id="body">
+        <div id="display" style="overflow-x:auto"></div>
     </body>
 </html>
