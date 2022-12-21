@@ -380,14 +380,40 @@
                                             console.log(characterStorage[l][k].hitPoint)
                                             characterStorage[l][k].hitPoint-=characterStorage[j][i].damage
                                             console.log(characterStorage[l][k].hitPoint)
-                                        },waitTime*1000)
+                                            checkAlive(l,k)
+                                        },waitTime*2000)
                                         attackFlag=1
                                         waitTime++
                                         break
                                     }
-                                    //else if((Math.abs(l-j)+Math.abs(k-i))<=(characterStorage[j][i].mobility+[j][i].weaponRange)&&characterStorage[l][k]!=undefined&&characterStorage[l][k].side=="alpha")
+                                    else if((Math.abs(l-j)+Math.abs(k-i))<=characterStorage[j][i].mobility&&characterStorage[l][k]==undefined)
                                     {
-
+                                        for(let m=0;m<10;m++)
+                                        {
+                                            for(let n=0;n<20;n++)
+                                            {   
+                                                if((Math.abs(n-l)+Math.abs(m-k))<=characterStorage[j][i].weaponRange&&characterStorage[n][m]!=undefined&&characterStorage[n][m].side=="alpha")
+                                                {
+                                                    
+                                                    setTimeout(function()
+                                                    {               
+                                                        document.getElementById("cell"+l+k).innerHTML=characterStorage[j][i].unitIcon
+                                                        document.getElementById("cell"+j+i).innerHTML=""
+                                                        characterStorage[l][k]=characterStorage[j][i]
+                                                        characterStorage[j][i]=undefined                                         
+                                                        console.log(characterStorage[n][m].hitPoint)
+                                                        characterStorage[n][m].hitPoint-=characterStorage[l][k].damage
+                                                        console.log(characterStorage[n][m].hitPoint)
+                                                        checkAlive(n,m)
+                                                    },waitTime*2000)
+                                                    attackFlag=1
+                                                    waitTime++
+                                                    break
+                                                }                                                
+                                            }
+                                            if(attackFlag) break
+                                        }
+                                        if(attackFlag) break
                                     }
                                 }
                                 if(attackFlag)
@@ -399,7 +425,7 @@
                         }
                     }
                 }                
-                setTimeout(function(){playerTurn()},waitTime*1000)
+                setTimeout(function(){playerTurn()},waitTime*2000)
             }
 
             function playerTurn()
