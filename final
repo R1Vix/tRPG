@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <title>tRPG</title>
         <meta charset="utf-8">
         <style>
+            @import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
             body
             {
                 padding: 0px;
-                margin: 0px;
+                margin: 0px;        
                 width: 2000px;
-                height: 1000px;
-                background-image: url(neturalBackground01.png);
+                height: 1000px;        
                 background-repeat: no-repeat;
-                overflow-x: scroll
+                background-size: 2000px 1045px;
             }
             table
             {
                 padding: 0px;
                 margin: 0px;
+                width: 2000px;
+                height: 1000px;
                 border-collapse: collapse;
-                box-sizing: border-box;
             }
             td
             {
                 padding: 0px;
                 margin: 0px;
-                border: 1px solid black;
+                border: 0.5px solid black;
                 width: 100px;
                 height: 100px;
-                box-sizing: border-box;
             }
             .characterImgSize
             {
@@ -36,49 +37,95 @@
                 width: 100px;
                 height: 100px;
             }
+            .characterSkillSize
+            {
+                padding: 0px;
+                margin: 0px;
+                width: 30px;
+                height: 30px;
+            }
+            .button
+            {
+                width: 100px;
+                height: 50px;
+            }
+            .turnPanel
+            {
+                padding: 0px;
+                margin: 0px;
+                width: 100%;
+                height: auto;
+                text-align: center;
+                font-family:"cwTeXFangSong";
+                font-size: 30px;
+            }
+            .characterInfoPanel
+            {
+                padding: 0px;
+                margin: 0px;
+                border: 0.5px solid black;
+                width: calc(100%/2);
+                height: 200px;
+                text-align: center;
+                font-family:"cwTeXFangSong";
+                font-size: 30px;
+                float: left;
+                box-sizing: border-box;
+            }
+            .panelDetail
+            {
+                padding: 0px;
+                margin: 0px;
+                border-top: 0.5px solid black;
+                text-align: center;
+                width: calc(100%/3);
+                height: auto;
+                float: left;
+                box-sizing: border-box;
+            }
         </style>
         <script>
             let selectedFlag=1,characterX,characterY,playerAction,allyAliveUnit,enemyAliveUnit,characterStorage=new Array(20)
             for (let i=0;i<characterStorage.length;i++) characterStorage[i]=new Array(10)
 
-            summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["？？？", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 0, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["？？？", "我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 0)
+            summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [0, 6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 0, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 0)
             characterStorage[18][6] = summoner
 
-            heavyInfantry = new unit("alpha", "重裝兵", "<img src='heavyInfantry.png' alt = '我方重裝兵' class='characterImgSize'>", "使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", 1, 0, 1, 25, 25, 0.7, 11, 0.65, 6, 0.5, 12, 0.6, 5, 0.4, "蒼海之斧", "蒼海之斧的武器敘述", 1, [6, 9, 12]	, "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["？？？", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 0, "破防擊", "<img src='armorBreak.png' alt = '破防擊' class='characterSkillSize'>", ["？？？", "攻擊時，在敵人防守及魔防 - 30% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 50% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 70% 的情況下給予傷害"], 0, "尊嚴", "<img src='honeAtkDef.png' alt = '尊嚴' class='characterSkillSize'>", ["？？？", "戰鬥開始時，若自身HP高於 75% ，則攻擊、防禦 + 2，否則攻擊、防禦 - 7", "戰鬥開始時，若自身HP高於 50% ，則攻擊、防禦 + 4，否則攻擊、防禦 - 7", "戰鬥開始時，若自身HP高於 25% ，則攻擊、防禦 + 7，否則攻擊、防禦 - 7"], 0)
+            heavyInfantry = new unit("alpha", "重裝兵", "<img src='heavyInfantry.png' alt = '我方重裝兵' class='characterImgSize'>", "使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", 1, 0, 1, 25, 25, 0.7, 11, 0.65, 6, 0.5, 12, 0.6, 5, 0.4, "蒼海之斧", "蒼海之斧的武器敘述", 1, [0, 6, 9, 12]	, "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 0, "破防擊", "<img src='armorBreak.png' alt = '破防擊' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "攻擊時，在敵人防守及魔防 - 30% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 50% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 70% 的情況下給予傷害"], 0, "尊嚴", "<img src='honeAtkDef.png' alt = '尊嚴' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "戰鬥開始時，若自身HP高於 75% ，則攻擊、防禦 + 2，否則攻擊、防禦 - 7", "戰鬥開始時，若自身HP高於 50% ，則攻擊、防禦 + 4，否則攻擊、防禦 - 7", "戰鬥開始時，若自身HP高於 25% ，則攻擊、防禦 + 7，否則攻擊、防禦 - 7"], 0)
             characterStorage[17][5] = heavyInfantry
 
-            knight = new unit("alpha", "騎兵", "<img src='knight.png' alt = '我方騎兵' class='characterImgSize'>", "使用槍作為武器，機動性較高", 1, 0, 3, 21, 21, 0.45, 9, 0.5, 8, 0.45, 9, 0.45, 12, 0.6, "反攻槍", "反攻槍的武器敘述", 1, [6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["？？？", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 0, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["？？？", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 0, "麗華", "<img src='blizzard.png' alt = '麗華' class='characterSkillSize'>", ["？？？","受到敵人攻擊時，戰鬥中的魔防 + 2", "受到敵人攻擊時，戰鬥中的魔防 + 4", "受到敵人攻擊時，戰鬥中的魔防 + 7"], 0)
+            knight = new unit("alpha", "騎兵", "<img src='knight.png' alt = '我方騎兵' class='characterImgSize'>", "使用槍作為武器，機動性較高", 1, 0, 3, 21, 21, 0.45, 9, 0.5, 8, 0.45, 9, 0.45, 12, 0.6, "反攻槍", "反攻槍的武器敘述", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 0, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 0, "麗華", "<img src='blizzard.png' alt = '麗華' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","受到敵人攻擊時，戰鬥中的魔防 + 2", "受到敵人攻擊時，戰鬥中的魔防 + 4", "受到敵人攻擊時，戰鬥中的魔防 + 7"], 0)
             characterStorage[18][5] = knight
 
-            archer = new unit("alpha", "弓箭手", "<img src='archer.png' alt = '我方弓箭手' class='characterImgSize'>", "使用弓作為武器，可攻擊較遠的距離", 1, 0, 2, 19, 19, 0.55, 8, 0.55, 8, 0.65, 7, 0.5, 6, 0.35, "白尾聖弓", "白尾聖弓的武器敘述", 2, [6, 9, 12], "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["？？？", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 7"], 0, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["？？？", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 0, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["？？？", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 0)
+            archer = new unit("alpha", "弓箭手", "<img src='archer.png' alt = '我方弓箭手' class='characterImgSize'>", "使用弓作為武器，可攻擊較遠的距離", 1, 0, 2, 19, 19, 0.55, 8, 0.55, 8, 0.65, 7, 0.5, 6, 0.35, "白尾聖弓", "白尾聖弓的武器敘述", 2, [0, 6, 9, 12], "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 0, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 0, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 0)
             characterStorage[19][4] = archer
 
-            mage = new unit("alpha", "魔刃", "<img src='mage.png' alt = '我方魔刃' class='characterImgSize'>", "使用黑魔法作為武器，以敵人的魔防計算傷害", 1, 0, 2, 19, 19, 0.55, 8, 0.55, 8, 0.55, 8, 0.55, 6, 0.45, "深邃黑暗", "深邃黑暗的武器敘述", 2, [6, 9, 12], "冰河", "<img src='iceberg.png' alt = '冰河' class='characterSkillSize'>", ["？？？","由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 80%"], 0, "生命的代價", "<img src='costOfLife.png' alt = '生命的代價' class='characterSkillSize'>", ["？？？","戰鬥中的攻擊、速度、防禦、魔防 + 1，戰鬥後給予自己 2 點傷害", "戰鬥中的攻擊、速度、防禦、魔防 + 2，戰鬥後給予自己 4 點傷害", "戰鬥中的攻擊、速度、防禦、魔防 + 4，戰鬥後給予自己 6 點傷害"], 0, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["？？？","戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 0)
+            mage = new unit("alpha", "魔刃", "<img src='mage.png' alt = '我方魔刃' class='characterImgSize'>", "使用黑魔法作為武器，以敵人的魔防計算傷害", 1, 1, 2, 19, 19, 0.55, 8, 0.55, 8, 0.55, 8, 0.55, 6, 0.45, "深邃黑暗", "深邃黑暗的武器敘述", 2, [0, 6, 9, 12], "冰河", "<img src='iceberg.png' alt = '冰河' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 80%"], 0, "生命的代價", "<img src='costOfLife.png' alt = '生命的代價' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","戰鬥中的攻擊、速度、防禦、魔防 + 1，戰鬥後給予自己 2 點傷害", "戰鬥中的攻擊、速度、防禦、魔防 + 2，戰鬥後給予自己 4 點傷害", "戰鬥中的攻擊、速度、防禦、魔防 + 3，戰鬥後給予自己 6 點傷害"], 0, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 0)
             characterStorage[19][5] = mage
 
-            monk = new unit("alpha", "僧侶", "<img src='monk.png' alt = '我方僧侶' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", 1, 0, 2, 19, 19, 0.6, 6, 0.5, 7, 0.45, 6, 0.45, 11, 0.65, "海神的祝福", "海神的祝福的武器敘述", 2, [6, 9, 12], "治癒杖", "<img src='heal.png' alt = '治癒杖' class='characterSkillSize'>", ["？？？","我方回合開始時，回復周圍 2 格內的我方單位 5 HP" , "我方回合開始時，回復周圍 2 格內的我方單位 10 HP", "我方回合開始時，回復周圍 2 格內的我方單位（自身攻擊的 50%）HP"], 0, "奉獻", "<img src='devotion.png' alt = '奉獻' class='characterSkillSize'>", ["？？？","攻擊時，回復所造成傷害的 25%", "攻擊時，回復所造成傷害的 50%", "攻擊時，回復所造成傷害的 75%"], 0, "完美", "<img src='honeSpdRes.png' alt = '完美' class='characterSkillSize'>", ["？？？","戰鬥開始時，若自身HP高於 75% ，則速度、魔防 + 2，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 50% ，則速度、魔防 + 4，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 25% ，則速度、魔防 + 7，否則速度、魔防 - 7"], 0)
+            monk = new unit("alpha", "僧侶", "<img src='monk.png' alt = '我方僧侶' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", 1, 1, 2, 19, 19, 0.6, 6, 0.5, 7, 0.45, 6, 0.45, 11, 0.65, "海神的祝福", "海神的祝福的武器敘述", 2, [0, 6, 9, 12], "治癒杖", "<img src='heal.png' alt = '治癒杖' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","我方回合開始時，回復周圍 2 格內的我方單位 5 HP" , "我方回合開始時，回復周圍 2 格內的我方單位 10 HP", "我方回合開始時，回復周圍 2 格內的我方單位（自身攻擊的 50%）HP"], 0, "奉獻", "<img src='devotion.png' alt = '奉獻' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","攻擊時，回復所造成傷害的 25%", "攻擊時，回復所造成傷害的 50%", "攻擊時，回復所造成傷害的 75%"], 0, "完美", "<img src='honeSpdRes.png' alt = '完美' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","戰鬥開始時，若自身HP高於 75% ，則速度、魔防 + 2，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 50% ，則速度、魔防 + 4，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 25% ，則速度、魔防 + 7，否則速度、魔防 - 7"], 0)
             characterStorage[19][6] = monk
 
-            boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [5, 8, 10], 0, 0, [23, 25, 27], [23, 25, 27], 0, [10, 13, 15], 0, [12, 14, 16], 0, [11, 12, 14], 0, [9, 10, 13], "始祖斬裂劍", "默靈的專屬武器，攻擊時，攻擊2次（被敵人攻擊時也可以攻擊2次）", 1, [6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 1)
+            boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [0, 5, 8, 10], 0, 0, 0, [0, 23, 25, 27], 0, [0, 10, 13, 15], 0, [0, 12, 14, 16], 0, [0, 11, 12, 14], 0, [0, 9, 10, 13], 0, "始祖斬裂劍", "默靈的專屬武器，由自己發動攻擊時，攻擊2次", 1, [0, 6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["", "我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 1)
             characterStorage[1][8] = boss
 
-            assassin1 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客一' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 7"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
-            characterStorage[16][7] = assassin1
+            assassin1 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
+            characterStorage[16][6] = assassin1
 
-            armoredInfantry1 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [4, 6, 9], 1, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 7"], 1)
-            characterStorage[15][2] = armoredInfantry1
+            armoredInfantry1 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 4, 6, 9], 0, 2, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 7"], 1)
+            characterStorage[17][3] = armoredInfantry1
 
-            cavalry1 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵一' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["若自身 HP 低於 75% 且由自己發動攻擊時，則會在自己攻擊之後立刻進行追擊", "若自身 HP 低於 50% 且由自己發動攻擊時，則會在自己攻擊之後立刻進行追擊", "若自身 HP 低於 25% 且由自己發動攻擊時，則會在自己攻擊之後立刻進行追擊"], 1)
-            characterStorage[7][8] = cavalry1
+            cavalry1 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
+            characterStorage[18][2] = cavalry1
 
-            longbowman1 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手一' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [4, 6, 9], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
-            characterStorage[14][3] = longbowman1
+            longbowman1 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [0, 4, 6, 9], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [0, 6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["", "戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
+            characterStorage[16][4] = longbowman1
 
-            sorcerer1 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃一' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [4, 6, 9], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 4"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
-            characterStorage[10][1] = sorcerer1
+            sorcerer1 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [0, 4, 6, 9], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [0, 6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 3"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
+            characterStorage[18][8] = sorcerer1
 
-            monastic1 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶一' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [4, 6, 9], 1, 0, 22, 22, 0.5, 9, 0.65, 12, 0.75, 7, 0.5, 9, 0.75, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
-            characterStorage[13][7] = monastic1
+            monastic1 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [0, 4, 6, 9], 1, 0, 22, 22, 0.5, 9, 0.65, 12, 0.75, 7, 0.5, 9, 0.75, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [0, 6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["", "我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["", "戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["", "造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
+            characterStorage[17][7] = monastic1
 
             function unit(side, unitName, unitIcon, nameDescription, unitLevel, weaponAttribute, mobility, hitPoint, hitPointMaxium, hitPointGrowth, damage, damageGrowth, speed, speedGrowth, defense, defenseGrowth, resistance, resistanceGrowth, weaponName, weaponDescripton, weaponRange, weaponMight, skill1Name, skill1Icon, skill1Description, skill1Level, skill2Name, skill2Icon, skill2Description, skill2Level, skill3Name, skill3Icon, skill3Description, skill3Level)
             {
@@ -120,9 +167,20 @@
                 this.skill3Level = skill3Level
             }
 
-            function setup()
+            function cover()
+            {
+                document.getElementById("display").innerHTML+="<input type='button' id='startButtonEasy' value='簡單' class='button'>"
+                document.getElementById("display").innerHTML+="<input type='button' id='startButtonNormal' value='困難' class='button'>"
+                document.getElementById("display").innerHTML+="<input type='button' id='startButtonHard' value='深淵' class='button'>"
+                document.getElementById("startButtonEasy").addEventListener("click",game,false)
+                document.getElementById("startButtonNormal").addEventListener("click",game,false)
+                document.getElementById("startButtonHard").addEventListener("click",game,false)
+            }
+
+            function game()
             {
                 let board="<table>"
+                document.getElementById("body").setAttribute("style","background-image: url(neturalBackground01.png)")
                 for(let i=0;i<10;i++)
                 {
                     board+="<tr>"
@@ -134,10 +192,27 @@
                     board+="</tr>"
                 }
                 board+="</table>"
+                board+="<div id='turn' class='turnPanel'>你的回合 剩餘行動點數 : 6</div>"
+                board+="<div class='characterInfoPanel'>攻擊方<br><div id='attackerIcon' class='panelDetail'></div><div id='attackerState' class='panelDetail'></div><div id='attackerSkill' class='panelDetail'></div></div>"
+                board+="<div class='characterInfoPanel'>防守方<br><div id='defenderIcon' class='panelDetail'></div><div id='defenderState' class='panelDetail'></div><div id='defenderSkill' class='panelDetail'></div></div>"
                 document.getElementById("display").innerHTML=board
-                aliveUnit=6
-                playerAction=aliveUnit
-                statGenerate(assassin1, assassin1.unitLevel[0])
+                allyAliveUnit=6
+                playerAction=allyAliveUnit
+                difficulty = 1
+                console.log("難度：簡單")
+                stateGenerateAlly(summoner, difficulty)
+                stateGenerateAlly(heavyInfantry, difficulty)
+                stateGenerateAlly(knight, difficulty)
+                stateGenerateAlly(archer, difficulty)
+                stateGenerateAlly(mage, difficulty)
+                stateGenerateAlly(monk, difficulty)
+                stateGenerateBoss(boss, difficulty)
+                stateGenerate(assassin1, difficulty)
+                stateGenerate(armoredInfantry1, difficulty)
+                stateGenerate(cavalry1, difficulty)
+                stateGenerate(longbowman1, difficulty)
+                stateGenerate(sorcerer1, difficulty)
+                stateGenerate(monastic1, difficulty)
             }
 
             function selected(x,y)
@@ -200,7 +275,7 @@
                         {
                             move(x,y)
                         }
-                        if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y].side=="beta"&&characterStorage[characterX][characterY].attackActionPoint)
+                        else if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y].side=="beta"&&characterStorage[characterX][characterY].attackActionPoint)
                         {                        
                             attack(x,y)
                         }
@@ -230,11 +305,11 @@
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]==undefined)
+                            if((Math.abs(x-j)+Math.abs(y-i))==characterStorage[x][y].weaponRange&&characterStorage[j][i]==undefined)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(241,130,141,0.5)")
                             }
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
+                            if((Math.abs(x-j)+Math.abs(y-i))==characterStorage[x][y].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
                             {                            
                                 checkEnemy++
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(255,0,0,0.5)")
@@ -262,13 +337,12 @@
                             }
                         },1000)
                         playerAction--
-                        if(playerAction<=0) setTimeout(function(){enemyTurn()},2000) 
+                        document.getElementById("turn").innerHTML="你的回合 剩餘行動點數 : "+playerAction
+                        if(playerAction<=0) setTimeout(function(){enemyTurn()},1000) 
                     }                    
                 }
                 else
                 {
-                    document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].unitIcon
-                    document.getElementById("cell"+characterX+characterY).innerHTML=""
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
@@ -277,34 +351,26 @@
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]==undefined)
-                            {
-                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
-                            }
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
-                            {                            
-                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
-                            }
                         }
                     }
+                    document.getElementById("cell"+x+y).innerHTML=characterStorage[characterX][characterY].unitIcon
+                    document.getElementById("cell"+characterX+characterY).innerHTML=""
                     characterStorage[characterX][characterY].moveActionPoint--
                     characterStorage[x][y]=characterStorage[characterX][characterY]
                     characterStorage[characterX][characterY]=undefined
                     selectedFlag=1
                     playerAction--
-                    if(playerAction<=0) setTimeout(function(){enemyTurn()},2000)
+                    document.getElementById("turn").innerHTML="你的回合 剩餘行動點數 : "+playerAction
+                    if(playerAction<=0) setTimeout(function(){enemyTurn()},1000)
                 }
             }
 
             function attack(x,y)
             {
-                var attackerHP, attackerATK, attackerSPD, attackerDEF, attackerRES;
-                var defenderHP, defenderATK, defenderSPD, defenderDEF, defenderRES;
-                var buff, debuff;
                 if(characterStorage[characterX][characterY].moveActionPoint)
                 {
-                    console.log(characterStorage[characterX][characterY].unitName + "對" + characterStorage[x][y].unitName + "發動攻擊")
-                    characterStorage[x][y].hitPoint-=characterStorage[characterX][characterY].damage                                    
+                    //複製貼上
+                    updateInfoPanel(characterX,characterY,x,y)
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
@@ -313,58 +379,367 @@
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
-                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility)
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
                             }
                         }
-                    }
-                    checkAlive(x,y)
+                    }           
                     characterStorage[characterX][characterY].attackActionPoint--
                 }
                 else
                 {
-                    //這裡開始
-                    console.log(characterStorage[characterX][characterY].unitName + " 對 " + characterStorage[x][y].unitName + " 發動攻擊")
+                    //初始化 attacker 角色數據
+                    attacker = characterStorage[characterX][characterY]
+                    attackerNAME = attacker.unitName
+                    attackerHP = attacker.hitPoint
+                    attackerATK = attacker.damage
+                    attackerSPD = attacker.speed
+                    attackerDEF = attacker.defense
+                    attackerRES = attacker.resistance
+                    //初始化 defender 角色數據
+                    defender = characterStorage[x][y]
+                    defenderNAME = defender.unitName
+                    defenderHP = defender.hitPoint
+                    defenderATK = defender.damage
+                    defenderSPD = defender.speed
+                    defenderDEF = defender.defense
+                    defenderRES = defender.resistance
+                    //宣告攻擊開始
+                    console.log(attackerNAME + " 對 " + defenderNAME + " 發動攻擊")
+                    //技能前數值 log 顯示
+                    console.log("上技能之前的數值")
+                    console.log(attackerNAME + " 的 HP 為 " + attackerHP)
+                    console.log(attackerNAME + " 的 ATK 為 " + attackerATK)
+                    console.log(attackerNAME + " 的 SPD 為 " + attackerSPD)
+                    console.log(attackerNAME + " 的 DEF 為 " + attackerDEF)
+                    console.log(attackerNAME + " 的 RES 為 " + attackerRES)
+                    console.log(defenderNAME + " 的 HP 為 " + defenderHP)
+                    console.log(defenderNAME + " 的 ATK 為 " + defenderATK)
+                    console.log(defenderNAME + " 的 SPD 為 " + defenderSPD)
+                    console.log(defenderNAME + " 的 DEF 為 " + defenderDEF)
+                    console.log(defenderNAME + " 的 RES 為 " + defenderRES)
 
-                    attackerHP = characterStorage[characterX][characterY].hitPoint
-                    attackerATK = characterStorage[characterX][characterY].damage
-                    attackerSPD = characterStorage[characterX][characterY].speed
-                    attackerDEF = characterStorage[characterX][characterY].defense
-                    attackerRES = characterStorage[characterX][characterY].resistance
-
-                    attackerATK += characterStorage[characterX][characterY].weaponMight[0]
-
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 HP 為 " + attackerHP)
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 ATK 為 " + attackerATK)
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 SPD 為 " + attackerSPD)
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 DEF 為 " + attackerDEF)
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 RES 為 " + attackerRES)
-
-                    defenderHP = characterStorage[x][y].hitPoint
-                    defenderATK = characterStorage[x][y].damage
-                    defenderSPD = characterStorage[x][y].speed
-                    defenderDEF = characterStorage[x][y].defense
-                    defenderRES = characterStorage[x][y].resistance
-
-                    defenderATK += characterStorage[x][y].weaponMight[0]
-
-                    if(characterStorage[x][y].skill1Name == "渾沌學"){
-                        buff = Math.floor(defenderATK * characterStorage[x][y].skill1Level * 0.2)
-                        defenderATK += buff
-                        console.log(characterStorage[x][y].unitName  + "透過技能 " + characterStorage[x][y].skill1Name + " （" + characterStorage[x][y].skill1Description[characterStorage[x][y].skill1Level - 1] + "） 獲得 攻擊 + " + buff)
+                    //attacker 的技能
+                    if(attacker.skill2Name == "破防擊"){
+                        debuffDEF = Math.floor(defenderDEF * (0.1 + attacker.skill2Level * 0.2))
+                        debuffRES = Math.floor(defenderRES * (0.1 + attacker.skill2Level * 0.2))
+                        defenderDEF -= debuffDEF
+                        defenderRES -= debuffRES
+                        console.log(attackerNAME + " 透過技能 破防擊（" + attacker.skill2Description[attacker.skill2Level] + "）使 " + defenderNAME + " 防守 - " + debuffDEF + " 魔防 - " + debuffRES)
                     }
-                    console.log(characterStorage[x][y].unitName + " 的 HP 為 " + defenderHP)
-                    console.log(characterStorage[x][y].unitName + " 的 ATK 為 " + defenderATK)
-                    console.log(characterStorage[x][y].unitName + " 的 SPD 為 " + defenderSPD)
-                    console.log(characterStorage[x][y].unitName + " 的 DEF 為 " + defenderDEF)
-                    console.log(characterStorage[x][y].unitName + " 的 RES 為 " + defenderRES)
+
+                    if(attacker.skill3Name == "尊嚴")
+                    {
+                        if(attackerHP >= attacker.hitPointMaxium * (1 - 0.25 * attacker.skill3Level)){
+                            buffATK = 2 * attacker.skill3Level
+                            buffDEF = 2 * attacker.skill3Level
+                            attackerATK += buffATK
+                            attackerDEF += buffDEF
+                            console.log(attackerNAME + " 透過技能 尊嚴（" + attacker.skill3Description[attacker.skill3Level] + "）獲得 攻擊 + " + buffATK + " 防守 + " + buffDEF)
+                        }
+                        else{
+                            debuffATK = 7
+                            debuffDEF = 7
+                            attackerATK -= debuffATK
+                            attackerDEF -= debuffDEF
+                            console.log(attackerNAME + " 透過技能 尊嚴（" + attacker.skill3Description[attacker.skill3Level] + "）降低 攻擊 - " + debuffATK + " 防守 - " + debuffATK)
+                        }
+                    }
                     
-                    console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].hitPoint)
-                    characterStorage[x][y].hitPoint-=attackerATK
-                    checkAlive(x,y)
-                    console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].hitPoint)
+                    if(attacker.skill1Name == "衝敵斬")
+                    {
+                        if(attackerHP >= attacker.hitPointMaxium * (1 - 0.25 * attacker.skill1Level)){
+                            debuffATK = 5
+                            defenderATK -= debuffATK
+                            console.log(attackerNAME + " 透過技能 衝敵斬（" + attacker.skill1Description[attacker.skill1Level] + "）使 " + defenderNAME + " 攻擊 - " + debuffATK)
+                        }
+                    }
+
+                    if(attacker.skill1Name == "覺醒")
+                    {
+                        buffSPD = attacker.skill1Level * 2
+                        attackerSPD += buffSPD
+                        console.log(attackerNAME + " 透過技能 覺醒（" + attacker.skill1Description[attacker.skill1Level] + "）獲得 速度 + " + buffSPD)
+                    }
+
+                    if(attacker.skill1Name == "冰河")
+                    {
+                        buffRES = Math.floor(attackerRES * (0.1 + attacker.skill1Level * 0.2))
+                        attackerATK += buffRES
+                        console.log(attackerNAME + " 透過技能 冰河（" + attacker.skill1Description[attacker.skill1Level] + "）獲得 魔防 + " + buffRES)
+                    }
+
+                    if(attacker.skill2Name == "生命的代價")
+                    {
+                        buff = attacker.skill2Level
+                        attackerATK += buff
+                        attackerSPD += buff
+                        attackerDEF += buff
+                        attackerRES += buff
+                        console.log(attackerNAME + " 透過技能 生命的代價（" + attacker.skill2Description[attacker.skill2Level] + "）獲得 攻擊 + " + buff + " 速度 + " + buff + " 防守 + " + buff + " 魔防 + " + buff)
+                    }
+
+                    if(attacker.skill3Name == "憤怒")
+                    {
+                        if(attackerHP <= attacker.hitPointMaxium * (0.25 * attacker.skill3Level)){
+                                buffATK = 10
+                                attackerATK += buffATK
+                                console.log(attackerNAME + " 透過技能 憤怒（" + attacker.skill3Description[attacker.skill3Level] + "）獲得 攻擊 + " + buffATK)
+                            }
+                    }
+
+                    if(attacker.skill3Name == "完美")
+                    {
+                        if(attackerHP >= attacker.hitPointMaxium * (1 - 0.25 * attacker.skill3Level)){
+                            buffSPD = 2 * attacker.skill3Level
+                            buffRES = 2 * attacker.skill3Level
+                            attackerSPD += buffSPD
+                            attackerRES += buffRES
+                            console.log(attackerNAME + " 透過技能 完美（" + attacker.skill3Description[attacker.skill3Level] + "）獲得 速度 + " + buffSPD + " 魔防 + " + buffRES)
+                        }
+                        else{
+                            debuffSPD = 7
+                            debuffRES = 7
+                            attackerATK -= debuffSPD
+                            attackerRES -= debuffRES
+                            console.log(attackerNAME + " 透過技能 完美（" + attacker.skill3Description[attacker.skill3Level] + "）降低 速度 - " + debuffSPD + " 魔防 - " + debuffRES)
+                        }
+                    }
+
+                    //defender 的技能
+                    if(defender.skill1Name == "渾沌學")
+                    {
+                        buffATK = Math.floor(defenderATK * defender.skill1Level * 0.2)
+                        defenderATK += buffATK
+                        console.log(defenderNAME + " 透過技能 渾沌學（" + defender.skill1Description[defender.skill1Level] + "）獲得 攻擊 + " + buffATK)
+                    }
+
+                    if(defender.skill3Name == "緋炎")
+                    {
+                        buffDEF = defender.skill3Level * 2
+                        defenderDEF += buffDEF
+                        console.log(defenderNAME + " 透過技能 緋炎（" + defender.skill3Description[defender.skill3Level] + "）獲得 防守 + " + buffDEF)
+                    }
+
+                    if(defender.skill3Name == "憤怒")
+                    {
+                        if(defenderHP <= defender.hitPointMaxium * (0.25 * defender.skill3Level)){
+                                buffATK = 10
+                                defenderATK += buffATK
+                                console.log(defenderNAME + " 透過技能 憤怒（" + defender.skill3Description[defender.skill3Level] + "）獲得 攻擊 + " + buffATK)
+                            }
+                    }
+
+                    if(defender.skill2Name == "附身")
+                    {
+                        buff = defender.skill2Level * 3 - 2
+                        defenderATK += buff
+                        defenderSPD += buff
+                        defenderDEF += buff
+                        defenderRES += buff
+                        console.log(defenderNAME + " 透過技能 附身（" + defender.skill2Description[defender.skill2Level] + "）獲得 攻擊 + " + buff + " 速度 + " + buff + " 防守 + " + buff + " 魔防 + " + buff)
+                    }
+
+                    if(defender.skill3Name == "暴雷")
+                    {
+                        buffATK = Math.floor(defenderATK * defender.skill3Level * 0.3)
+                        defenderATK += buffATK
+                        console.log(defenderNAME + " 透過技能 暴雷（" + defender.skill3Description[defender.skill3Level] + "）獲得 攻擊 + " + buffATK)
+                    }
+
+                    //戰鬥前數值 log 顯示
+                    console.log("上技能之後的數值")
+                    console.log(attackerNAME + " 的 HP 為 " + attackerHP)
+                    console.log(attackerNAME + " 的 ATK 為 " + attackerATK)
+                    console.log(attackerNAME + " 的 SPD 為 " + attackerSPD)
+                    console.log(attackerNAME + " 的 DEF 為 " + attackerDEF)
+                    console.log(attackerNAME + " 的 RES 為 " + attackerRES)
+                    console.log(defenderNAME + " 的 HP 為 " + defenderHP)
+                    console.log(defenderNAME + " 的 ATK 為 " + defenderATK)
+                    console.log(defenderNAME + " 的 SPD 為 " + defenderSPD)
+                    console.log(defenderNAME + " 的 DEF 為 " + defenderDEF)
+                    console.log(defenderNAME + " 的 RES 為 " + defenderRES)
+
+
+                    //戰鬥前的技能
+
+                    if(attacker.weaponName == "斬裂劍"){
+                        if(defenderDEF > defenderRES){
+                            attackingTrueDefRes = defenderRES
+                            console.log(attackerNAME + " 透過武器 斬裂劍（" + attacker.weaponDescripton + "）以 " + defenderNAME + " 的 魔防 計算傷害")
+                        }
+                        else{
+                            attackingTrueDefRes = defenderDEF
+                            console.log(attackerNAME + " 以 " + defenderNAME + " 的 防守 計算傷害")
+                        }
+                    }
+                    else if(attacker.weaponAttribute == 0){
+                        attackingTrueDefRes = defenderDEF
+                        console.log(attackerNAME + " 以 " + defenderNAME + " 的 防守 計算傷害")
+                    }
+                    else if(attacker.weaponAttribute == 1){
+                        attackingTrueDefRes = defenderRES
+                        console.log(attackerNAME + " 以 " + defenderNAME + " 的 魔防 計算傷害")
+                    }
+
+                    if(defender.skill2Name == "逆轉" && defenderHP >= defender.hitPointMaxium * (0.25 * defender.skill2Level)){
+                        if(attackingTrueDefRes = defenderRES && defenderDEF > defenderRES){
+                            attackingTrueDefRes = defenderDEF
+                            console.log(defenderNAME + " 透過技能 逆轉（" + defender.skill2Description[defender.skill2Level] + "）以自身的 防守 承受傷害")
+                        }
+                        else{
+                            attackingTrueDefRes = defenderRES
+                            console.log(defenderNAME + " 透過技能 逆轉（" + defender.skill2Description[defender.skill2Level] + "）以自身的 魔防 承受傷害")
+                        }
+                    }
+                    if(defender.weaponAttribute == 0){
+                        defendingTrueDefRes = attackerDEF
+                        console.log(defenderNAME + " 以 " + attackerNAME + " 的 防守 計算傷害")
+                    }
+                    else if(defender.weaponAttribute == 1){
+                        defendingTrueDefRes = attackerRES
+                        console.log(defenderNAME + " 以 " + attackerNAME + " 的 魔防 計算傷害")
+                    }
+
+                    attackerFollowUp = 0
+                    defenderFollowUp = 0
+                    if(attackerSPD > defenderSPD + 5){
+                        attackerFollowUp +=1
+                        console.log(attackerNAME + " 因為速度高於敵人 5 以上，可以追擊")
+                    }
+                    if(defenderSPD > attackerSPD + 5){
+                        defenderFollowUp +=1
+                        console.log(defenderNAME + " 因為速度高於敵人 5 以上，可以追擊")
+                    }
+
+                    if(defender.skill2Name == "回擊" && defenderHP >= defender.hitPointMaxium * (1 - 0.25 * defender.skill2Level)){
+                        defenderFollowUp += 1
+                        console.log(defenderNAME + " 透過技能 回擊（" + defender.skill2Description[defender.skill2Level] + "）獲得 反手追擊")
+                    }
+
+                    attackingTrueDamage = attackerATK - attackingTrueDefRes
+                    if(attackingTrueDamage < 0) attackingTrueDamage = 0
+                    console.log(attackerNAME + " 對 " + defenderNAME + " 會造成 " + attackingTrueDamage + " 點傷害")
+                    defendingTrueDamage = defenderATK - defendingTrueDefRes
+                    if(defendingTrueDamage < 0) defendingTrueDamage = 0
+                    console.log(defenderNAME + " 對 " + attackerNAME + " 會造成 " + defendingTrueDamage + " 點傷害")
+
+                    if(defender.skill2Name == "反擊" && defenderHP >= defender.hitPointMaxium * (1 - 0.5 * defender.skill2Level)){
+                        defenderFollowUp += 1
+                        console.log(defenderNAME + " 透過技能 回擊（" + defender.skill2Description[defender.skill2Level] + "獲得 反擊")
+                    }
+
+                    if(defender.skill1Name == "不動如山" && defenderHP >= defender.hitPointMaxium * (1 - 0.25 * defender.skill1Level)){
+                        attackerFollowUp = 0
+                        defenderFollowUp = 0
+                        console.log(defenderNAME + " 透過技能 不動如山（" + defender.skill1Description[defender.skill1Level] + "）使自己與敵人皆無法進行追擊")
+                    }
+
+                    if(attacker.skill3Name == "靜謐" ){
+                        attackerFollowUp = 0
+                        if(attacker.skill3Level == 1){
+                            if(attackerSPD >= defenderSPD + 5)
+                            defendingTrueDamage = 0
+                            console.log(attackerNAME + " 透過技能 靜謐（" + attacker.skill3Description[attacker.skill3Level] + "）使 " + defenderNAME + " 無法反擊")
+                        }
+                        if(attacker.skill3Level == 2){
+                            if(attackerSPD >= defenderSPD + 3)
+                            defendingTrueDamage = 0
+                            console.log(attackerNAME + " 透過技能 靜謐（" + attacker.skill3Description[attacker.skill3Level] + "）使 " + defenderNAME + " 無法反擊")
+                        }
+                        if(attacker.skill3Level == 3){
+                            if(attackerSPD >= defenderSPD)
+                            defendingTrueDamage = 0
+                            console.log(attackerNAME + " 透過技能 靜謐（" + attacker.skill3Description[attacker.skill3Level] + "）使 " + defenderNAME + " 無法反擊")
+                        }
+                    }
+
+                    if(attacker.weaponRange != defender.weaponRange){
+                        defendingTrueDamage = 0
+                        console.log(defenderNAME + " 無法反擊")
+                    }
+
+                    if(defender.skill3Name == "隱匿" && attacker.weaponAttribute == 0){
+                        debuff = Math.floor(attackingTrueDamage * 0.25 * defender.skill3Level)
+                        attackingTrueDamage -= debuff
+                        console.log(defenderNAME + " 透過技能 隱匿（" + defender.skill3Description[defender.skill3Level] + "）降低 " + debuff + " 點傷害")
+                    }
+
+                    if(defender.skill2Name == "聖盾" && attacker.weaponAttribute == 1){
+                        debuff = Math.floor(attackingTrueDamage * 0.25 * defender.skill2Level)
+                        attackingTrueDamage -= debuff
+                        console.log(defenderNAME + " 透過技能 聖盾（" + defender.skill2Description[defender.skill2Level] + "）降低 " + debuff + " 點傷害")
+                    }
+
+                    //戰鬥中的技能
+                    //attacker 攻擊
+                    defenderHP -= attackingTrueDamage
+                    if(attacker.skill2Name == "奉獻"){
+                        buff = Math.floor(attackingTrueDamage * (0.25 * attacker.skill2Level))
+                        attackerHP += buff
+                        overload = attackerHP - attacker.hitPointMaxium
+                        if(overload >= 0){
+                            attackerHP = attacker.hitPointMaxium
+                            buff -= overload    
+                        }
+                        console.log(attackerNAME + " 透過技能 奉獻（" + attacker.skill2Description[attacker.skill2Level] + "）回復了 " + buff + " 點傷害")
+                    }
+                    console.log(attackerNAME + " 對 " + defenderNAME + " 造成 " + attackingTrueDamage + " 點傷害 " + attackerNAME + " " + attackerHP + " "  + defenderNAME + " "  + defenderHP) 
+
+                    //defender 反擊
+                    attackerHP -= defendingTrueDamage
+                    console.log(defenderNAME + " 對 " + attackerNAME + " 造成 " + defendingTrueDamage + " 點傷害 " + attackerNAME + " " + attackerHP + " "  + defenderNAME + " "  + defenderHP)
+
+                    //attacker 追擊
+                    if(attackerFollowUp == 1){
+                        defenderHP -= attackingTrueDamage
+                        if(attacker.skill2Name == "奉獻"){
+                            buff = Math.floor(attackingTrueDamage * (0.25 * attacker.skill2Level))
+                            attackerHP += buff
+                            overload = attackerHP - attacker.hitPointMaxium
+                            if(overload >= 0){
+                                attackerHP = attacker.hitPointMaxium
+                                buff -= overload    
+                            }
+                            console.log(attackerNAME + " 透過技能 奉獻（" + attacker.skill2Description[attacker.skill2Level] + "）回復了 " + buff + " 點傷害")
+                        }
+                        console.log(attackerNAME + " 對 " + defenderNAME + " 追擊 " + attackingTrueDamage + " 點傷害 " + attackerNAME + " " + attackerHP + " "  + defenderNAME + " "  + defenderHP) 
+                    }
+
+                    //defender 反擊
+                    if(defenderFollowUp == 1){
+                        attackerHP -= defendingTrueDamage
+                        console.log(defenderNAME + " 對 " + attackerNAME + " 追擊 " + defendingTrueDamage + " 點傷害 " + attackerNAME + " " + attackerHP + " "  + defenderNAME + " "  + defenderHP)
+                    }
+
+                    characterStorage[characterX][characterY].hitPoint = attackerHP
+                    characterStorage[x][y].hitPoint = defenderHP
+
+                    //戰鬥後的技能
+                    if(attacker.skill2Name == "蛇毒"){
+                        debuff = 1 + 3 * attacker.skill2Level
+                        if(defenderHP < debuff){
+                            defenderHP = 1
+                            debuff = defenderHP - 1
+                        }
+                        else defenderHP -= debuff
+                        console.log(attackerNAME + " 透過技能 蛇毒（" + attacker.skill2Description[attacker.skill2Level] + "）在戰鬥後對 " + defenderNAME + " 造成 " + debuff + " 點傷害")
+                    }
+
+                    if(attacker.skill3Name == "憤怒")
+                    {
+                        debuff = 2 * attacker.skill2Level
+                        if(attackerHP < debuff){
+                            attackerHP = 1
+                            debuff = attackerHP - 1
+                        }
+                        else attackerHP -= debuff
+                        console.log(attackerNAME + " 在戰鬥後，因為技能 憤怒（" + attacker.skill3Description[attacker.skill3Level] + "）而喪失 HP " + debuff)
+                    }
+                    
                     //這裡結束
+                    updateInfoPanel(characterX,characterY,x,y)
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
@@ -378,8 +753,91 @@
                     characterStorage[characterX][characterY].attackActionPoint--
                     selectedFlag=1
                     playerAction--
-                    if(playerAction<=0) setTimeout(function(){enemyTurn()},2000)
+                    document.getElementById("turn").innerHTML="你的回合 剩餘行動點數 : "+playerAction
+                    if(playerAction<=0) setTimeout(function(){enemyTurn()},1000)
                 }
+            }
+
+            function stateGenerateAlly(character, difficulty)
+            {
+                character.damage += character.weaponMight[difficulty]
+                character.skill1Level = difficulty
+                character.skill2Level = difficulty
+                character.skill3Level = difficulty
+                //console.log(character.unitName + " " + "Lv. " + character.unitLevel)
+				//console.log(character.unitName + " " + "HP " + character.hitPoint)
+				//console.log(character.unitName + " " + "ATK " + character.damage + "（+" + character.weaponMight[difficulty] + "）")
+				//console.log(character.unitName + " " + "SPD " + character.speed)
+				//console.log(character.unitName + " " + "DEF " + character.defense)
+				//console.log(character.unitName + " " + "RES " + character.resistance)
+                //console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
+                //console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
+                //console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
+                //console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
+                //console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
+                //console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
+            }
+
+            function stateGenerate(character, difficulty)
+            {	//敵方腳色初始數據生成和我方腳色升級數據生成
+                level = character.unitLevel[difficulty]
+				var hitPointGrowth = character.hitPointGrowth
+				var damageGrowth = character.damageGrowth
+				var speedGrowth = character.speedGrowth
+				var defenseGrowth = character.defenseGrowth
+				var resistanceGrowth = character.resistanceGrowth
+				
+				for(var i = 0; i < level; i++){
+					var hitPointRNG = Math.random()
+					var damageRNG = Math.random()
+					var speedRNG = Math.random()
+					var defenseRNG = Math.random()
+					var resistanceRNG = Math.random()
+					if(hitPointRNG >= hitPointGrowth) character.hitPointMaxium++
+					if(damageRNG >= damageGrowth) character.damage++
+					if(speedRNG >= speedGrowth) character.speed++
+					if(defenseRNG >= defenseGrowth) character.defense++
+					if(resistanceRNG >= resistanceGrowth) character.resistance++
+				}
+                character.hitPoint = character.hitPointMaxium
+
+                character.damage += character.weaponMight[difficulty]
+                character.skill1Level = difficulty
+                character.skill2Level = difficulty
+                character.skill3Level = difficulty
+                //console.log(character.unitName + " " + "Lv. " + character.unitLevel[difficulty])
+				//console.log(character.unitName + " " + "HP " + character.hitPoint)
+				//console.log(character.unitName + " " + "ATK " + character.damage + "（+" + character.weaponMight[difficulty] + "）")
+				//console.log(character.unitName + " " + "SPD " + character.speed)
+				//console.log(character.unitName + " " + "DEF " + character.defense)
+				//console.log(character.unitName + " " + "RES " + character.resistance)
+                //console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
+                //console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
+                //console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
+                //console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
+                //console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
+                //console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
+			}
+
+            function stateGenerateBoss(character, difficulty)
+            {
+                character.hitPoint = character.hitPointMaxium[difficulty]
+                character.damage[difficulty] += character.weaponMight[difficulty]
+                character.skill1Level = difficulty
+                character.skill2Level = difficulty
+                character.skill3Level = difficulty
+                //console.log(character.unitName + " " + "Lv. " + character.unitLevel[difficulty])
+                //console.log(character.unitName + " " + "HP " + character.hitPoint)
+				//console.log(character.unitName + " " + "ATK " + character.damage[difficulty] + "（+" + character.weaponMight[difficulty] + "）")
+				//console.log(character.unitName + " " + "SPD " + character.speed[difficulty])
+				//console.log(character.unitName + " " + "DEF " + character.defense[difficulty])
+				//console.log(character.unitName + " " + "RES " + character.resistance[difficulty])
+                //console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
+                //console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
+                //console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
+                //console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
+                //console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
+                //console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
             }
 
             function checkAlive(x,y)
@@ -400,37 +858,76 @@
                 } 
             }
 
-            function statGenerate(character, level){	//敵方腳色初始數據生成和我方腳色升級數據生成
-				var hitPointGrowth = character.hitPointGrowth
-				var damageGrowth = character.damageGrowth
-				var speedGrowth = character.speedGrowth
-				var defenseGrowth = character.defenseGrowth
-				var resistanceGrowth = character.resistanceGrowth
-				
-				for(var i = 0; i < level; i++){
-					var hitPointRNG = Math.random()
-					var damageRNG = Math.random()
-					var speedRNG = Math.random()
-					var defenseRNG = Math.random()
-					var resistanceRNG = Math.random()
-					if(hitPointRNG >= hitPointGrowth) character.hitPointMaxium++
-					if(damageRNG >= damageGrowth) character.damage++
-					if(speedRNG >= speedGrowth) character.speed++
-					if(defenseRNG >= defenseGrowth) character.defense++
-					if(resistanceRNG >= resistanceGrowth) character.resistance++
-				}
-                character.hitPoint = character.hitPointMaxium
-				console.log(character.unitName + " " + character.hitPoint)
-				console.log(character.unitName + " " + character.damage)
-				console.log(character.unitName + " " + character.speed)
-				console.log(character.unitName + " " + character.defense)
-				console.log(character.unitName + " " + character.resistance)
-			}
-
             function enemyTurn()
             {
-                console.log("Enemy's turn")
-                setTimeout(function(){playerTurn()},2000)
+                let attackFlag=0,waitTime=0
+                console.log("敵方回合")
+                document.getElementById("turn").innerHTML="敵方回合"
+                for(let i=0;i<10;i++)
+                {
+                    for(let j=0;j<20;j++)
+                    {   
+                        if(characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
+                        {
+                            for(let k=0;k<10;k++)
+                            {
+                                for(let l=0;l<20;l++)
+                                {   
+                                    if((Math.abs(l-j)+Math.abs(k-i))<=characterStorage[j][i].weaponRange&&characterStorage[l][k]!=undefined&&characterStorage[l][k].side=="alpha")
+                                    {                                        
+                                        setTimeout(function()
+                                        {
+                                            console.log(characterStorage[l][k].hitPoint)
+                                            characterStorage[l][k].hitPoint-=characterStorage[j][i].damage
+                                            console.log(characterStorage[l][k].hitPoint)
+                                            updateInfoPanel(j,i,l,k)
+                                            checkAlive(l,k)
+                                        },waitTime*2000)
+                                        attackFlag=1
+                                        waitTime++
+                                        break
+                                    }
+                                    else if((Math.abs(l-j)+Math.abs(k-i))<=characterStorage[j][i].mobility&&characterStorage[l][k]==undefined)
+                                    {
+                                        for(let m=0;m<10;m++)
+                                        {
+                                            for(let n=0;n<20;n++)
+                                            {   
+                                                if((Math.abs(n-l)+Math.abs(m-k))<=characterStorage[j][i].weaponRange&&characterStorage[n][m]!=undefined&&characterStorage[n][m].side=="alpha")
+                                                {
+                                                    
+                                                    setTimeout(function()
+                                                    {               
+                                                        document.getElementById("cell"+l+k).innerHTML=characterStorage[j][i].unitIcon
+                                                        document.getElementById("cell"+j+i).innerHTML=""
+                                                        characterStorage[l][k]=characterStorage[j][i]
+                                                        characterStorage[j][i]=undefined                                         
+                                                        console.log(characterStorage[n][m].hitPoint)
+                                                        characterStorage[n][m].hitPoint-=characterStorage[l][k].damage
+                                                        console.log(characterStorage[n][m].hitPoint)
+                                                        updateInfoPanel(l,k,n,m)
+                                                        checkAlive(n,m)
+                                                    },waitTime*2000)
+                                                    attackFlag=1
+                                                    waitTime++
+                                                    break
+                                                }                                                
+                                            }
+                                            if(attackFlag) break
+                                        }
+                                        if(attackFlag) break
+                                    }
+                                }
+                                if(attackFlag)
+                                {
+                                    attackFlag=0
+                                    break
+                                }
+                            }
+                        }
+                    }
+                }                
+                setTimeout(function(){playerTurn()},waitTime*2000)
             }
 
             function playerTurn()
@@ -447,13 +944,25 @@
                         }                         
                     }
                 }
-                console.log("Your turn")
+                console.log("你的回合")
+                document.getElementById("turn").innerHTML="你的回合 剩餘行動點數 : "+playerAction
             }
 
-            window.addEventListener("load",setup,false)
+            function updateInfoPanel(attackerX,attackerY,defenderX,defenderY)
+            {
+                document.getElementById("attackerIcon").innerHTML=characterStorage[attackerX][attackerY].unitIcon
+                document.getElementById("attackerState").innerHTML="HP : "+characterStorage[attackerX][attackerY].hitPoint+"<br>DMG : "+characterStorage[attackerX][attackerY].damage+"<br>SPD : "+characterStorage[attackerX][attackerY].speed+"<br>DEF : "+characterStorage[attackerX][attackerY].defense+"<br>RES : "+characterStorage[attackerX][attackerY].resistance
+                document.getElementById("attackerSkill").innerHTML=characterStorage[attackerX][attackerY].skill1Icon
+                document.getElementById("defenderIcon").innerHTML=characterStorage[defenderX][defenderY].unitIcon
+                document.getElementById("defenderState").innerHTML="HP : "+characterStorage[defenderX][defenderY].hitPoint+"<br>DMG : "+characterStorage[defenderX][defenderY].damage+"<br>SPD : "+characterStorage[defenderX][defenderY].speed+"<br>DEF : "+characterStorage[defenderX][defenderY].defense+"<br>RES : "+characterStorage[defenderX][defenderY].resistance
+                document.getElementById("defenderSkill").innerHTML=characterStorage[defenderX][defenderY].skill1Icon
+                checkAlive(defenderX,defenderY)
+            }
+            
+            window.addEventListener("load",cover,false)
         </script>
     </head>
-    <body>
+    <body id="body">
         <div id="display"></div>
     </body>
 </html>
