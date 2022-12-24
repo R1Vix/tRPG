@@ -88,7 +88,7 @@
             let selectedFlag=1,characterX,characterY,playerAction,allyAliveUnit,enemyAliveUnit,characterStorage=new Array(20)
             for (let i=0;i<characterStorage.length;i++) characterStorage[i]=new Array(10)
 
-            summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [0, 6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 0, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 0)
+            summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [0, 6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "", "受到敵人攻擊時，當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 0, "復甦", "<img src='renewal.png' alt = '復甦' class='characterSkillSize'>", ["", "戰鬥後，回復 2 HP", "戰鬥後，回復 8 HP", "戰鬥後，回復 10 HP"], 0)
             characterStorage[18][6] = summoner
 
             heavyInfantry = new unit("alpha", "重裝兵", "<img src='heavyInfantry.png' alt = '我方重裝兵' class='characterImgSize'>", "使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", 1, 0, 1, 25, 25, 0.7, 11, 0.65, 6, 0.5, 12, 0.6, 5, 0.4, "蒼海之斧", "海浪潘打上岸的斧頭，隱約透漏著魔力", 1, [0, 6, 9, 12]	, "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 0, "破防擊", "<img src='armorBreak.png' alt = '破防擊' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "攻擊時，在敵人防守及魔防 - 30% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 50% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 70% 的情況下給予傷害"], 0, "尊嚴", "<img src='honeAtkDef.png' alt = '尊嚴' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "戰鬥開始時，若自身HP高於 75% ，則攻擊、防禦 + 2，否則攻擊、防禦 - 7", "戰鬥開始時，若自身HP高於 50% ，則攻擊、防禦 + 4，否則攻擊、防禦 - 7", "戰鬥開始時，若自身HP高於 25% ，則攻擊、防禦 + 7，否則攻擊、防禦 - 7"], 0)
@@ -106,26 +106,26 @@
             monk = new unit("alpha", "僧侶", "<img src='monk.png' alt = '我方僧侶' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", 1, 1, 2, 19, 19, 0.6, 6, 0.5, 7, 0.45, 6, 0.45, 11, 0.65, "海神的祝福", "海神親手打造之杖，將心願託付於後世", 2, [0, 6, 9, 12], "治癒杖", "<img src='heal.png' alt = '治癒杖' class='characterSkillSize'>", ["提升角色等級即可強化此技能","我方回合開始時，回復周圍 2 格內的我方單位 5 HP" , "我方回合開始時，回復周圍 2 格內的我方單位 10 HP", "我方回合開始時，回復周圍 2 格內的我方單位（自身攻擊的 50%）HP"], 0, "奉獻", "<img src='devotion.png' alt = '奉獻' class='characterSkillSize'>", ["提升角色等級即可強化此技能","攻擊時，回復所造成傷害的 25%", "攻擊時，回復所造成傷害的 50%", "攻擊時，回復所造成傷害的 75%"], 0, "完美", "<img src='honeSpdRes.png' alt = '完美' class='characterSkillSize'>", ["提升角色等級即可強化此技能","戰鬥開始時，若自身HP高於 75% ，則速度、魔防 + 2，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 50% ，則速度、魔防 + 4，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 25% ，則速度、魔防 + 7，否則速度、魔防 - 7"], 0)
             characterStorage[19][6] = monk
 
-            boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [0, 5, 8, 10], 0, 0, 0, [0, 23, 25, 27], 0, 0, [0, 10, 13, 15], 0, [0, 12, 14, 16], 0, [0, 11, 12, 14], 0, [0, 9, 10, 13], "始祖斬裂劍", "默靈的專屬武器，由自己發動攻擊時，攻擊2次", 1, [0, 6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["", "我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 1)
-            characterStorage[19][1] = boss
+            boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [0, 5, 8, 10], 0, 0, 0, [0, 23, 25, 27], 0, 0, [0, 10, 13, 15], 0, [0, 12, 14, 16], 0, [0, 11, 12, 14], 0, [0, 9, 10, 13], "始祖斬裂劍", "默靈的專屬武器，由自己發動攻擊時，攻擊2次", 1, [0, 6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "復甦", "<img src='renewal.png' alt = '復甦' class='characterSkillSize'>", ["", "戰鬥後，回復 2 HP", "戰鬥後，回復 8 HP", "戰鬥後，回復 10 HP"], 1)
+            characterStorage[1][8] = boss
 
             assassin1 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
-            characterStorage[16][6] = assassin1
+            characterStorage[16][7] = assassin1
 
             armoredInfantry1 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 4, 6, 9], 0, 2, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 7"], 1)
-            characterStorage[17][3] = armoredInfantry1
+            characterStorage[15][2] = armoredInfantry1
 
-            cavalry1 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
-            characterStorage[18][2] = cavalry1
+            cavalry1 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
+            characterStorage[7][8] = cavalry1
 
             longbowman1 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [0, 4, 6, 9], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [0, 6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["", "戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
-            characterStorage[16][4] = longbowman1
+            characterStorage[14][3] = longbowman1
 
             sorcerer1 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [0, 4, 6, 9], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [0, 6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 3"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
-            characterStorage[18][8] = sorcerer1
+            characterStorage[10][1] = sorcerer1
 
             monastic1 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [0, 4, 6, 9], 1, 0, 22, 22, 0.5, 9, 0.65, 12, 0.75, 7, 0.5, 9, 0.75, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [0, 6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["", "我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["", "戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["", "造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
-            characterStorage[17][7] = monastic1
+            characterStorage[13][7] = monastic1
 
             function unit(side, unitName, unitIcon, nameDescription, unitLevel, weaponAttribute, mobility, hitPoint, hitPointMaxium, hitPointGrowth, damage, damageGrowth, speed, speedGrowth, defense, defenseGrowth, resistance, resistanceGrowth, weaponName, weaponDescripton, weaponRange, weaponMight, skill1Name, skill1Icon, skill1Description, skill1Level, skill2Name, skill2Icon, skill2Description, skill2Level, skill3Name, skill3Icon, skill3Description, skill3Level)
             {
@@ -669,8 +669,15 @@
 
                     //戰鬥中的技能
                     console.log("攻擊前：" + attackerNAME + " " + attackerHP + " " + defenderNAME + " " + defenderHP)
+
                     //attacker 攻擊
                     defenderHP -= attackingTrueDamage
+
+                    if(defenderHP < 0 && defender.skill1Name == "渾沌默靈" && defender.skill1Level > 1){
+                        defenderHP = 1
+                        console.log(defenderNAME + " 透過技能 渾沌默靈（" + attacker.skill1Description[attacker.skill1Level] + "）將傷害降低至 HP 剩餘 1 點")
+                    }
+
                     if(attacker.skill2Name == "奉獻"){
                         buff = Math.floor(attackingTrueDamage * (0.25 * attacker.skill2Level))
                         attackerHP += buff
@@ -684,12 +691,28 @@
                     console.log(attackerNAME + " 對 " + defenderNAME + " 造成 " + attackingTrueDamage + " 點傷害 ") 
 
                     //defender 反擊
-                    attackerHP -= defendingTrueDamage
-                    console.log(defenderNAME + " 對 " + attackerNAME + " 造成 " + defendingTrueDamage + " 點傷害 ")
+                    if(defenderHP > 0){
+                        attackerHP -= defendingTrueDamage
+
+                        if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
+                            debuff = defenderATK * 0.5
+                            attackerHP -= debuff
+                            console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
+                        }
+                        console.log(defenderNAME + " 對 " + attackerNAME + " 造成 " + defendingTrueDamage + " 點傷害 ")
+                    }
+                    
 
                     //attacker 追擊
-                    if(attackerFollowUp == 1){
+                    if(attackerFollowUp == 1 && attackerHP > 0){
                         defenderHP -= attackingTrueDamage
+
+                        defenderHP -= attackingTrueDamage
+                        if(defenderHP < 0 && defender.skill1Name == "渾沌默靈" && defender.skill1Level > 1){
+                            defenderHP = 1
+                            console.log(defenderNAME + " 透過技能 渾沌默靈（" + attacker.skill1Description[attacker.skill1Level] + "）將傷害降低至 HP 剩餘 1 點")
+                        }
+
                         if(attacker.skill2Name == "奉獻"){
                             buff = Math.floor(attackingTrueDamage * (0.25 * attacker.skill2Level))
                             attackerHP += buff
@@ -702,10 +725,18 @@
                         }
                         console.log(attackerNAME + " 對 " + defenderNAME + " 追擊 " + attackingTrueDamage + " 點傷害 ") 
                     }
+                    
 
                     //defender 反擊
-                    if(defenderFollowUp == 1){
+                    if(defenderFollowUp == 1 && defenderHP > 0){
                         attackerHP -= defendingTrueDamage
+
+                        if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
+                            debuff = defenderATK * 0.5
+                            attackerHP -= debuff
+                            console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
+                        }
+
                         console.log(defenderNAME + " 對 " + attackerNAME + " 追擊 " + defendingTrueDamage + " 點傷害 ")
                     }
 
@@ -713,6 +744,29 @@
                     characterStorage[x][y].hitPoint = defenderHP
 
                     //戰鬥後的技能
+                    if(defender.skill3Name == "復甦" && defenderHP > 0){
+                        buff = -2 + 4 * defender.skill3Level
+                        defenderHP += buff
+                        if(defenderHP > defender.hitPointMaxium[difficulty]){
+                            overload = defenderHP - defender.hitPointMaxium[difficulty]
+                            defenderHP = defender.hitPointMaxium[difficulty]
+                            buff -= overload
+                        }
+                        console.log(defenderNAME + " 透過技能 復甦（" + defender.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
+                    }
+
+                    if(attacker.skill3Name == "復甦" && attackerHP > 0 && attacker.skill3Level > 0){
+                        buff = -2 + 4 * attacker.skill3Level
+                        attackerHP += buff
+                        if(attackerHP > attacker.hitPointMaxium[difficulty]){
+                            overload = attackerHP - attacker.hitPointMaxium[difficulty]
+                            attackerHP = attacker.hitPointMaxium[difficulty]
+                            buff -= overload
+                        }
+                        console.log(attackerNAME + " 透過技能 復甦（" + attacker.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
+                    }
+
+
                     if(attacker.skill2Name == "蛇毒" && attackerHP > 0 && attacker.skill2Level > 0){
                         debuff = 1 + 3 * attacker.skill2Level
                         if(defenderHP < debuff){
@@ -723,7 +777,7 @@
                         console.log(attackerNAME + " 透過技能 蛇毒（" + attacker.skill2Description[attacker.skill2Level] + "）在戰鬥後對 " + defenderNAME + " 造成 " + debuff + " 點傷害")
                     }
 
-                    if(attacker.skill3Name == "憤怒" && attackerHP > 0 && attacker.skill2Level > 0)
+                    if(attacker.skill3Name == "生命的代價" && attackerHP > 0 && attacker.skill2Level > 0)
                     {
                         debuff = 2 * attacker.skill2Level
                         if(attackerHP < debuff){
@@ -731,7 +785,7 @@
                             debuff = attackerHP - 1
                         }
                         else attackerHP -= debuff
-                        console.log(attackerNAME + " 在戰鬥後，因為技能 憤怒（" + attacker.skill3Description[attacker.skill3Level] + "）而喪失 HP " + debuff)
+                        console.log(attackerNAME + " 在戰鬥後，因為技能 生命的代價（" + attacker.skill3Description[attacker.skill3Level] + "）而喪失 HP " + debuff)
                     }
 
                     characterStorage[characterX][characterY].hitPoint = attackerHP
@@ -762,22 +816,24 @@
             function stateGenerateAlly(character, difficulty)
             {
                 character.damage += character.weaponMight[difficulty]
-                //console.log(character.unitName + " " + "Lv. " + character.unitLevel)
-				//console.log(character.unitName + " " + "HP " + character.hitPoint)
-				//console.log(character.unitName + " " + "ATK " + character.damage + "（+" + character.weaponMight[difficulty] + "）")
-				//console.log(character.unitName + " " + "SPD " + character.speed)
-				//console.log(character.unitName + " " + "DEF " + character.defense)
-				//console.log(character.unitName + " " + "RES " + character.resistance)
-                //console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
-                //console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
-                //console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
-                //console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
-                //console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
-                //console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
+                /*
+                console.log(character.unitName + " " + "Lv. " + character.unitLevel)
+				console.log(character.unitName + " " + "HP " + character.hitPoint)
+				console.log(character.unitName + " " + "ATK " + character.damage + "（+" + character.weaponMight[difficulty] + "）")
+				console.log(character.unitName + " " + "SPD " + character.speed)
+				console.log(character.unitName + " " + "DEF " + character.defense)
+				console.log(character.unitName + " " + "RES " + character.resistance)
+                console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
+                console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
+                console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
+                console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
+                console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
+                console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
+                */
             }
 
             function stateGenerate(character, difficulty)
-            {	//敵方腳色初始數據生成和我方腳色升級數據生成
+            {
                 level = character.unitLevel[difficulty]
 				var hitPointGrowth = character.hitPointGrowth
 				var damageGrowth = character.damageGrowth
@@ -803,18 +859,20 @@
                 character.skill1Level = difficulty
                 character.skill2Level = difficulty
                 character.skill3Level = difficulty
-                //console.log(character.unitName + " " + "Lv. " + character.unitLevel[difficulty])
-				//console.log(character.unitName + " " + "HP " + character.hitPoint)
-				//console.log(character.unitName + " " + "ATK " + character.damage + "（+" + character.weaponMight[difficulty] + "）")
-				//console.log(character.unitName + " " + "SPD " + character.speed)
-				//console.log(character.unitName + " " + "DEF " + character.defense)
-				//console.log(character.unitName + " " + "RES " + character.resistance)
-                //console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
-                //console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
-                //console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
-                //console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
-                //console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
-                //console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
+                /*
+                console.log(character.unitName + " " + "Lv. " + character.unitLevel[difficulty])
+				console.log(character.unitName + " " + "HP " + character.hitPoint)
+				console.log(character.unitName + " " + "ATK " + character.damage + "（+" + character.weaponMight[difficulty] + "）")
+				console.log(character.unitName + " " + "SPD " + character.speed)
+				console.log(character.unitName + " " + "DEF " + character.defense)
+				console.log(character.unitName + " " + "RES " + character.resistance)
+                console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
+                console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
+                console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
+                console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
+                console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
+                console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
+                */
 			}
 
             function stateGenerateBoss(character, difficulty)
@@ -828,18 +886,19 @@
                 character.skill1Level = difficulty
                 character.skill2Level = difficulty
                 character.skill3Level = difficulty
-                //console.log(character.unitName + " " + "Lv. " + character.unitLevel[difficulty])
-                //console.log(character.unitName + " " + "HP " + character.hitPoint)
-				//console.log(character.unitName + " " + "ATK " + character.damage)
-				//console.log(character.unitName + " " + "SPD " + character.speed)
-				//console.log(character.unitName + " " + "DEF " + character.defense)
-				//console.log(character.unitName + " " + "RES " + character.resistance)
-                //console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
-                //console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
-                //console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
-                //console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
-                //console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
-                //console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
+                console.log(character.unitName + " " + "Lv. " + character.unitLevel[difficulty])
+                console.log(character.unitName + " " + "HP " + character.hitPoint)
+				console.log(character.unitName + " " + "ATK " + character.damage)
+				console.log(character.unitName + " " + "SPD " + character.speed)
+				console.log(character.unitName + " " + "DEF " + character.defense)
+				console.log(character.unitName + " " + "RES " + character.resistance)
+                console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
+                console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
+                console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
+                console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
+                console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
+                console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
+                
             }
 
             function checkAlive(x,y)
@@ -865,6 +924,7 @@
                 let attackFlag=0,waitTime=0
                 console.log("敵方回合")
                 document.getElementById("turn").innerHTML="敵方回合"
+
                 for(let i=0;i<10;i++)
                 {
                     for(let j=0;j<20;j++)
@@ -946,6 +1006,7 @@
                         }                         
                     }
                 }
+
                 console.log("你的回合")
                 document.getElementById("turn").innerHTML="你的回合 剩餘行動點數 : "+playerAction
             }
