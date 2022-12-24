@@ -257,7 +257,7 @@
 
                     }
                 }
-                
+
                 summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [0, 6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 0, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）", "我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 0)
                 characterStorage[18][6] = summoner
 
@@ -276,7 +276,7 @@
                 monk = new unit("alpha", "僧侶", "<img src='monk.png' alt = '我方僧侶' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", 1, 1, 2, 19, 19, 0.6, 6, 0.5, 7, 0.45, 6, 0.45, 11, 0.65, "海神的祝福", "海神的祝福的武器敘述", 2, [0, 6, 9, 12], "治癒杖", "<img src='heal.png' alt = '治癒杖' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","我方回合開始時，回復周圍 2 格內的我方單位 5 HP" , "我方回合開始時，回復周圍 2 格內的我方單位 10 HP", "我方回合開始時，回復周圍 2 格內的我方單位（自身攻擊的 50%）HP"], 0, "奉獻", "<img src='devotion.png' alt = '奉獻' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","攻擊時，回復所造成傷害的 25%", "攻擊時，回復所造成傷害的 50%", "攻擊時，回復所造成傷害的 75%"], 0, "完美", "<img src='honeSpdRes.png' alt = '完美' class='characterSkillSize'>", ["（提升角色等級即可強化此技能）","戰鬥開始時，若自身HP高於 75% ，則速度、魔防 + 2，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 50% ，則速度、魔防 + 4，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 25% ，則速度、魔防 + 7，否則速度、魔防 - 7"], 0)
                 characterStorage[19][6] = monk
 
-                boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [0, 5, 8, 10], 0, 0, 0, [0, 23, 25, 27], 0, [0, 10, 13, 15], 0, [0, 12, 14, 16], 0, [0, 11, 12, 14], 0, [0, 9, 10, 13], 0, "始祖斬裂劍", "默靈的專屬武器，由自己發動攻擊時，攻擊2次", 1, [0, 6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "痊癒", "<img src='renewal.png' alt = '痊癒' class='characterSkillSize'>", ["", "我方奇數回合開始時，回復 4 HP", "我方回合開始時，回復 4 HP", "我方回合開始時，回復 7 HP"], 1)
+                boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [0, 5, 8, 10], 0, 0, 0, [0, 23, 25, 27], 0, 0, [0, 10, 13, 15], 0, [0, 12, 14, 16], 0, [0, 11, 12, 14], 0, [0, 9, 10, 13], "始祖斬裂劍", "默靈的專屬武器，由自己發動攻擊時，攻擊2次", 1, [0, 6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下1，一場戰鬥僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "復甦", "<img src='renewal.png' alt = '復甦' class='characterSkillSize'>", ["", "戰鬥後，回復 2 HP", "戰鬥後，回復 8 HP", "戰鬥後，回復 10 HP"], 1)
                 characterStorage[1][8] = boss
 
                 assassin1 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
@@ -316,7 +316,7 @@
                 allyAliveUnit=6
                 enemyAliveUnit=7
                 playerAction=allyAliveUnit
-                console.log("difficulty : "+difficulty)
+                console.log("難度 : "+difficulty)
                 stateGenerateAlly(summoner, difficulty)
                 stateGenerateAlly(heavyInfantry, difficulty)
                 stateGenerateAlly(knight, difficulty)
@@ -501,47 +501,384 @@
             {
                 if(characterStorage[characterX][characterY].moveActionPoint)
                 {
-                    //這裡開始
-                    console.log(characterStorage[characterX][characterY].unitName + " 對 " + characterStorage[x][y].unitName + " 發動攻擊")
+                    //初始化 attacker 角色數據
+                    attacker = characterStorage[characterX][characterY]
+                    attackerNAME = attacker.unitName
+                    attackerHP = attacker.hitPoint
+                    attackerATK = attacker.damage
+                    attackerSPD = attacker.speed
+                    attackerDEF = attacker.defense
+                    attackerRES = attacker.resistance
+                    //初始化 defender 角色數據
+                    defender = characterStorage[x][y]
+                    defenderNAME = defender.unitName
+                    defenderHP = defender.hitPoint
+                    defenderATK = defender.damage
+                    defenderSPD = defender.speed
+                    defenderDEF = defender.defense
+                    defenderRES = defender.resistance
+                    //宣告攻擊開始
+                    console.log(attackerNAME + " 對 " + defenderNAME + " 發動攻擊")
+                    //技能前數值 log 顯示
+                    /*
+                    console.log("上技能之前的數值")
+                    console.log(attackerNAME + " 的 HP 為 " + attackerHP)
+                    console.log(attackerNAME + " 的 ATK 為 " + attackerATK)
+                    console.log(attackerNAME + " 的 SPD 為 " + attackerSPD)
+                    console.log(attackerNAME + " 的 DEF 為 " + attackerDEF)
+                    console.log(attackerNAME + " 的 RES 為 " + attackerRES)
+                    console.log(defenderNAME + " 的 HP 為 " + defenderHP)
+                    console.log(defenderNAME + " 的 ATK 為 " + defenderATK)
+                    console.log(defenderNAME + " 的 SPD 為 " + defenderSPD)
+                    console.log(defenderNAME + " 的 DEF 為 " + defenderDEF)
+                    console.log(defenderNAME + " 的 RES 為 " + defenderRES)
+                    */
 
-                    attackerHP = characterStorage[characterX][characterY].hitPoint
-                    attackerATK = characterStorage[characterX][characterY].damage
-                    attackerSPD = characterStorage[characterX][characterY].speed
-                    attackerDEF = characterStorage[characterX][characterY].defense
-                    attackerRES = characterStorage[characterX][characterY].resistance
-
-                    attackerATK += characterStorage[characterX][characterY].weaponMight[0]
-
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 HP 為 " + attackerHP)
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 ATK 為 " + attackerATK)
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 SPD 為 " + attackerSPD)
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 DEF 為 " + attackerDEF)
-                    console.log(characterStorage[characterX][characterY].unitName + " 的 RES 為 " + attackerRES)
-
-                    defenderHP = characterStorage[x][y].hitPoint
-                    defenderATK = characterStorage[x][y].damage
-                    defenderSPD = characterStorage[x][y].speed
-                    defenderDEF = characterStorage[x][y].defense
-                    defenderRES = characterStorage[x][y].resistance
-
-                    defenderATK += characterStorage[x][y].weaponMight[0]
-
-                    if(characterStorage[x][y].skill1Name == "渾沌學")
-                    {
-                        buff = Math.floor(defenderATK * characterStorage[x][y].skill1Level * 0.2)
-                        defenderATK += buff
-                        console.log(characterStorage[x][y].unitName  + "透過技能 " + characterStorage[x][y].skill1Name + " （" + characterStorage[x][y].skill1Description[characterStorage[x][y].skill1Level - 1] + "） 獲得 攻擊 + " + buff)
+                    //attacker 的技能
+                    if(attacker.skill2Name == "破防擊" && attacker.skill2Level > 0){
+                        debuffDEF = Math.floor(defenderDEF * (0.1 + attacker.skill2Level * 0.2))
+                        debuffRES = Math.floor(defenderRES * (0.1 + attacker.skill2Level * 0.2))
+                        defenderDEF -= debuffDEF
+                        defenderRES -= debuffRES
+                        console.log(attackerNAME + " 透過技能 破防擊（" + attacker.skill2Description[attacker.skill2Level] + "）使 " + defenderNAME + " 防守 - " + debuffDEF + " 魔防 - " + debuffRES)
                     }
-                    console.log(characterStorage[x][y].unitName + " 的 HP 為 " + defenderHP)
-                    console.log(characterStorage[x][y].unitName + " 的 ATK 為 " + defenderATK)
-                    console.log(characterStorage[x][y].unitName + " 的 SPD 為 " + defenderSPD)
-                    console.log(characterStorage[x][y].unitName + " 的 DEF 為 " + defenderDEF)
-                    console.log(characterStorage[x][y].unitName + " 的 RES 為 " + defenderRES)
+
+                    if(attacker.skill3Name == "尊嚴" && attacker.skill3Level > 0)
+                    {
+                        if(attackerHP >= attacker.hitPointMaxium * (1 - 0.25 * attacker.skill3Level)){
+                            buffATK = 2 * attacker.skill3Level
+                            buffDEF = 2 * attacker.skill3Level
+                            attackerATK += buffATK
+                            attackerDEF += buffDEF
+                            console.log(attackerNAME + " 透過技能 尊嚴（" + attacker.skill3Description[attacker.skill3Level] + "）獲得 攻擊 + " + buffATK + " 防守 + " + buffDEF)
+                        }
+                        else{
+                            debuffATK = 7
+                            debuffDEF = 7
+                            attackerATK -= debuffATK
+                            attackerDEF -= debuffDEF
+                            console.log(attackerNAME + " 透過技能 尊嚴（" + attacker.skill3Description[attacker.skill3Level] + "）降低 攻擊 - " + debuffATK + " 防守 - " + debuffATK)
+                        }
+                    }
                     
-                    console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].hitPoint)
-                    characterStorage[x][y].hitPoint-=attackerATK
-                    console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].hitPoint)                    
-                    //這裡結束            
+                    if(attacker.skill1Name == "衝敵斬" && attacker.skill1Level > 0)
+                    {
+                        if(attackerHP >= attacker.hitPointMaxium * (1 - 0.25 * attacker.skill1Level)){
+                            debuffATK = 5
+                            defenderATK -= debuffATK
+                            console.log(attackerNAME + " 透過技能 衝敵斬（" + attacker.skill1Description[attacker.skill1Level] + "）使 " + defenderNAME + " 攻擊 - " + debuffATK)
+                        }
+                    }
+
+                    if(attacker.skill1Name == "覺醒" && attacker.skill1Level > 0)
+                    {
+                        buffSPD = attacker.skill1Level * 2
+                        attackerSPD += buffSPD
+                        console.log(attackerNAME + " 透過技能 覺醒（" + attacker.skill1Description[attacker.skill1Level] + "）獲得 速度 + " + buffSPD)
+                    }
+
+                    if(attacker.skill1Name == "冰河" && attacker.skill1Level > 0)
+                    {
+                        buffRES = Math.floor(attackerRES * (0.1 + attacker.skill1Level * 0.2))
+                        attackerATK += buffRES
+                        console.log(attackerNAME + " 透過技能 冰河（" + attacker.skill1Description[attacker.skill1Level] + "）獲得 魔防 + " + buffRES)
+                    }
+
+                    if(attacker.skill2Name == "生命的代價" && attacker.skill2Level > 0)
+                    {
+                        buff = attacker.skill2Level
+                        attackerATK += buff
+                        attackerSPD += buff
+                        attackerDEF += buff
+                        attackerRES += buff
+                        console.log(attackerNAME + " 透過技能 生命的代價（" + attacker.skill2Description[attacker.skill2Level] + "）獲得 攻擊 + " + buff + " 速度 + " + buff + " 防守 + " + buff + " 魔防 + " + buff)
+                    }
+
+                    if(attacker.skill3Name == "憤怒" && attacker.skill3Level > 0)
+                    {
+                        if(attackerHP <= attacker.hitPointMaxium * (0.25 * attacker.skill3Level)){
+                                buffATK = 10
+                                attackerATK += buffATK
+                                console.log(attackerNAME + " 透過技能 憤怒（" + attacker.skill3Description[attacker.skill3Level] + "）獲得 攻擊 + " + buffATK)
+                            }
+                    }
+
+                    if(attacker.skill3Name == "完美" && attacker.skill3Level > 0)
+                    {
+                        if(attackerHP >= attacker.hitPointMaxium * (1 - 0.25 * attacker.skill3Level)){
+                            buffSPD = 2 * attacker.skill3Level
+                            buffRES = 2 * attacker.skill3Level
+                            attackerSPD += buffSPD
+                            attackerRES += buffRES
+                            console.log(attackerNAME + " 透過技能 完美（" + attacker.skill3Description[attacker.skill3Level] + "）獲得 速度 + " + buffSPD + " 魔防 + " + buffRES)
+                        }
+                        else{
+                            debuffSPD = 7
+                            debuffRES = 7
+                            attackerATK -= debuffSPD
+                            attackerRES -= debuffRES
+                            console.log(attackerNAME + " 透過技能 完美（" + attacker.skill3Description[attacker.skill3Level] + "）降低 速度 - " + debuffSPD + " 魔防 - " + debuffRES)
+                        }
+                    }
+
+                    //defender 的技能
+                    if(defender.skill1Name == "渾沌學")
+                    {
+                        buffATK = Math.floor(defenderATK * defender.skill1Level * 0.2)
+                        defenderATK += buffATK
+                        console.log(defenderNAME + " 透過技能 渾沌學（" + defender.skill1Description[defender.skill1Level] + "）獲得 攻擊 + " + buffATK)
+                    }
+
+                    if(defender.skill3Name == "緋炎")
+                    {
+                        buffDEF = defender.skill3Level * 2
+                        defenderDEF += buffDEF
+                        console.log(defenderNAME + " 透過技能 緋炎（" + defender.skill3Description[defender.skill3Level] + "）獲得 防守 + " + buffDEF)
+                    }
+
+                    if(defender.skill3Name == "憤怒")
+                    {
+                        if(defenderHP <= defender.hitPointMaxium * (0.25 * defender.skill3Level)){
+                                buffATK = 10
+                                defenderATK += buffATK
+                                console.log(defenderNAME + " 透過技能 憤怒（" + defender.skill3Description[defender.skill3Level] + "）獲得 攻擊 + " + buffATK)
+                            }
+                    }
+
+                    if(defender.skill2Name == "附身")
+                    {
+                        buff = defender.skill2Level * 3 - 2
+                        defenderATK += buff
+                        defenderSPD += buff
+                        defenderDEF += buff
+                        defenderRES += buff
+                        console.log(defenderNAME + " 透過技能 附身（" + defender.skill2Description[defender.skill2Level] + "）獲得 攻擊 + " + buff + " 速度 + " + buff + " 防守 + " + buff + " 魔防 + " + buff)
+                    }
+
+                    if(defender.skill3Name == "暴雷")
+                    {
+                        buffATK = Math.floor(defenderATK * defender.skill3Level * 0.3)
+                        defenderATK += buffATK
+                        console.log(defenderNAME + " 透過技能 暴雷（" + defender.skill3Description[defender.skill3Level] + "）獲得 攻擊 + " + buffATK)
+                    }
+
+                    //戰鬥前數值 log 顯示
+                    /*
+                    console.log("上技能之後的數值")
+                    console.log(attackerNAME + " 的 HP 為 " + attackerHP)
+                    console.log(attackerNAME + " 的 ATK 為 " + attackerATK)
+                    console.log(attackerNAME + " 的 SPD 為 " + attackerSPD)
+                    console.log(attackerNAME + " 的 DEF 為 " + attackerDEF)
+                    console.log(attackerNAME + " 的 RES 為 " + attackerRES)
+                    console.log(defenderNAME + " 的 HP 為 " + defenderHP)
+                    console.log(defenderNAME + " 的 ATK 為 " + defenderATK)
+                    console.log(defenderNAME + " 的 SPD 為 " + defenderSPD)
+                    console.log(defenderNAME + " 的 DEF 為 " + defenderDEF)
+                    console.log(defenderNAME + " 的 RES 為 " + defenderRES)
+                    */
+
+
+                    //戰鬥前的技能
+
+                    if(attacker.weaponName == "斬裂劍")
+                    {
+                        if(defenderDEF > defenderRES)
+                        {
+                            attackingTrueDefRes = defenderRES
+                            console.log(attackerNAME + " 透過武器 斬裂劍（" + attacker.weaponDescripton + "）以 " + defenderNAME + " 的 魔防 計算傷害")
+                        }
+                        else
+                        {
+                            attackingTrueDefRes = defenderDEF
+                            //console.log(attackerNAME + " 以 " + defenderNAME + " 的 防守 計算傷害")
+                        }
+                    }
+                    else if(attacker.weaponAttribute == 0)
+                    {
+                        attackingTrueDefRes = defenderDEF
+                        //console.log(attackerNAME + " 以 " + defenderNAME + " 的 防守 計算傷害")
+                    }
+                    else if(attacker.weaponAttribute == 1)
+                    {
+                        attackingTrueDefRes = defenderRES
+                        //console.log(attackerNAME + " 以 " + defenderNAME + " 的 魔防 計算傷害")
+                    }
+
+                    if(defender.skill2Name == "逆轉" && defenderHP >= defender.hitPointMaxium * (0.25 * defender.skill2Level))
+                    {
+                        if(attackingTrueDefRes = defenderRES && defenderDEF > defenderRES)
+                        {
+                            attackingTrueDefRes = defenderDEF
+                            console.log(defenderNAME + " 透過技能 逆轉（" + defender.skill2Description[defender.skill2Level] + "）以自身的 防守 承受傷害")
+                        }
+                        else
+                        {
+                            attackingTrueDefRes = defenderRES
+                            console.log(defenderNAME + " 透過技能 逆轉（" + defender.skill2Description[defender.skill2Level] + "）以自身的 魔防 承受傷害")
+                        }
+                    }
+                    if(defender.weaponAttribute == 0)
+                    {
+                        defendingTrueDefRes = attackerDEF
+                        //console.log(defenderNAME + " 以 " + attackerNAME + " 的 防守 計算傷害")
+                    }
+                    else if(defender.weaponAttribute == 1)
+                    {
+                        defendingTrueDefRes = attackerRES
+                        //console.log(defenderNAME + " 以 " + attackerNAME + " 的 魔防 計算傷害")
+                    }
+
+                    attackerFollowUp = 0
+                    defenderFollowUp = 0
+                    if(attackerSPD > defenderSPD + 5)
+                    {
+                        attackerFollowUp +=1
+                        console.log(attackerNAME + " 因為速度高於敵人 5 以上，可以追擊")
+                    }
+                    if(defenderSPD > attackerSPD + 5)
+                    {
+                        defenderFollowUp +=1
+                        console.log(defenderNAME + " 因為速度高於敵人 5 以上，可以追擊")
+                    }
+
+                    if(defender.skill2Name == "回擊" && defenderHP >= defender.hitPointMaxium * (1 - 0.25 * defender.skill2Level))
+                    {
+                        defenderFollowUp += 1
+                        console.log(defenderNAME + " 透過技能 回擊（" + defender.skill2Description[defender.skill2Level] + "）獲得 反手追擊")
+                    }
+
+                    attackingTrueDamage = attackerATK - attackingTrueDefRes
+                    if(attackingTrueDamage < 0) attackingTrueDamage = 0
+                    //console.log(attackerNAME + " 對 " + defenderNAME + " 會造成 " + attackingTrueDamage + " 點傷害")
+                    defendingTrueDamage = defenderATK - defendingTrueDefRes
+                    if(defendingTrueDamage < 0) defendingTrueDamage = 0
+                    //console.log(defenderNAME + " 對 " + attackerNAME + " 會造成 " + defendingTrueDamage + " 點傷害")
+
+                    
+
+                    if(defender.skill1Name == "不動如山" && defenderHP >= defender.hitPointMaxium * (1 - 0.25 * defender.skill1Level))
+                    {
+                        attackerFollowUp = 0
+                        defenderFollowUp = 0
+                        console.log(defenderNAME + " 透過技能 不動如山（" + defender.skill1Description[defender.skill1Level] + "）使自己與敵人皆無法進行追擊")
+                    }
+
+                    if(attacker.skill3Name == "靜謐" )
+                    {
+                        attackerFollowUp = 0
+                        if(attackerSPD >= defenderSPD + (-1 + 2 * attacker.skill2Level))
+                        {
+                            defendingTrueDamage = 0
+                            console.log(attackerNAME + " 透過技能 靜謐（" + attacker.skill3Description[attacker.skill3Level] + "）使 " + defenderNAME + " 無法反擊")
+                        }
+                    }
+                    
+                    if(attacker.weaponRange != defender.weaponRange)
+                    {
+                        defendingTrueDamage = 0
+                        //console.log(defenderNAME + " 無法反擊")
+                    }
+
+                    if(defender.skill2Name == "反擊" && defender.skill2Level >= 2)
+                    {
+                        defendingTrueDamage = defenderATK - defendingTrueDefRes
+                        console.log(defenderNAME + " 透過技能 反擊（" + defender.skill3Description[defender.skill3Level] + "）撤銷 自身無法反擊")
+                    }
+
+                    if(defender.skill3Name == "隱匿" && attacker.weaponAttribute == 0)
+                    {
+                        debuff = Math.floor(attackingTrueDamage * 0.25 * defender.skill3Level)
+                        attackingTrueDamage -= debuff
+                        console.log(defenderNAME + " 透過技能 隱匿（" + defender.skill3Description[defender.skill3Level] + "）降低 " + debuff + " 點傷害")
+                    }
+
+                    if(defender.skill2Name == "聖盾" && attacker.weaponAttribute == 1)
+                    {
+                        debuff = Math.floor(attackingTrueDamage * 0.25 * defender.skill2Level)
+                        attackingTrueDamage -= debuff
+                        console.log(defenderNAME + " 透過技能 聖盾（" + defender.skill2Description[defender.skill2Level] + "）降低 " + debuff + " 點傷害")
+                    }
+
+                    //戰鬥中的技能
+                    console.log("攻擊前：" + attackerNAME + " " + attackerHP + " " + defenderNAME + " " + defenderHP)
+                    //attacker 攻擊
+                    defenderHP -= attackingTrueDamage
+                    if(attacker.skill2Name == "奉獻")
+                    {
+                        buff = Math.floor(attackingTrueDamage * (0.25 * attacker.skill2Level))
+                        attackerHP += buff
+                        overload = attackerHP - attacker.hitPointMaxium
+                        if(overload >= 0)
+                        {
+                            attackerHP = attacker.hitPointMaxium
+                            buff -= overload    
+                        }
+                        console.log(attackerNAME + " 透過技能 奉獻（" + attacker.skill2Description[attacker.skill2Level] + "）回復了 " + buff + " 點傷害")
+                    }
+                    console.log(attackerNAME + " 對 " + defenderNAME + " 造成 " + attackingTrueDamage + " 點傷害 ") 
+
+                    //defender 反擊
+                    attackerHP -= defendingTrueDamage
+                    console.log(defenderNAME + " 對 " + attackerNAME + " 造成 " + defendingTrueDamage + " 點傷害 ")
+
+                    //attacker 追擊
+                    if(attackerFollowUp == 1)
+                    {
+                        defenderHP -= attackingTrueDamage
+                        if(attacker.skill2Name == "奉獻")
+                        {
+                            buff = Math.floor(attackingTrueDamage * (0.25 * attacker.skill2Level))
+                            attackerHP += buff
+                            overload = attackerHP - attacker.hitPointMaxium
+                            if(overload >= 0)
+                            {
+                                attackerHP = attacker.hitPointMaxium
+                                buff -= overload    
+                            }
+                            console.log(attackerNAME + " 透過技能 奉獻（" + attacker.skill2Description[attacker.skill2Level] + "）回復了 " + buff + " 點傷害")
+                        }
+                        console.log(attackerNAME + " 對 " + defenderNAME + " 追擊 " + attackingTrueDamage + " 點傷害 ") 
+                    }
+
+                    //defender 反擊
+                    if(defenderFollowUp == 1)
+                    {
+                        attackerHP -= defendingTrueDamage
+                        console.log(defenderNAME + " 對 " + attackerNAME + " 追擊 " + defendingTrueDamage + " 點傷害 ")
+                    }
+
+                    characterStorage[characterX][characterY].hitPoint = attackerHP
+                    characterStorage[x][y].hitPoint = defenderHP
+
+                    //戰鬥後的技能
+                    if(attacker.skill2Name == "蛇毒" && attackerHP > 0 && attacker.skill2Level > 0)
+                    {
+                        debuff = 1 + 3 * attacker.skill2Level
+                        if(defenderHP < debuff)
+                        {
+                            defenderHP = 1
+                            debuff = defenderHP - 1
+                        }
+                        else defenderHP -= debuff
+                        console.log(attackerNAME + " 透過技能 蛇毒（" + attacker.skill2Description[attacker.skill2Level] + "）在戰鬥後對 " + defenderNAME + " 造成 " + debuff + " 點傷害")
+                    }
+
+                    if(attacker.skill3Name == "憤怒" && attackerHP > 0 && attacker.skill2Level > 0)
+                    {
+                        debuff = 2 * attacker.skill2Level
+                        if(attackerHP < debuff)
+                        {
+                            attackerHP = 1
+                            debuff = attackerHP - 1
+                        }
+                        else attackerHP -= debuff
+                        console.log(attackerNAME + " 在戰鬥後，因為技能 憤怒（" + attacker.skill3Description[attacker.skill3Level] + "）而喪失 HP " + debuff)
+                    }
+
+                    characterStorage[characterX][characterY].hitPoint = attackerHP
+                    characterStorage[x][y].hitPoint = defenderHP
+                    console.log("攻擊後：" + attackerNAME + " " + attackerHP + " " + defenderNAME + " " + defenderHP)
+                    //這裡結束           
                     updateInfoPanel(characterX,characterY,x,y)
                     checkAlive(x,y)
                     for(let i=0;i<10;i++)
@@ -969,18 +1306,19 @@
 
             function stateGenerateEnemy(character, level)
             {	//敵方腳色初始數據生成和我方腳色升級數據生成
-				var hitPointGrowth = character.hitPointGrowth
-				var damageGrowth = character.damageGrowth
-				var speedGrowth = character.speedGrowth
-				var defenseGrowth = character.defenseGrowth
-				var resistanceGrowth = character.resistanceGrowth
+				let hitPointGrowth = character.hitPointGrowth
+				let damageGrowth = character.damageGrowth
+				let speedGrowth = character.speedGrowth
+				let defenseGrowth = character.defenseGrowth
+				let resistanceGrowth = character.resistanceGrowth
 				
-				for(var i = 0; i < level; i++){
-					var hitPointRNG = Math.random()
-					var damageRNG = Math.random()
-					var speedRNG = Math.random()
-					var defenseRNG = Math.random()
-					var resistanceRNG = Math.random()
+				for(var i = 0; i < level; i++)
+                {
+					let hitPointRNG = Math.random()
+					let damageRNG = Math.random()
+					let speedRNG = Math.random()
+					let defenseRNG = Math.random()
+					let resistanceRNG = Math.random()
 					if(hitPointRNG >= hitPointGrowth) character.hitPointMaxium++
 					if(damageRNG >= damageGrowth) character.damage++
 					if(speedRNG >= speedGrowth) character.speed++
@@ -1006,6 +1344,18 @@
                 character.skill1Level = difficulty
                 character.skill2Level = difficulty
                 character.skill3Level = difficulty
+                console.log(character.unitName + " " + "Lv. " + character.unitLevel[difficulty])
+                console.log(character.unitName + " " + "HP " + character.hitPoint)
+				console.log(character.unitName + " " + "ATK " + character.damage)
+				console.log(character.unitName + " " + "SPD " + character.speed)
+				console.log(character.unitName + " " + "DEF " + character.defense)
+				console.log(character.unitName + " " + "RES " + character.resistance)
+                console.log(character.unitName + " " + character.skill1Name + " Lv. " + character.skill1Level)
+                console.log(character.unitName + " " + character.skill1Description[character.skill1Level])
+                console.log(character.unitName + " " + character.skill2Name + " Lv. " + character.skill2Level)
+                console.log(character.unitName + " " + character.skill2Description[character.skill2Level])
+                console.log(character.unitName + " " + character.skill3Name + " Lv. " + character.skill3Level)
+                console.log(character.unitName + " " + character.skill3Description[character.skill3Level])
             }
 
             function checkAlive(x,y)
