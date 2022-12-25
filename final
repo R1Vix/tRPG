@@ -49,7 +49,7 @@
                 margin: 0px;
                 width: 100px;
                 height: 100px;
-                opacity: 0.5;
+                opacity: 0.7;
             }
             .turnPanel
             {
@@ -415,6 +415,10 @@
                 {
                     characterStorage[i][0] = terrain
                 }
+                for(let i=3;i<20;i++)
+                {
+                    characterStorage[i][9] = terrain
+                }
                 characterStorage[0][1] = terrain
                 characterStorage[1][1] = terrain
                 characterStorage[11][1] = terrain
@@ -473,10 +477,6 @@
                 characterStorage[15][8] = terrain
                 characterStorage[18][8] = terrain
                 characterStorage[19][8] = terrain
-                for(let i=3;i<20;i++)
-                {
-                    characterStorage[i][9] = terrain
-                }
 
                 document.getElementById("body").setAttribute("style","background-image: url(neturalBackground01.png); background-size: 2000px 1050px;")
                 for(let i=0;i<10;i++)
@@ -489,12 +489,20 @@
                     }
                     board+="</tr>"
                 }
+                
                 board+="</table>"
                 board+="<div id='turn' class='turnPanel'>我方回合 剩餘可行動單位 : 6</div>"
                 board+="<div id='infoSession1' class='characterInfoPanel'></div><div id='infoSession2' class='characterInfoPanel_2'></div><div id='infoSession3' class='characterInfoPanel_2'></div><div id='infoSession4' class='characterInfoPanel'></div><div id='infoSession5' class='characterInfoPanel'></div><div id='infoSession6' class='characterInfoPanel'></div>"
                 board+="<div class='characterBattlePanel'>攻擊方<br><div id='attackerIcon' class='battlePanelDetail'></div><div id='attackerState' class='battlePanelDetail'></div><div id='attackerSkill' class='battlePanelDetail'></div></div>"
                 board+="<div class='characterBattlePanel'>防守方<br><div id='defenderIcon' class='battlePanelDetail'></div><div id='defenderState' class='battlePanelDetail'></div><div id='defenderSkill' class='battlePanelDetail'></div></div>"
                 document.getElementById("display").innerHTML=board
+                for(let i=0;i<10;i++)
+                {
+                    for(let j=0;j<20;j++)
+                    {
+                        if(characterStorage[j][i]!=undefined&&characterStorage[j][i]==terrain) document.getElementById("cell"+j+i).setAttribute("style","background-color: gray; opacity: 0.7;")
+                    }
+                }
                 allyAliveUnit=6
                 enemyAliveUnit=20
                 playerAction=allyAliveUnit
@@ -554,11 +562,11 @@
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
-                        {            
+                        {             
                             if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange + characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined&&characterStorage[characterX][characterY].attackActionPoint)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(241,130,141,0.5)")
-                            } 
+                            }
                             if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined&&characterStorage[characterX][characterY].moveActionPoint)
                             {                            
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
@@ -988,8 +996,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = Math.floor(defenderATK * 0.5)
-                            defenderATK * 0.5
+                            debuff = Math.floor(defenderATK  * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1053,9 +1060,9 @@
                     if(attacker.skill3Name == "復甦" && attackerHP > 0 && attacker.skill3Level > 0){
                         buff = -2 + 4 * attacker.skill3Level
                         attackerHP += buff
-                        if(attackerHP > attacker.hitPointMaxium[difficulty]){
-                            overload = attackerHP - attacker.hitPointMaxium[difficulty]
-                            attackerHP = attacker.hitPointMaxium[difficulty]
+                        if(attackerHP > attacker.hitPointMaxium){
+                            overload = attackerHP - attacker.hitPointMaxium
+                            attackerHP = attacker.hitPointMaxium
                             buff -= overload
                         }
                         console.log(attackerNAME + " 透過技能 復甦（" + attacker.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
@@ -1094,18 +1101,9 @@
                         {
                             for(let j=0;j<20;j++)
                             {             
-                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange)
-                                {
-                                    document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
-                                }
-                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined)
-                                {
-                                    document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
-                                }
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
                         }   
-                        selectedFlag=1
-                        console.log("selectedFlag "+selectedFlag)
                     }
                     else
                     {
@@ -1113,10 +1111,7 @@
                         {
                             for(let j=0;j<20;j++)
                             {             
-                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange)
-                                {
-                                    document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
-                                }
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                                 if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined)
                                 {
                                     document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
@@ -1500,9 +1495,9 @@
                     if(attacker.skill3Name == "復甦" && attackerHP > 0 && attacker.skill3Level > 0){
                         buff = -2 + 4 * attacker.skill3Level
                         attackerHP += buff
-                        if(attackerHP > attacker.hitPointMaxium[difficulty]){
-                            overload = attackerHP - attacker.hitPointMaxium[difficulty]
-                            attackerHP = attacker.hitPointMaxium[difficulty]
+                        if(attackerHP > attacker.hitPointMaxium){
+                            overload = attackerHP - attacker.hitPointMaxium
+                            attackerHP = attacker.hitPointMaxium
                             buff -= overload
                         }
                         console.log(attackerNAME + " 透過技能 復甦（" + attacker.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
@@ -1635,6 +1630,8 @@
                 if(characterStorage[attackerX][attackerY].hitPoint<=0&&characterStorage[attackerX][attackerY].side=="alpha")
                 {
                     allyAliveUnit--
+                    selectedFlag=1
+                    playerAction--
                     document.getElementById("cell"+attackerX+attackerY).innerHTML=""
                     if(summoner.hitPoint <= 0)
                     {
@@ -2793,14 +2790,14 @@
                 document.getElementById("attackerSkill").innerHTML=characterStorage[attackerX][attackerY].skill1Icon+characterStorage[attackerX][attackerY].skill1Name+"<br>"+characterStorage[attackerX][attackerY].skill2Icon+characterStorage[attackerX][attackerY].skill2Name+"<br>"+characterStorage[attackerX][attackerY].skill3Icon+characterStorage[attackerX][attackerY].skill3Name
                 document.getElementById("defenderIcon").innerHTML=characterStorage[defenderX][defenderY].unitIcon+"<br>"+characterStorage[defenderX][defenderY].unitName
                 document.getElementById("defenderState").innerHTML="HP : "+characterStorage[defenderX][defenderY].hitPoint+"<br>DMG : "+characterStorage[defenderX][defenderY].damage+"<br>SPD : "+characterStorage[defenderX][defenderY].speed+"<br>DEF : "+characterStorage[defenderX][defenderY].defense+"<br>RES : "+characterStorage[defenderX][defenderY].resistance
-                document.getElementById("defenderSkill").innerHTML=characterStorage[defenderX][defenderY].skill1Icon+characterStorage[defenderX][defenderY].skill1Name+" Lv : "+characterStorage[defenderX][defenderY].skill1Level+"<br>"+characterStorage[defenderX][defenderY].skill2Icon+characterStorage[defenderX][defenderY].skill2Name+" Lv : "+characterStorage[defenderX][defenderY].skill2Level+"<br>"+characterStorage[defenderX][defenderY].skill3Icon+characterStorage[defenderX][defenderY].skill3Name+" Lv : "+characterStorage[defenderX][defenderY].skill3Level
+                document.getElementById("defenderSkill").innerHTML=characterStorage[defenderX][defenderY].skill1Icon+characterStorage[defenderX][defenderY].skill1Name+"<br>"+characterStorage[defenderX][defenderY].skill2Icon+characterStorage[defenderX][defenderY].skill2Name+"<br>"+characterStorage[defenderX][defenderY].skill3Icon+characterStorage[defenderX][defenderY].skill3Name
             }
             
             function updateInfoPanel(x,y)
             {
                 document.getElementById("infoSession1").innerHTML=characterStorage[x][y].unitIcon+characterStorage[x][y].unitName+" Lv : "+characterStorage[x][y].unitLevel+"<br>"+characterStorage[x][y].nameDescription
                 document.getElementById("infoSession2").innerHTML=characterStorage[x][y].weaponName+"<br>"+characterStorage[x][y].weaponDescripton
-                document.getElementById("infoSession3").innerHTML="HP : "+characterStorage[x][y].hitPoint+" / " +characterStorage[x][y].hitPointMaxium + "<br>DMG : "+characterStorage[x][y].damage+"<br>SPD : "+characterStorage[x][y].speed+"<br>DEF : "+characterStorage[x][y].defense+"<br>RES : "+characterStorage[x][y].resistance
+                document.getElementById("infoSession3").innerHTML="HP : "+characterStorage[x][y].hitPoint+" / " +characterStorage[x][y].hitPointMaxium +"<br>DMG : "+characterStorage[x][y].damage+"<br>SPD : "+characterStorage[x][y].speed+"<br>DEF : "+characterStorage[x][y].defense+"<br>RES : "+characterStorage[x][y].resistance
                 document.getElementById("infoSession4").innerHTML=characterStorage[x][y].skill1Icon+characterStorage[x][y].skill1Name+" Lv : "+characterStorage[x][y].skill1Level+"<br>"+characterStorage[x][y].skill1Description[characterStorage[x][y].skill1Level]
                 document.getElementById("infoSession5").innerHTML=characterStorage[x][y].skill2Icon+characterStorage[x][y].skill2Name+" Lv : "+characterStorage[x][y].skill2Level+"<br>"+characterStorage[x][y].skill2Description[characterStorage[x][y].skill2Level]
                 document.getElementById("infoSession6").innerHTML=characterStorage[x][y].skill3Icon+characterStorage[x][y].skill3Name+" Lv : "+characterStorage[x][y].skill3Level+"<br>"+characterStorage[x][y].skill3Description[characterStorage[x][y].skill3Level]
