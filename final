@@ -106,7 +106,7 @@
                 padding: 0px;
                 margin: 0px;
                 font-family:"cwTeXFangSong";
-                font-size: 30px;
+                font-size: 40px;
                 font-weight: bold;
                 color: lightgoldenrodyellow;
                 position: absolute;
@@ -132,7 +132,7 @@
                 padding: 0px;
                 margin: 0px;
                 font-family:"cwTeXFangSong";
-                font-size: 100px;
+                font-size: 200px;
                 position: absolute;
                 top: 20%;
                 left: 50%;
@@ -227,7 +227,7 @@
 
             function cover()
             {
-                document.getElementById("body").setAttribute("style","background-image: url(ntou.jpg); background-size: cover;")
+                document.getElementById("body").setAttribute("style","background-image: url(neturalBackground00.png); background-size: cover;")
                 document.getElementById("display").innerHTML="<div class='text'>默海之役</div><br><input type='button' id='startButton' value='開始遊戲' class='button'>"
                 document.getElementById("startButton").addEventListener("click",selectDifficulty,false)
             }
@@ -258,7 +258,7 @@
                     }
                 }
 
-                summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [0, 6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "", "受到敵人攻擊時，當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下 1，一場遊戲僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 0, "復甦", "<img src='renewal.png' alt = '復甦' class='characterSkillSize'>", ["", "戰鬥後，回復 2 HP", "戰鬥後，回復 8 HP", "戰鬥後，回復 10 HP"], 0)
+                summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.6, 13, 0.65, 7, 0.55, 11, 0.6, 8, 0.45, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [0, 6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "", "受到敵人攻擊時，當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下 1，一場遊戲僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 0, "復甦", "<img src='renewal.png' alt = '復甦' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "戰鬥後，回復 2 HP", "戰鬥後，回復 8 HP", "戰鬥後，回復 10 HP"], 0)
                 characterStorage[18][6] = summoner
 
                 heavyInfantry = new unit("alpha", "重裝兵", "<img src='heavyInfantry.png' alt = '我方重裝兵' class='characterImgSize'>", "使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", 1, 0, 1, 25, 25, 0.7, 11, 0.65, 6, 0.5, 12, 0.6, 5, 0.4, "蒼海之斧", "海浪潘打上岸的斧頭，隱約透漏著魔力", 1, [0, 6, 9, 12]	, "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 0, "破防擊", "<img src='armorBreak.png' alt = '破防擊' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "攻擊時，在敵人防守及魔防 - 30% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 50% 的情況下給予傷害", "攻擊時，在敵人防守及魔防 - 70% 的情況下給予傷害"], 0, "尊嚴", "<img src='honeAtkDef.png' alt = '尊嚴' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "戰鬥開始時，若自身HP高於 75% ，則攻擊、防禦 + 2，否則攻擊、防禦 - 7", "戰鬥開始時，若自身HP高於 50% ，則攻擊、防禦 + 4，否則攻擊、防禦 - 7", "戰鬥開始時，若自身HP高於 25% ，則攻擊、防禦 + 6，否則攻擊、防禦 - 7"], 0)
@@ -273,68 +273,71 @@
                 mage = new unit("alpha", "魔刃", "<img src='mage.png' alt = '我方魔刃' class='characterImgSize'>", "使用黑魔法作為武器，以敵人的魔防計算傷害", 1, 1, 2, 19, 19, 0.55, 8, 0.55, 8, 0.55, 8, 0.55, 6, 0.45, "深邃黑暗", "闇魔道研究學者留下來的咒書，但在錯誤的手中會帶來痛苦的代價", 2, [0, 6, 9, 12], "冰河", "<img src='iceberg.png' alt = '冰河' class='characterSkillSize'>", ["提升角色等級即可強化此技能","由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身魔防的 80%"], 0, "生命的代價", "<img src='costOfLife.png' alt = '生命的代價' class='characterSkillSize'>", ["提升角色等級即可強化此技能","戰鬥中的攻擊、速度、防禦、魔防 + 1，戰鬥後給予自己 2 點傷害", "戰鬥中的攻擊、速度、防禦、魔防 + 2，戰鬥後給予自己 4 點傷害", "戰鬥中的攻擊、速度、防禦、魔防 + 3，戰鬥後給予自己 6 點傷害"], 0, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["提升角色等級即可強化此技能","戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 0)
                 characterStorage[19][5] = mage
 
-                monk = new unit("alpha", "僧侶", "<img src='monk.png' alt = '我方僧侶' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", 1, 1, 2, 19, 19, 0.6, 6, 0.5, 7, 0.45, 6, 0.45, 11, 0.65, "海神的祝福", "海神親手打造之杖，將心願託付於後世", 2, [0, 6, 9, 12], "治癒杖", "<img src='heal.png' alt = '治癒杖' class='characterSkillSize'>", ["提升角色等級即可強化此技能","我方回合開始時，回復周圍 2 格內的我方單位 5 HP" , "我方回合開始時，回復周圍 2 格內的我方單位 10 HP", "我方回合開始時，回復周圍 2 格內的我方單位（自身攻擊的 50%）HP"], 0, "奉獻", "<img src='devotion.png' alt = '奉獻' class='characterSkillSize'>", ["提升角色等級即可強化此技能","攻擊時，回復所造成傷害的 25%", "攻擊時，回復所造成傷害的 50%", "攻擊時，回復所造成傷害的 75%"], 0, "完美", "<img src='honeSpdRes.png' alt = '完美' class='characterSkillSize'>", ["提升角色等級即可強化此技能","戰鬥開始時，若自身HP高於 75% ，則速度、魔防 + 2，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 50% ，則速度、魔防 + 4，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 25% ，則速度、魔防 + 6，否則速度、魔防 - 7"], 0)
+                monk = new unit("alpha", "僧侶", "<img src='monk.png' alt = '我方僧侶' class='characterImgSize'>", "使用白魔法作為武器，可以輔助我方單位", 1, 1, 2, 19, 19, 0.6, 6, 0.5, 7, 0.45, 6, 0.45, 11, 0.65, "海神的祝福", "海神親手打造之杖，將心願託付於後世", 2, [0, 6, 9, 12], "治癒杖", "<img src='heal.png' alt = '治癒杖' class='characterSkillSize'>", ["我方回合開始時，回復我方所有單位 5 HP","我方回合開始時，回復我方所有單位 10 HP" , "我方回合開始時，回復周圍 2 格內的我方單位 15 HP", "我方回合開始時，回復周圍 2 格內的我方單位（自身攻擊的 80%）HP"], 0, "奉獻", "<img src='devotion.png' alt = '奉獻' class='characterSkillSize'>", ["提升角色等級即可強化此技能","攻擊時，回復所造成傷害的 25%", "攻擊時，回復所造成傷害的 50%", "攻擊時，回復所造成傷害的 75%"], 0, "完美", "<img src='honeSpdRes.png' alt = '完美' class='characterSkillSize'>", ["提升角色等級即可強化此技能","戰鬥開始時，若自身HP高於 75% ，則速度、魔防 + 2，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 50% ，則速度、魔防 + 4，否則速度、魔防 - 7", "戰鬥開始時，若自身HP高於 25% ，則速度、魔防 + 6，否則速度、魔防 - 7"], 0)
                 characterStorage[19][6] = monk
 
                 boss = new unit("beta", "默靈頭目", "<img src='boss.png' alt = '敵方頭目' class='characterImgSize'>", "使用劍作為武器，能力優秀", [0, 5, 8, 10], 0, 0, 0, [0, 23, 25, 27], 0, 0, [0, 10, 13, 15], 0, [0, 12, 14, 16], 0, [0, 11, 12, 14], 0, [0, 9, 10, 13], "始祖斬裂劍", "默靈的專屬武器，由自己發動攻擊時，攻擊2次", 1, [0, 6, 10, 14], "渾沌默靈", "<img src='divineSummoner.png' alt = '渾沌默靈' class='characterSkillSize'>", ["", "-", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下 1，一場遊戲僅能發動一次", "當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下 1，一場遊戲僅能發動一次"], 1, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 1, "復甦", "<img src='renewal.png' alt = '復甦' class='characterSkillSize'>", ["", "戰鬥後，回復 2 HP", "戰鬥後，回復 8 HP", "戰鬥後，回復 10 HP"], 1)
                 characterStorage[1][8] = boss
 
-                assassin1 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
+                assassin1 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客一' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 1, 4, 7], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
                 characterStorage[14][7] = assassin1
 
-                assassin2 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
+                assassin2 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客二' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 2, 5, 8], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
                 characterStorage[9][2] = assassin2
 
-                assassin3 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 4, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
+                assassin3 = new unit("beta", "默靈刺客", "<img src='assassin.png' alt = '敵方刺客三' class='characterImgSize'>", "侵略校園的默靈刺客，使用劍作為武器，能力平均", [0, 3, 6, 9], 0, 2, 20, 20, 0.6, 10, 0.65, 7, 0.55, 8, 0.6, 6, 0.45, "闇之鐵羽劍", "默靈的專屬武器，集合了默靈的魔力", 1, [0, 6, 9, 12], "渾沌學", "<img src='darkness.png' alt = '渾沌學' class='characterSkillSize'>", ["", "造成傷害 + 20%", "造成傷害 + 40%", "造成傷害 + 60%"], 1, "覺醒", "<img src='awaken.png' alt = '覺醒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的速度 + 2", "由自己發動攻擊時，戰鬥中的速度 + 4", "由自己發動攻擊時，戰鬥中的速度 + 6"], 1, "隱匿", "<img src='stealth.png' alt = '隱匿' class='characterSkillSize'>", ["", "受到物理攻擊時，降低 25% 的傷害", "受到物理攻擊時，降低 50% 的傷害", "受到物理攻擊時，降低 75% 的傷害"], 1)
                 characterStorage[5][1] = assassin3
 
-                armoredInfantry1 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 4, 6, 9], 0, 2, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 6"], 1)
+                armoredInfantry1 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 1, 4, 7], 0, 1, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 6"], 1)
                 characterStorage[15][2] = armoredInfantry1
 
-                armoredInfantry2 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 4, 6, 9], 0, 2, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 6"], 1)
+                armoredInfantry2 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵二' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 2, 5, 8], 0, 1, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 6"], 1)
                 characterStorage[11][3] = armoredInfantry2
 
-                armoredInfantry3 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 4, 6, 9], 0, 2, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 6"], 1)
+                armoredInfantry3 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵三' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 2, 5, 8], 0, 1, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 6"], 1)
                 characterStorage[10][7] = armoredInfantry3
 
-                armoredInfantry4 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵一' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 4, 6, 9], 0, 2, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 6"], 1)
+                armoredInfantry4 = new unit("beta", "默靈重裝兵", "<img src='armoredInfantry.png' alt = '敵方重裝兵四' class='characterImgSize'>", "侵略校園的默靈重裝兵，使用斧頭作為武器，擁有優秀的防禦力，但移動速度較慢", [0, 4, 7, 9], 0, 1, 23, 23, 0.65, 10, 0.65, 6, 0.5, 13, 0.6, 7, 0.55, "绯炎大斧", "默靈的專屬武器，一把冒焰的大斧，所到之處寸草不生", 1, [0, 6, 9, 12], "不動如山", "<img src='hardyBearing.png' alt = '不動如山' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75%，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 50% ，則自己與敵人皆無法進行追擊", "受到敵人攻擊時，若自身HP高於 25% ，則自己與敵人皆無法進行追擊"], 1, "聖盾", "<img src='aegis.png' alt = '聖盾' class='characterSkillSize'>", ["", "受到魔法攻擊時，降低 25% 的傷害", "受到魔法攻擊時，降低 50% 的傷害", "受到魔法攻擊時，降低 75% 的傷害"], 1, "緋炎", "<img src='bonfire.png' alt = '緋炎' class='characterSkillSize'>", ["", "受到敵人攻擊時，防守 + 2", "受到敵人攻擊時，戰鬥中的防守 + 4", "受到敵人攻擊時，戰鬥中的防守 + 6"], 1)
                 characterStorage[2][7] = armoredInfantry4
 
-                cavalry1 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
+                cavalry1 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵一' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 3, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
                 characterStorage[7][8] = cavalry1
 
-                cavalry2 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
+                cavalry2 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵二' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 7, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 2, 5, 8], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
                 characterStorage[10][4] = cavalry2
 
-                cavalry3 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
+                cavalry3 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵三' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 3, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
                 characterStorage[6][8] = cavalry3
 
-                cavalry4 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 6, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
+                cavalry4 = new unit("beta", "默靈騎兵", "<img src='cavalry.png' alt = '敵方騎兵四' class='characterImgSize'>", "侵略校園的默靈騎兵，使用槍作為武器，機動性高", [0, 4, 7, 9], 0, 3, 22, 22, 0.55, 10, 0.6, 10, 0.5, 7, 0.5, 7, 0.5, "風火飛舞的靈槍", "默靈的專屬武器，能召喚颶風", 1, [0, 6, 9, 12], "衝敵斬", "<img src='lunge.png' alt = '衝敵斬' class='characterSkillSize'>", ["", "由自己發動攻擊時，若自身HP高於 25%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 50%，則敵人攻擊 - 5", "由自己發動攻擊時，若自身HP高於 75%，則敵人攻擊 - 5"], 1, "回擊", "<img src='riptose.png' alt = '回擊' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 50% 時，則必定可進行追擊", "受到敵人攻擊時，若自身HP高於 25% 時，則必定可進行追擊"], 1, "同歸於盡", "<img src='desperation.png' alt = '同歸於盡' class='characterSkillSize'>", ["", "戰鬥中，若自身 HP 低於 25%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 50%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防", "戰鬥中，若自身 HP 低於 75%，以 50% 的攻擊額外攻擊一次，本次攻擊無視敵方防守及魔防"], 1)
                 characterStorage[0][8] = cavalry4
 
-                longbowman1 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [0, 4, 6, 9], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [0, 6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["", "戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
+                longbowman1 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手一' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [0, 1, 4, 7], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [0, 6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["", "戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
                 characterStorage[14][3] = longbowman1
 
-                longbowman2 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [0, 4, 6, 9], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [0, 6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["", "戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
+                longbowman2 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手二' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [0, 1, 4, 7], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [0, 6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["", "戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
                 characterStorage[13][3] = longbowman2
 
-                longbowman3 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [0, 4, 6, 9], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [0, 6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["", "戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
+                longbowman3 = new unit("beta", "默靈弓箭手", "<img src='longbowman.png' alt = '敵方弓箭手三' class='characterImgSize'>", "侵略校園的默靈弓箭手，使用弓作為武器，可以攻擊較遠的敵人", [0, 4, 7, 9], 0, 2, 19, 19, 0.5, 7, 0.5, 9, 0.65, 5, 0.4, 9, 0.65, "默靈的鍊弓", "默靈的專屬武器，曾以這把弓擊敗聖戰士烏勒爾", 2, [0, 6, 9, 12], "華炎", "<img src='ignis.png' alt = '華炎' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 30%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 50%", "由自己發動攻擊時，戰鬥中的攻擊增加自身防守的 80%"], 1, "靜謐", "<img src='silence.png' alt = '靜謐' class='characterSkillSize'>", ["", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 5 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人 3 以上時，則敵方無法反擊", "由自己發動攻擊時，自己無法追擊，若自己速度高於敵人時，敵方無法反擊"], 1, "憤怒", "<img src='wrath.png' alt = '憤怒' class='characterSkillSize'>", ["", "戰鬥開始時，若自身HP低於 25%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 50%, 則造成的傷害 + 10", "戰鬥開始時，若自身HP低於 75%, 則造成的傷害 + 10"], 1)
                 characterStorage[2][5] = longbowman3
 
-                sorcerer1 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [0, 4, 6, 9], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [0, 6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 3"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
+                sorcerer1 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃一' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [0, 2, 5, 8], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [0, 6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 3"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
                 characterStorage[10][1] = sorcerer1
 
-                sorcerer2 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [0, 4, 6, 9], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [0, 6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 3"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
+                sorcerer2 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃二' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [0, 3, 6, 9], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [0, 6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 3"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
                 characterStorage[5][2] = sorcerer2
 
-                sorcerer3 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [0, 4, 6, 9], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [0, 6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 3"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
+                sorcerer3 = new unit("beta", "默靈魔刃", "<img src='sorcerer.png' alt = '敵方魔刃三' class='characterImgSize'>", "侵略校園的默靈魔刃，使用黑魔法作為武器，以敵人的魔防計算傷害", [0, 4, 6, 9], 1, 2, 20, 20, 0.65, 7, 0.45, 6, 0.5, 9, 0.6, 7, 0.5, "絕無之書", "默靈的專屬武器，闇魔道研究學者留下來的咒書，擁有深不可測的魔力", 2, [0, 6, 9, 12], "強化", "<img src='aptitude.png' alt = '強化' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 1", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 2", "由自己發動攻擊時，戰鬥中的攻擊、速度 + 3"], 1, "逆轉", "<img src='reverse.png' alt = '逆轉' class='characterSkillSize'>", ["", "受到敵人攻擊時，若自身HP高於 75% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 50% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害", "受到敵人攻擊時，若自身HP高於 25% 時，撤銷敵人的「以敵人防守或魔防中較低者計算傷害」技能，以自身防守或魔防較高者承受傷害"], 1, "蛇毒", "<img src='poison.png' alt = '蛇毒' class='characterSkillSize'>", ["", "由自己發動攻擊時，戰鬥後給予敵人 4 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 7 點傷害", "由自己發動攻擊時，戰鬥後給予敵人 10 點傷害"], 1)
                 characterStorage[1][9] = sorcerer3
 
-                monastic1 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [0, 4, 6, 9], 1, 0, 22, 22, 0.5, 9, 0.65, 12, 0.75, 7, 0.5, 9, 0.75, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [0, 6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["", "我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["", "戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["", "造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
+                monastic1 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶一' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [0, 1, 4, 7], 1, 0, 22, 22, 0.5, 9, 0.55, 4, 0.55, 7, 0.5, 9, 0.65, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [0, 6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["", "我方回合開始時，對 5 格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害 * 0.5， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 1.5"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["", "戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["", "造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
                 characterStorage[13][7] = monastic1
 
-                monastic2 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [0, 4, 6, 9], 1, 0, 22, 22, 0.5, 9, 0.65, 12, 0.75, 7, 0.5, 9, 0.75, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [0, 6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["", "我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["", "戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["", "造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
+                monastic2 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶二' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [0, 3, 6, 9], 1, 0, 22, 22, 0.5, 9, 0.55, 4, 0.55, 7, 0.5, 9, 0.65, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [0, 6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["", "我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["", "戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["", "造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
                 characterStorage[5][6] = monastic2
+
+                
+
 
                 document.getElementById("body").setAttribute("style","background-image: url(neturalBackground01.png); background-size: 2000px 1040px;")
                 for(let i=0;i<10;i++)
@@ -353,7 +356,7 @@
                 board+="<div class='characterInfoPanel'>防守方<br><div id='defenderIcon' class='panelDetail'></div><div id='defenderState' class='panelDetail'></div><div id='defenderSkill' class='panelDetail'></div></div>"
                 document.getElementById("display").innerHTML=board
                 allyAliveUnit=6
-                enemyAliveUnit=7
+                enemyAliveUnit=20
                 playerAction=allyAliveUnit
                 console.log("難度 : "+difficulty)
                 stateGenerateAlly(summoner, difficulty)
@@ -959,7 +962,8 @@
                     console.log("攻擊後：" + attackerNAME + " " + attackerHP + " " + defenderNAME + " " + defenderHP)
                     //這裡結束           
                     updateInfoPanel(characterX,characterY,x,y)
-                    checkAlive(x,y)
+
+                    checkAlive(characterX,characterY,x,y)
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
@@ -1386,7 +1390,7 @@
                     
                     //這裡結束
                     updateInfoPanel(characterX,characterY,x,y)
-                    checkAlive(x,y)
+                    checkAlive(characterX,characterY,x,y)
                     for(let i=0;i<10;i++)
                     {
                         for(let j=0;j<20;j++)
@@ -1480,32 +1484,155 @@
                 */
             }
 
-            function checkAlive(x,y)
+            function checkAlive(characterX,characterY,x,y)
             {
+                if(characterStorage[characterX][characterY].hitPoint<=0&&characterStorage[x][y].side=="alpha")
+                {
+                    allyAliveUnit--
+                    characterStorage[characterX][characterY]=undefined
+                    document.getElementById("cell"+x+y).innerHTML=""
+                    console.log("allyAliveUnit:"+allyAliveUnit)
+                    
+                }
+                if(characterStorage[characterX][characterY].hitPoint<=0&&characterStorage[x][y].side=="beta")
+                {
+                    levelUp(x, y)
+                    enemyAliveUnit--
+                    characterStorage[characterX][characterY]=undefined
+                    document.getElementById("cell"+x+y).innerHTML=""
+                    console.log("enemyAliveUnit:"+enemyAliveUnit)
+                    
+                } 
                 if(characterStorage[x][y].hitPoint<=0&&characterStorage[x][y].side=="alpha")
                 {
                     allyAliveUnit--
                     characterStorage[x][y]=undefined
                     document.getElementById("cell"+x+y).innerHTML=""
                     console.log("allyAliveUnit:"+allyAliveUnit)
-                    if(allyAliveUnit<=0)
-                    {
-                        console.log("defeat")
-                        end(0)
-                    } 
+                    
                 } 
-                else if(characterStorage[x][y].hitPoint<=0&&characterStorage[x][y].side=="beta")
+                if(characterStorage[x][y].hitPoint<=0&&characterStorage[x][y].side=="beta")
                 {
+                    levelUp(characterX, characterY)
                     enemyAliveUnit--
                     characterStorage[x][y]=undefined
                     document.getElementById("cell"+x+y).innerHTML=""
                     console.log("enemyAliveUnit:"+enemyAliveUnit)
-                    if(enemyAliveUnit<=0)
-                    {
-                        console.log("victory")
-                        end(1)
-                    } 
+                    
                 } 
+                if(summoner.hitPoint <= 0)
+                {
+                    console.log("defeat")
+                    end(0)
+                } 
+                if(boss.hitPoint <= 0)
+                {
+                    console.log("victory")
+                    end(1)
+                } 
+            }
+
+            function levelUp(x, y){
+                console.log(characterStorage[x][y].unitName + " 升級")
+                
+                console.log("升級之前的數值")
+                console.log(characterStorage[x][y].unitName + " " + "Lv " + characterStorage[x][y].unitLevel)
+                console.log(characterStorage[x][y].unitName + " " + "HP " + characterStorage[x][y].hitPoint)
+				console.log(characterStorage[x][y].unitName + " " + "ATK " + characterStorage[x][y].damage)
+				console.log(characterStorage[x][y].unitName + " " + "SPD " + characterStorage[x][y].speed)
+				console.log(characterStorage[x][y].unitName + " " + "DEF " + characterStorage[x][y].defense)
+				console.log(characterStorage[x][y].unitName + " " + "RES " + characterStorage[x][y].resistance)
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill1Name + " Lv. " + characterStorage[x][y].skill1Level)
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill1Description[characterStorage[x][y].skill1Level])
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill2Name + " Lv. " + characterStorage[x][y].skill2Level)
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill2Description[characterStorage[x][y].skill2Level])
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill3Name + " Lv. " + characterStorage[x][y].skill3Level)
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill3Description[characterStorage[x][y].skill3Level])
+
+
+                let hitPointGrowth = characterStorage[x][y].hitPointGrowth
+				let damageGrowth = characterStorage[x][y].damageGrowth
+				let speedGrowth = characterStorage[x][y].speedGrowth
+				let defenseGrowth = characterStorage[x][y].defenseGrowth
+				let resistanceGrowth = characterStorage[x][y].resistanceGrowth
+				
+				let hitPointRNG = Math.random()
+                let damageRNG = Math.random()
+                let speedRNG = Math.random()
+                let defenseRNG = Math.random()
+                let resistanceRNG = Math.random()
+
+                if(hitPointRNG >= hitPointGrowth){
+                    characterStorage[x][y].hitPointMaxium++
+                    console.log(characterStorage[x][y].unitName + " HP 上升 1 點")
+                }
+                if(damageRNG >= damageGrowth){
+                    characterStorage[x][y].damage++
+                    console.log(characterStorage[x][y].unitName + " ATK 上升 1 點")
+                }
+                if(speedRNG >= speedGrowth){
+                    characterStorage[x][y].speed++
+                    console.log(characterStorage[x][y].unitName + " SPD 上升 1 點")
+                }
+                if(defenseRNG >= defenseGrowth){
+                    characterStorage[x][y].defense++
+                    console.log(characterStorage[x][y].unitName + " DEF 上升 1 點")
+                }
+                if(resistanceRNG >= resistanceGrowth){
+                    characterStorage[x][y].resistance++
+                    console.log(characterStorage[x][y].unitName + " RES 上升 1 點")
+                }
+
+                let RNG = skillUpRNG(x, y)
+                while(RNG == -1){
+                    RNG = skillUpRNG(x, y)
+                }
+                if(RNG == 0){
+                    console.log(characterStorage[x][y].unitName + " 已達等級上限，無法升級")
+                }
+                if(RNG == 1){
+                    characterStorage[x][y].skill1Level++
+                    console.log("技能 " + characterStorage[x][y].skill1Name + " 升級")
+                }
+                if(RNG == 2){
+                    characterStorage[x][y].skill2Level++
+                    console.log("技能 " + characterStorage[x][y].skill2Name + " 升級")
+                }
+                if(RNG == 3){
+                    characterStorage[x][y].skill3Level++
+                    console.log("技能 " + characterStorage[x][y].skill3Name + " 升級")
+                }
+
+                console.log("升級之後的數值")
+                console.log(characterStorage[x][y].unitName + " " + "Lv " + characterStorage[x][y].unitLevel)
+                console.log(characterStorage[x][y].unitName + " " + "HP " + characterStorage[x][y].hitPoint)
+				console.log(characterStorage[x][y].unitName + " " + "ATK " + characterStorage[x][y].damage)
+				console.log(characterStorage[x][y].unitName + " " + "SPD " + characterStorage[x][y].speed)
+				console.log(characterStorage[x][y].unitName + " " + "DEF " + characterStorage[x][y].defense)
+				console.log(characterStorage[x][y].unitName + " " + "RES " + characterStorage[x][y].resistance)
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill1Name + " Lv. " + characterStorage[x][y].skill1Level)
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill1Description[characterStorage[x][y].skill1Level])
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill2Name + " Lv. " + characterStorage[x][y].skill2Level)
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill2Description[characterStorage[x][y].skill2Level])
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill3Name + " Lv. " + characterStorage[x][y].skill3Level)
+                console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill3Description[characterStorage[x][y].skill3Level])
+            }
+
+            function skillUpRNG(x, y){
+                let RNG = Math.floor((Math.random() * 3) + 1)
+                if(characterStorage[x][y].skill1Level + characterStorage[x][y].skill2Level + characterStorage[x][y].skill3Level == 9){
+                    return 0
+                }
+                if(RNG == 1 && characterStorage[x][y].skill1Level >= 3){
+                    return -1
+                }
+                if(RNG == 2 && characterStorage[x][y].skill2Level >= 3){
+                    return -1
+                }
+                if(RNG == 3 && characterStorage[x][y].skill3Level >= 3){
+                    return -1
+                }
+                return RNG
             }
 
             function enemyTurn()
@@ -1513,10 +1640,139 @@
                 let attackFlag=0,waitTime=0
                 console.log("敵方回合")
                 document.getElementById("turn").innerHTML="敵方回合 剩餘敵方單位 : "+enemyAliveUnit
+
+
+                //montastic1
+                notBeta = 0
+                debuff = 0
+                for(let i=0;i<10;i++){
+                    for(let j=0;j<20;j++){
+                        if(characterStorage[j][i]!=undefined && Math.abs(13 - j) + Math.abs(7 - i) <= 5 && characterStorage[j][i].side=="alpha"){
+                            notBeta++
+                            
+                        }
+                    }
+                }
+                debuff = Math.floor(notBeta * 0.5 * monastic1.skill1Level)
+
+                if(monastic1.hitPoint > 0){
+                    for(let i=0;i<10;i++){
+                        for(let j=0;j<20;j++){
+                            if(characterStorage[j][i]!=undefined && Math.abs(13 - j) + Math.abs(7 - i) <= 5 && characterStorage[j][i].side=="alpha"){
+                                characterStorage[j][i].hitPoint -= debuff
+                                amount = debuff
+                                if(characterStorage[j][i].hitPoint < 0){
+                                    amount = 0
+                                    overload = 0 - characterStorage[j][i].hitPoint
+                                    characterStorage[j][i].hitPoint = 1
+                                    amount -= overload
+                                }
+                                if(amount > 0) console.log(characterStorage[j][i].unitName + " 透過默靈僧侶的技能 獻祭（" + monastic1.skill1Description[monastic1.skill1Level] + "）失去 " + amount + " HP")
+                            }
+                        }
+                    }
+                        
+                }
+
+                notBeta = 0
+                buff = 0
+                for(let i=0;i<10;i++){
+                    for(let j=0;j<20;j++){
+                        if(characterStorage[j][i]!=undefined && Math.abs(13 - j) + Math.abs(7 - i) <= 5 && characterStorage[j][i].side=="alpha"){
+                            notBeta++
+                            
+                        }
+                    }
+                }
+                buff = Math.floor(notBeta * 0.5 * monastic1.skill1Level)
+
+                if(monastic1.hitPoint > 0){
+                    for(let i=0;i<10;i++){
+                        for(let j=0;j<20;j++){
+                            if(characterStorage[j][i]!=undefined && Math.abs(13 - j) + Math.abs(7 - i) <= 5 && characterStorage[j][i].side=="beta"){
+                                characterStorage[j][i].hitPoint += buff
+                                amount = buff
+                                if(characterStorage[j][i].hitPoint > characterStorage[j][i].hitPointMaxium){
+                                    overload = characterStorage[j][i].hitPoint - characterStorage[j][i].hitPointMaxium
+                                    characterStorage[j][i].hitPoint = characterStorage[j][i].hitPointMaxium
+                                    amount -= overload
+                                }
+                                if(amount > 0) console.log(characterStorage[j][i].unitName + " 透過默靈僧侶的技能 治癒杖（" + monastic1.skill1Description[monastic1.skill1Level] + "）恢復 " + amount + " HP")
+                            }
+                        }
+                    }
+                        
+                }
+
+                //montastic2
+                notBeta = 0
+                debuff = 0
+                for(let i=0;i<10;i++){
+                    for(let j=0;j<20;j++){
+                        if(characterStorage[j][i]!=undefined && Math.abs(5 - j) + Math.abs(6 - i) <= 5 && characterStorage[j][i].side=="alpha"){
+                            notBeta++
+                            
+                        }
+                    }
+                }
+                debuff = Math.floor(notBeta * 0.5 * monastic2.skill1Level)
+
+                if(monastic2.hitPoint > 0){
+                    for(let i=0;i<10;i++){
+                        for(let j=0;j<20;j++){
+                            if(characterStorage[j][i]!=undefined && Math.abs(5 - j) + Math.abs(6 - i) <= 5 && characterStorage[j][i].side=="alpha"){
+                                characterStorage[j][i].hitPoint -= debuff
+                                amount = debuff
+                                if(characterStorage[j][i].hitPoint < 0){
+                                    amount = 0
+                                    overload = 0 - characterStorage[j][i].hitPoint
+                                    characterStorage[j][i].hitPoint = 1
+                                    amount -= overload
+                                }
+                                if(amount > 0) console.log(characterStorage[j][i].unitName + " 透過默靈僧侶的技能 獻祭（" + monastic2.skill1Description[monastic2.skill1Level] + "）失去 " + amount + " HP")
+                            }
+                        }
+                    }
+                        
+                }
+
+                notBeta = 0
+                buff = 0
+                for(let i=0;i<10;i++){
+                    for(let j=0;j<20;j++){
+                        if(characterStorage[j][i]!=undefined && Math.abs(5 - j) + Math.abs(6 - i) <= 5 && characterStorage[j][i].side=="alpha"){
+                            notBeta++
+                            
+                        }
+                    }
+                }
+                buff = Math.floor(notBeta * 0.5 * monastic2.skill1Level)
+
+                if(monastic2.hitPoint > 0){
+                    for(let i=0;i<10;i++){
+                        for(let j=0;j<20;j++){
+                            if(characterStorage[j][i]!=undefined && Math.abs(5 - j) + Math.abs(6 - i) <= 5 && characterStorage[j][i].side=="beta"){
+                                characterStorage[j][i].hitPoint += buff
+                                amount = buff
+                                if(characterStorage[j][i].hitPoint > characterStorage[j][i].hitPointMaxium){
+                                    overload = characterStorage[j][i].hitPoint - characterStorage[j][i].hitPointMaxium
+                                    characterStorage[j][i].hitPoint = characterStorage[j][i].hitPointMaxium
+                                    amount -= overload
+                                }
+                                if(amount > 0) console.log(characterStorage[j][i].unitName + " 透過默靈僧侶的技能 治癒杖（" + monastic2.skill1Description[monastic2.skill1Level] + "）恢復 " + amount + " HP")
+                            }
+                        }
+                    }
+                        
+                }
+                
+
+
                 for(let i=0;i<10;i++)
                 {
                     for(let j=0;j<20;j++)
-                    {   
+                    {
+                        
                         if(characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
                         {
                             for(let k=0;k<10;k++)
@@ -1527,7 +1783,7 @@
                                     {                                        
                                         setTimeout(function()
                                         {
-                                                                //初始化 attacker 角色數據
+                        //初始化 attacker 角色數據
                     attacker = characterStorage[j][i]
                     attackerNAME = attacker.unitName
                     attackerHP = attacker.hitPoint
@@ -1913,7 +2169,7 @@
                     characterStorage[l][k].hitPoint = defenderHP
                     console.log("攻擊後：" + attackerNAME + " " + attackerHP + " " + defenderNAME + " " + defenderHP)
                                             updateInfoPanel(j,i,l,k)
-                                            checkAlive(l,k)
+                                            checkAlive(j,i,l,k)
                                         },waitTime*2000)
                                         attackFlag=1
                                         waitTime++
@@ -2321,7 +2577,7 @@
                     characterStorage[n][m].hitPoint = defenderHP
                     console.log("攻擊後：" + attackerNAME + " " + attackerHP + " " + defenderNAME + " " + defenderHP)
                                                         updateInfoPanel(l,k,n,m)
-                                                        checkAlive(n,m)
+                                                        checkAlive(l,k,n,m)
                                                     },waitTime*2000)
                                                     attackFlag=1
                                                     waitTime++
@@ -2348,6 +2604,7 @@
             function playerTurn()
             {
                 playerAction=allyAliveUnit
+                console.log("我方回合")
                 for(let i=0;i<10;i++)
                 {
                     for(let j=0;j<20;j++)
@@ -2355,11 +2612,24 @@
                         if(characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="alpha")
                         {
                             characterStorage[j][i].attackActionPoint=1
-                            characterStorage[j][i].moveActionPoint=1                            
+                            characterStorage[j][i].moveActionPoint=1
+                            if(monk.hitPoint > 0){
+                                if(monk.skill1Level < 3){
+                                    buff = 5 * ( monk.skill1Level + 1)
+                                }
+                                else buff = monk.damage * 0.8
+                                
+                                characterStorage[j][i].hitPoint += buff
+                                if(characterStorage[j][i].hitPoint > characterStorage[j][i].hitPointMaxium){
+                                    overload = characterStorage[j][i].hitPoint - characterStorage[j][i].hitPointMaxium
+                                    characterStorage[j][i].hitPoint = characterStorage[j][i].hitPointMaxium
+                                    buff -= overload
+                                }
+                                if(buff > 0) console.log(characterStorage[j][i].unitName + " 透過僧侶的技能 治癒杖（" + monk.skill1Description[monk.skill1Level] + "）恢復 " + buff + " HP")     
+                            }
                         }                         
                     }
                 }
-                console.log("我方回合")
                 document.getElementById("turn").innerHTML="我方回合 剩餘可行動單位 : "+playerAction
             }
 
