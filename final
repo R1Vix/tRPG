@@ -56,6 +56,7 @@
                 padding: 0px;
                 margin: 0px;
                 border-bottom: 0.5px solid black;
+                border-right: 0.5px solid black;
                 width: 100%;
                 height: 30px;
                 text-align: center;
@@ -410,7 +411,7 @@
                 monastic2 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶二' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [0, 3, 6, 9], 1, 0, 22, 22, 0.5, 7, 0.55, 4, 0.55, 7, 0.5, 9, 0.65, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [0, 6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["", "我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["", "戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["", "造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
                 characterStorage[5][6] = monastic2
 
-                terrain = new unit("gamma", "障礙物", "<img src='terrain.png' alt = '障礙物' class='terrain'>", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+                terrain = new unit("gamma", "障礙物", "<img src=''>", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 for(let i=0;i<20;i++)
                 {
                     characterStorage[i][0] = terrain
@@ -563,7 +564,7 @@
                     {
                         for(let j=0;j<20;j++)
                         {             
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange + characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined&&characterStorage[characterX][characterY].attackActionPoint)
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]==undefined&&characterStorage[characterX][characterY].attackActionPoint)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(241,130,141,0.5)")
                             }
@@ -571,7 +572,7 @@
                             {                            
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
                             }
-                            if((Math.abs(x-j)+Math.abs(y-i))==characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side!="gamma"&&characterStorage[j][i].side!=characterStorage[characterX][characterY].side&&characterStorage[characterX][characterY].attackActionPoint)
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i]!=terrain&&characterStorage[j][i].side!=characterStorage[characterX][characterY].side&&characterStorage[characterX][characterY].attackActionPoint)
                             {                            
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(255,0,0,0.5)")
                             }
@@ -593,7 +594,14 @@
                             {
                                 for(let j=0;j<20;j++)
                                 {             
-                                    document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=terrain)
+                                    {
+                                        document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                    }
+                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]!=terrain)
+                                    {                            
+                                        document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                    }
                                 }
                             }
                             selected(x,y)
@@ -605,7 +613,7 @@
                         {
                             move(x,y)
                         }
-                        else if((Math.abs(characterX-x)+Math.abs(characterY-y))==characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y].side=="beta"&&characterStorage[characterX][characterY].attackActionPoint)
+                        else if((Math.abs(characterX-x)+Math.abs(characterY-y))<=characterStorage[characterX][characterY].weaponRange&&(Math.abs(characterX-x)+Math.abs(characterY-y))!=0&&characterStorage[x][y].side=="beta"&&characterStorage[characterX][characterY].attackActionPoint)
                         {                        
                             attack(x,y)
                         }
@@ -627,12 +635,19 @@
                     {
                         for(let j=0;j<20;j++)
                         {             
-                            document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
-                            if((Math.abs(x-j)+Math.abs(y-i))==characterStorage[x][y].weaponRange&&characterStorage[j][i]==undefined)
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[x][y].mobility&&characterStorage[j][i]!=terrain)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]!=terrain)
+                            {
+                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                            }
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]==undefined)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(241,130,141,0.5)")
                             }
-                            if((Math.abs(x-j)+Math.abs(y-i))==characterStorage[x][y].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
+                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]!=undefined&&characterStorage[j][i].side=="beta")
                             {                            
                                 checkEnemy++
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(255,0,0,0.5)")
@@ -652,7 +667,10 @@
                             {
                                 for(let j=0;j<20;j++)
                                 {             
-                                    document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]!=terrain)
+                                    {
+                                        document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                    }
                                 }
                             }
                         },1000)
@@ -667,7 +685,7 @@
                     {
                         for(let j=0;j<20;j++)
                         {             
-                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility)
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]!=terrain)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
@@ -996,7 +1014,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = Math.floor(defenderATK  * 0.5)
+                            debuff = Math.floor(attackerATK  * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1034,7 +1052,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = Math.floor(defenderATK * 0.5)
+                            debuff = Math.floor(attackerATK * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1060,9 +1078,9 @@
                     if(attacker.skill3Name == "復甦" && attackerHP > 0 && attacker.skill3Level > 0){
                         buff = -2 + 4 * attacker.skill3Level
                         attackerHP += buff
-                        if(attackerHP > attacker.hitPointMaxium){
-                            overload = attackerHP - attacker.hitPointMaxium
-                            attackerHP = attacker.hitPointMaxium
+                        if(attackerHP > attacker.hitPointMaxium[difficulty]){
+                            overload = attackerHP - attacker.hitPointMaxium[difficulty]
+                            attackerHP = attacker.hitPointMaxium[difficulty]
                             buff -= overload
                         }
                         console.log(attackerNAME + " 透過技能 復甦（" + attacker.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
@@ -1101,7 +1119,14 @@
                         {
                             for(let j=0;j<20;j++)
                             {             
-                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=terrain)
+                                {
+                                    document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                }
+                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined)
+                                {
+                                    document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                }
                             }
                         }   
                     }
@@ -1111,7 +1136,10 @@
                         {
                             for(let j=0;j<20;j++)
                             {             
-                                document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=terrain)
+                                {
+                                    document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
+                                }
                                 if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]==undefined)
                                 {
                                     document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(25,181,254,0.5)")
@@ -1431,7 +1459,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = Math.floor(defenderATK * 0.5)
+                            debuff = Math.floor(attackerATK * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1469,7 +1497,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = Math.floor(defenderATK * 0.5)
+                            debuff = Math.floor(attackerATK * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1495,9 +1523,9 @@
                     if(attacker.skill3Name == "復甦" && attackerHP > 0 && attacker.skill3Level > 0){
                         buff = -2 + 4 * attacker.skill3Level
                         attackerHP += buff
-                        if(attackerHP > attacker.hitPointMaxium){
-                            overload = attackerHP - attacker.hitPointMaxium
-                            attackerHP = attacker.hitPointMaxium
+                        if(attackerHP > attacker.hitPointMaxium[difficulty]){
+                            overload = attackerHP - attacker.hitPointMaxium[difficulty]
+                            attackerHP = attacker.hitPointMaxium[difficulty]
                             buff -= overload
                         }
                         console.log(attackerNAME + " 透過技能 復甦（" + attacker.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
@@ -1534,7 +1562,7 @@
                     {
                         for(let j=0;j<20;j++)
                         {             
-                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange)
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=terrain)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
@@ -1673,6 +1701,7 @@
                     levelUp(attackerX, attackerY)
                     enemyAliveUnit--
                     document.getElementById("cell"+defenderX+defenderY).innerHTML=""
+                    if(characterStorage[attackerX][attackerY].moveActionPoint) document.getElementById("cell"+defenderX+defenderY).setAttribute("style","background-color: rgba(25,181,254,0.5)")
                     if(boss.hitPoint <= 0)
                     {
                         console.log("victory")
@@ -1929,7 +1958,7 @@
                             {
                                 for(let l=0;l<20;l++)
                                 {   
-                                    if((Math.abs(l-j)+Math.abs(k-i))==characterStorage[j][i].weaponRange&&characterStorage[l][k]!=undefined&&characterStorage[l][k].side=="alpha")
+                                    if((Math.abs(l-j)+Math.abs(k-i))<=characterStorage[j][i].weaponRange&&characterStorage[l][k]!=undefined&&characterStorage[l][k].side=="alpha")
                                     {                                        
                                         setTimeout(function()
                                         {
