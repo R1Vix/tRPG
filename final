@@ -2277,9 +2277,9 @@
                                             if(defender.skill3Name == "復甦" && defenderHP > 0 && defender.skill3Level > 0){
                                                 buff = -2 + 4 * defender.skill3Level
                                                 defenderHP += buff
-                                                if(defenderHP > defender.hitPointMaxium[difficulty]){
-                                                    overload = defenderHP - defender.hitPointMaxium[difficulty]
-                                                    defenderHP = defender.hitPointMaxium[difficulty]
+                                                if(defenderHP > defender.hitPointMaxium){
+                                                    overload = defenderHP - defender.hitPointMaxium
+                                                    defenderHP = defender.hitPointMaxium
                                                     buff -= overload
                                                 }
                                                 console.log(defenderNAME + " 透過技能 復甦（" + defender.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
@@ -2685,9 +2685,9 @@
                                                         if(defender.skill3Name == "復甦" && defenderHP > 0 && defender.skill3Level > 0){
                                                             buff = -2 + 4 * defender.skill3Level
                                                             defenderHP += buff
-                                                            if(defenderHP > defender.hitPointMaxium[difficulty]){
-                                                                overload = defenderHP - defender.hitPointMaxium[difficulty]
-                                                                defenderHP = defender.hitPointMaxium[difficulty]
+                                                            if(defenderHP > defender.hitPointMaxium){
+                                                                overload = defenderHP - defender.hitPointMaxium
+                                                                defenderHP = defender.hitPointMaxium
                                                                 buff -= overload
                                                             }
                                                             console.log(defenderNAME + " 透過技能 復甦（" + defender.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
@@ -2800,7 +2800,7 @@
             {
                 document.getElementById("infoSession1").innerHTML=characterStorage[x][y].unitIcon+characterStorage[x][y].unitName+" Lv : "+characterStorage[x][y].unitLevel+"<br>"+characterStorage[x][y].nameDescription
                 document.getElementById("infoSession2").innerHTML=characterStorage[x][y].weaponName+"<br>"+characterStorage[x][y].weaponDescripton
-                document.getElementById("infoSession3").innerHTML="HP : "+characterStorage[x][y].hitPoint+"<br>DMG : "+characterStorage[x][y].damage+"<br>SPD : "+characterStorage[x][y].speed+"<br>DEF : "+characterStorage[x][y].defense+"<br>RES : "+characterStorage[x][y].resistance
+                document.getElementById("infoSession3").innerHTML="HP : "+characterStorage[x][y].hitPoint+" / " +characterStorage[x][y].hitPointMaxium + "<br>DMG : "+characterStorage[x][y].damage+"<br>SPD : "+characterStorage[x][y].speed+"<br>DEF : "+characterStorage[x][y].defense+"<br>RES : "+characterStorage[x][y].resistance
                 document.getElementById("infoSession4").innerHTML=characterStorage[x][y].skill1Icon+characterStorage[x][y].skill1Name+" Lv : "+characterStorage[x][y].skill1Level+"<br>"+characterStorage[x][y].skill1Description[characterStorage[x][y].skill1Level]
                 document.getElementById("infoSession5").innerHTML=characterStorage[x][y].skill2Icon+characterStorage[x][y].skill2Name+" Lv : "+characterStorage[x][y].skill2Level+"<br>"+characterStorage[x][y].skill2Description[characterStorage[x][y].skill2Level]
                 document.getElementById("infoSession6").innerHTML=characterStorage[x][y].skill3Icon+characterStorage[x][y].skill3Name+" Lv : "+characterStorage[x][y].skill3Level+"<br>"+characterStorage[x][y].skill3Description[characterStorage[x][y].skill3Level]
