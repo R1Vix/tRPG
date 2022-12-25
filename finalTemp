@@ -49,7 +49,7 @@
                 margin: 0px;
                 width: 100px;
                 height: 100px;
-                opacity: 0.5;
+                opacity: 0.7;
             }
             .turnPanel
             {
@@ -415,6 +415,10 @@
                 {
                     characterStorage[i][0] = terrain
                 }
+                for(let i=3;i<20;i++)
+                {
+                    characterStorage[i][9] = terrain
+                }
                 characterStorage[0][1] = terrain
                 characterStorage[1][1] = terrain
                 characterStorage[11][1] = terrain
@@ -473,10 +477,6 @@
                 characterStorage[15][8] = terrain
                 characterStorage[18][8] = terrain
                 characterStorage[19][8] = terrain
-                for(let i=3;i<20;i++)
-                {
-                    characterStorage[i][9] = terrain
-                }
 
                 document.getElementById("body").setAttribute("style","background-image: url(neturalBackground01.png); background-size: 2000px 1050px;")
                 for(let i=0;i<10;i++)
@@ -489,12 +489,20 @@
                     }
                     board+="</tr>"
                 }
+                
                 board+="</table>"
                 board+="<div id='turn' class='turnPanel'>我方回合 剩餘可行動單位 : 6</div>"
                 board+="<div id='infoSession1' class='characterInfoPanel'></div><div id='infoSession2' class='characterInfoPanel_2'></div><div id='infoSession3' class='characterInfoPanel_2'></div><div id='infoSession4' class='characterInfoPanel'></div><div id='infoSession5' class='characterInfoPanel'></div><div id='infoSession6' class='characterInfoPanel'></div>"
                 board+="<div class='characterBattlePanel'>攻擊方<br><div id='attackerIcon' class='battlePanelDetail'></div><div id='attackerState' class='battlePanelDetail'></div><div id='attackerSkill' class='battlePanelDetail'></div></div>"
                 board+="<div class='characterBattlePanel'>防守方<br><div id='defenderIcon' class='battlePanelDetail'></div><div id='defenderState' class='battlePanelDetail'></div><div id='defenderSkill' class='battlePanelDetail'></div></div>"
                 document.getElementById("display").innerHTML=board
+                for(let i=0;i<10;i++)
+                {
+                    for(let j=0;j<20;j++)
+                    {
+                        if(characterStorage[j][i]!=undefined&&characterStorage[j][i]==terrain) document.getElementById("cell"+j+i).setAttribute("style","background-color: gray; opacity: 0.7;")
+                    }
+                }
                 allyAliveUnit=6
                 enemyAliveUnit=20
                 playerAction=allyAliveUnit
@@ -1005,8 +1013,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = Math.floor(defenderATK * 0.5)
-                            defenderATK * 0.5
+                            debuff = Math.floor(attackerATK  * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1044,7 +1051,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = defenderATK * 0.5
+                            debuff = Math.floor(attackerATK * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1107,7 +1114,6 @@
                     updateBattlePanel(characterX,characterY,x,y)   
                     if(characterStorage[characterX][characterY].hitPoint<=0)
                     {
-                        console.log("1")
                         for(let i=0;i<10;i++)
                         {
                             for(let j=0;j<20;j++)
@@ -1122,12 +1128,9 @@
                                 }
                             }
                         }   
-                        selectedFlag=1
-                        console.log("selectedFlag "+selectedFlag)
                     }
                     else
                     {
-                        console.log("2")
                         for(let i=0;i<10;i++)
                         {
                             for(let j=0;j<20;j++)
@@ -1455,7 +1458,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = defenderATK * 0.5
+                            debuff = Math.floor(attackerATK * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1493,7 +1496,7 @@
                         attackerHP -= defendingTrueDamage
 
                         if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                            debuff = defenderATK * 0.5
+                            debuff = Math.floor(attackerATK * 0.5)
                             attackerHP -= debuff
                             console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                         }
@@ -1654,6 +1657,8 @@
                 if(characterStorage[attackerX][attackerY].hitPoint<=0&&characterStorage[attackerX][attackerY].side=="alpha")
                 {
                     allyAliveUnit--
+                    selectedFlag=1
+                    playerAction--
                     document.getElementById("cell"+attackerX+attackerY).innerHTML=""
                     if(summoner.hitPoint <= 0)
                     {
@@ -1707,7 +1712,8 @@
 
             function levelUp(x, y){
                 console.log(characterStorage[x][y].unitName + " 升級")
-                
+                characterStorage[x][y].unitLevel++
+                /*
                 console.log("升級之前的數值")
                 console.log(characterStorage[x][y].unitName + " " + "Lv " + characterStorage[x][y].unitLevel)
                 console.log(characterStorage[x][y].unitName + " " + "HP " + characterStorage[x][y].hitPoint)
@@ -1721,7 +1727,7 @@
                 console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill2Description[characterStorage[x][y].skill2Level])
                 console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill3Name + " Lv. " + characterStorage[x][y].skill3Level)
                 console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill3Description[characterStorage[x][y].skill3Level])
-
+                */
 
                 let hitPointGrowth = characterStorage[x][y].hitPointGrowth
 				let damageGrowth = characterStorage[x][y].damageGrowth
@@ -1775,7 +1781,7 @@
                     characterStorage[x][y].skill3Level++
                     console.log("技能 " + characterStorage[x][y].skill3Name + " 升級")
                 }
-
+                /*
                 console.log("升級之後的數值")
                 console.log(characterStorage[x][y].unitName + " " + "Lv " + characterStorage[x][y].unitLevel)
                 console.log(characterStorage[x][y].unitName + " " + "HP " + characterStorage[x][y].hitPoint)
@@ -1789,6 +1795,7 @@
                 console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill2Description[characterStorage[x][y].skill2Level])
                 console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill3Name + " Lv. " + characterStorage[x][y].skill3Level)
                 console.log(characterStorage[x][y].unitName + " " + characterStorage[x][y].skill3Description[characterStorage[x][y].skill3Level])
+                */
             }
 
             function skillUpRNG(x, y){
@@ -2218,7 +2225,7 @@
                                             defenderHP -= attackingTrueDamage
 
                                             if(attackerHP <= attacker.hitPointMaxium * attacker.skill3Level * 0.25 && attacker.skill3Name == "同歸於盡"){
-                                                    debuff = attackerATK * 0.5
+                                                    debuff = Math.floor(attackerATK * 0.5)
                                                     attackerHP -= debuff
                                                     console.log(attackerNAME + " 透過技能 同歸於盡（" + attacker.skill3Description[attacker.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                                             }
@@ -2279,7 +2286,7 @@
                                                 attackerHP -= defendingTrueDamage
 
                                                 if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                                                    debuff = defenderATK * 0.5
+                                                    debuff = Math.floor(attackerATK * 0.5)
                                                     attackerHP -= debuff
                                                     console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                                                 }
@@ -2294,9 +2301,9 @@
                                             if(defender.skill3Name == "復甦" && defenderHP > 0 && defender.skill3Level > 0){
                                                 buff = -2 + 4 * defender.skill3Level
                                                 defenderHP += buff
-                                                if(defenderHP > defender.hitPointMaxium[difficulty]){
-                                                    overload = defenderHP - defender.hitPointMaxium[difficulty]
-                                                    defenderHP = defender.hitPointMaxium[difficulty]
+                                                if(defenderHP > defender.hitPointMaxium){
+                                                    overload = defenderHP - defender.hitPointMaxium
+                                                    defenderHP = defender.hitPointMaxium
                                                     buff -= overload
                                                 }
                                                 console.log(defenderNAME + " 透過技能 復甦（" + defender.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
@@ -2626,7 +2633,7 @@
                                                         defenderHP -= attackingTrueDamage
 
                                                         if(attackerHP <= attacker.hitPointMaxium * attacker.skill3Level * 0.25 && attacker.skill3Name == "同歸於盡"){
-                                                                debuff = attackerATK * 0.5
+                                                                debuff = Math.floor(attackerATK * 0.5)
                                                                 attackerHP -= debuff
                                                                 console.log(attackerNAME + " 透過技能 同歸於盡（" + attacker.skill3Description[attacker.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                                                         }
@@ -2687,7 +2694,7 @@
                                                             attackerHP -= defendingTrueDamage
 
                                                             if(defenderHP <= defender.hitPointMaxium * defender.skill3Level * 0.25 && defender.skill3Name == "同歸於盡"){
-                                                                debuff = defenderATK * 0.5
+                                                                debuff = Math.floor(attackerATK * 0.5)
                                                                 attackerHP -= debuff
                                                                 console.log(defenderNAME + " 透過技能 同歸於盡（" + defender.skill3Description[defender.skill3Level] + "）額外對 " + attackerNAME + " 造成 " + debuff + " 點傷害")
                                                             }
@@ -2702,9 +2709,9 @@
                                                         if(defender.skill3Name == "復甦" && defenderHP > 0 && defender.skill3Level > 0){
                                                             buff = -2 + 4 * defender.skill3Level
                                                             defenderHP += buff
-                                                            if(defenderHP > defender.hitPointMaxium[difficulty]){
-                                                                overload = defenderHP - defender.hitPointMaxium[difficulty]
-                                                                defenderHP = defender.hitPointMaxium[difficulty]
+                                                            if(defenderHP > defender.hitPointMaxium){
+                                                                overload = defenderHP - defender.hitPointMaxium
+                                                                defenderHP = defender.hitPointMaxium
                                                                 buff -= overload
                                                             }
                                                             console.log(defenderNAME + " 透過技能 復甦（" + defender.skill3Description[defender.skill3Level] + "）在戰鬥後恢復 " + buff + " HP")
@@ -2817,10 +2824,10 @@
             {
                 document.getElementById("infoSession1").innerHTML=characterStorage[x][y].unitIcon+characterStorage[x][y].unitName+" Lv : "+characterStorage[x][y].unitLevel+"<br>"+characterStorage[x][y].nameDescription
                 document.getElementById("infoSession2").innerHTML=characterStorage[x][y].weaponName+"<br>"+characterStorage[x][y].weaponDescripton
-                document.getElementById("infoSession3").innerHTML="HP : "+characterStorage[x][y].hitPoint+"<br>DMG : "+characterStorage[x][y].damage+"<br>SPD : "+characterStorage[x][y].speed+"<br>DEF : "+characterStorage[x][y].defense+"<br>RES : "+characterStorage[x][y].resistance
-                document.getElementById("infoSession4").innerHTML=characterStorage[x][y].skill1Icon+characterStorage[x][y].skill1Name+" Lv : "+characterStorage[x][y].skill1Level+"<br>"+characterStorage[x][y].skill1Description[1]
-                document.getElementById("infoSession5").innerHTML=characterStorage[x][y].skill2Icon+characterStorage[x][y].skill2Name+" Lv : "+characterStorage[x][y].skill2Level+"<br>"+characterStorage[x][y].skill2Description[1]
-                document.getElementById("infoSession6").innerHTML=characterStorage[x][y].skill3Icon+characterStorage[x][y].skill3Name+" Lv : "+characterStorage[x][y].skill3Level+"<br>"+characterStorage[x][y].skill3Description[1]
+                document.getElementById("infoSession3").innerHTML="HP : "+characterStorage[x][y].hitPoint+" / " +characterStorage[x][y].hitPointMaxium +"<br>DMG : "+characterStorage[x][y].damage+"<br>SPD : "+characterStorage[x][y].speed+"<br>DEF : "+characterStorage[x][y].defense+"<br>RES : "+characterStorage[x][y].resistance
+                document.getElementById("infoSession4").innerHTML=characterStorage[x][y].skill1Icon+characterStorage[x][y].skill1Name+" Lv : "+characterStorage[x][y].skill1Level+"<br>"+characterStorage[x][y].skill1Description[characterStorage[x][y].skill1Level]
+                document.getElementById("infoSession5").innerHTML=characterStorage[x][y].skill2Icon+characterStorage[x][y].skill2Name+" Lv : "+characterStorage[x][y].skill2Level+"<br>"+characterStorage[x][y].skill2Description[characterStorage[x][y].skill2Level]
+                document.getElementById("infoSession6").innerHTML=characterStorage[x][y].skill3Icon+characterStorage[x][y].skill3Name+" Lv : "+characterStorage[x][y].skill3Level+"<br>"+characterStorage[x][y].skill3Description[characterStorage[x][y].skill3Level]
             }
 
             window.addEventListener("load",cover,false)
