@@ -596,7 +596,7 @@
                             {
                                 for(let j=0;j<20;j++)
                                 {             
-                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=terrain)
+                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange + characterStorage[characterX][characterY].mobility&&characterStorage[j][i]!=terrain)
                                     {	
                                         document.getElementById("cell"+j+i).setAttribute("style","background-color: none")	
                                     }	
@@ -641,7 +641,7 @@
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
-                            if((Math.abs(x-j)+Math.abs(y-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]==undefined)
+                            if((Math.abs(x-j)+Math.abs(y-i))==characterStorage[x][y].weaponRange&&characterStorage[j][i]==undefined)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: rgba(241,130,141,0.5)")
                             }
@@ -665,7 +665,7 @@
                             {
                                 for(let j=0;j<20;j++)
                                 {             
-                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[x][y].weaponRange&&characterStorage[j][i]!=terrain)
+                                    if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[x][y].weaponRange + characterStorage[x][y].mobility&&characterStorage[j][i]!=terrain)
                                     {
                                         document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                                     }
@@ -683,7 +683,7 @@
                     {
                         for(let j=0;j<20;j++)
                         {             
-                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility&&characterStorage[j][i]!=terrain)
+                            if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].mobility + characterStorage[characterX][characterY].mobility&&characterStorage[j][i]!=terrain)
                             {
                                 document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                             }
@@ -1117,7 +1117,7 @@
                         {
                             for(let j=0;j<20;j++)
                             {             
-                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=terrain)
+                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange + characterStorage[characterX][characterY].mobility&&characterStorage[j][i]!=terrain)
                                 {
                                     document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                                 }
@@ -1134,7 +1134,7 @@
                         {
                             for(let j=0;j<20;j++)
                             {             
-                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange&&characterStorage[j][i]!=terrain)
+                                if((Math.abs(characterX-j)+Math.abs(characterY-i))<=characterStorage[characterX][characterY].weaponRange + characterStorage[characterX][characterY].mobility&&characterStorage[j][i]!=terrain)
                                 {
                                     document.getElementById("cell"+j+i).setAttribute("style","background-color: none")
                                 }
