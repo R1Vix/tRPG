@@ -549,6 +549,8 @@
                 stateGenerateEnemy(sorcerer3, difficulty)
                 stateGenerateEnemy(monastic1, difficulty)
                 stateGenerateEnemy(monastic2, difficulty)
+
+                document.getElementById("BGM").play()
             }
 
             function end(n)
@@ -2929,6 +2931,9 @@
         </audio>
         <audio id="magicAttack" preload="auto">
             <source src="magicAttack.mp3" type="audio/mpeg">
+        </audio>
+        <audio id="BGM" preload="auto">
+            <source src="BGM.mp3" type="audio/mpeg">
         </audio>
         <div id="display"></div>
     </body>
