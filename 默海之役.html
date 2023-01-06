@@ -253,7 +253,19 @@
                 width: 150px;
                 height: 75px;
             }
+            .smallText
+            {
+                padding: 0px;
+                margin: 0px;
+                font-family:"cwTeXFangSong";
+                font-size: 80px;
+                position: absolute;
+                top: 85%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
         <script>
             let selectedFlag=1,characterX,characterY,playerAction,allyAliveUnit,enemyAliveUnit,difficulty,characterStorage=new Array(20)
             for (let i=0;i<characterStorage.length;i++) characterStorage[i]=new Array(10)
@@ -301,7 +313,7 @@
             function cover()
             {
                 document.getElementById("body").setAttribute("style","background-image: url(neturalBackground00.png); background-size: cover;")
-                document.getElementById("display").innerHTML="<div class='coverText'>默海之役</div><br><input type='button' id='startButton' value='開始遊戲' class='coverButton'>"
+                document.getElementById("display").innerHTML="<div class='coverText'>默海之役</div><br><input type='button' id='startButton' value='開始遊戲' class='coverButton'><br><div class='smallText'><a href='https://r1vix.github.io/tRPG/%E8%AA%AA%E6%98%8E.pptx'>（說明文件）</a></div>"
                 document.getElementById("startButton").addEventListener("click",selectDifficulty,false)
             }
 
@@ -332,7 +344,7 @@
 
                     }
                 }
-
+                
                 summoner = new unit("alpha", "召喚師", "<img src='summoner.png' alt = '我方召喚師' class='characterImgSize'>", "主角，使用劍作為武器，能力平均", 4, 0, 2, 22, 22, 0.7, 13, 0.75, 7, 0.65, 11, 0.7, 8, 0.55, "斬裂劍", "召喚師的御用武器，以敵人防守或魔防中較低者計算傷害", 1, [0, 6, 10, 14], "至尊召喚師", "<img src='divineSummoner.png' alt = '至尊召喚師' class='characterSkillSize'>", ["", "", "", "受到敵人攻擊時，當自己的HP高於 2，且受到敵人的致命攻擊時，將傷害盡低至身HP會剩下 1，一場遊戲僅能發動一次"], 3, "反擊", "<img src='counter.png' alt = '反擊' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "若自身HP為100%，受到敵人攻擊時，可無視距離進行反擊", "若自身HP高於50%，受到敵人攻擊時，可無視距離進行反擊", "受到敵人攻擊時，可無視距離進行反擊"], 0, "復甦", "<img src='renewal.png' alt = '復甦' class='characterSkillSize'>", ["提升角色等級即可強化此技能", "戰鬥後，回復 2 HP", "戰鬥後，回復 8 HP", "戰鬥後，回復 10 HP"], 0)
                 characterStorage[18][6] = summoner
 
@@ -410,6 +422,8 @@
 
                 monastic2 = new unit("beta", "默靈僧侶", "<img src='monastic.png' alt = '敵方僧侶二' class='characterImgSize'>", "侵略校園的默靈僧侶，使用白魔法作為武器，可以輔助我方單位", [0, 3, 6, 9], 1, 0, 22, 22, 0.5, 7, 0.55, 4, 0.55, 7, 0.5, 9, 0.65, "落雷之符", "默靈的專屬武器，戰神托爾的符咒，對人類真正的強大抱持著敬意", 2, [0, 6, 9, 12], "獻祭", "<img src='sacrifice.png' alt = '獻祭' class='characterSkillSize'>", ["", "我方回合開始時，對3格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對4格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量", "我方回合開始時，對5格內的敵方單位造成 X 點傷害，回復5格內的我方單位 X 點傷害， X = 5 格內的敵方單位數量 * 2"], 1, "附身", "<img src='bless.png' alt = '附身' class='characterSkillSize'>", ["", "戰鬥中的攻擊、速度、防禦、魔防 + 1", "戰鬥中的攻擊、速度、防禦、魔防 + 4", "戰鬥中的攻擊、速度、防禦、魔防 + 7"], 1, "暴雷", "<img src='thunder.png' alt = '暴雷' class='characterSkillSize'>", ["", "造成傷害 + 30%", "造成傷害 + 60%", "造成傷害 + 90%"], 1)
                 characterStorage[5][6] = monastic2
+
+                
 
                 terrain = new unit("gamma", "障礙物", "<img src='terrain.png' alt = '障礙物' class='terrain'>", "", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
                 for(let i=0;i<20;i++)
@@ -2026,6 +2040,24 @@
                                             */
 
                                             //attacker 的技能
+
+                                            if(characterStorage[l][k].weaponName== "闇之鐵羽劍" || "始祖斬裂劍")
+                                            {
+                                                document.getElementById("swordAttack").play()
+                                            }  
+                                            else if(characterStorage[let][k].weaponName== "绯炎大斧" || "風火飛舞的靈槍")        
+                                            {
+                                                document.getElementById("axeAndSpearAttack").play()
+                                            }    
+                                            else if(characterStorage[l][k].weaponName=="默靈的鍊弓")        
+                                            {
+                                                document.getElementById("bowAttack").play()
+                                            }    
+                                            else if(characterStorage[l][k].weaponName=="絕無之書" || "落雷之符")        
+                                            {
+                                                document.getElementById("magicAttack").play()
+                                            }
+
                                             if(attacker.skill1Name == "渾沌學")
                                             {
                                                 buffATK = Math.floor(attackerATK * attacker.skill1Level * 0.2)
@@ -2426,12 +2458,31 @@
                                                         console.log(attackerNAME + " 的 SPD 為 " + attackerSPD)
                                                         console.log(attackerNAME + " 的 DEF 為 " + attackerDEF)
                                                         console.log(attackerNAME + " 的 RES 為 " + attackerRES)
-                                                        console.log(defenderNAME + " 的 HP 為 " + defenderHP)
+                                                        console.log(defenderNAME + " 的 HP 為 " + defenderHP) 
                                                         console.log(defenderNAME + " 的 ATK 為 " + defenderATK)
                                                         console.log(defenderNAME + " 的 SPD 為 " + defenderSPD)
                                                         console.log(defenderNAME + " 的 DEF 為 " + defenderDEF)
                                                         console.log(defenderNAME + " 的 RES 為 " + defenderRES)
                                                         */
+
+
+                                                        if(characterStorage[l][k].weaponName== "闇之鐵羽劍" || "始祖斬裂劍")
+                                                        {
+                                                            document.getElementById("swordAttack").play()
+                                                        }  
+                                                        else if(characterStorage[let][k].weaponName== "绯炎大斧" || "風火飛舞的靈槍")        
+                                                        {
+                                                            document.getElementById("axeAndSpearAttack").play()
+                                                        }    
+                                                        else if(characterStorage[l][k].weaponName=="默靈的鍊弓")        
+                                                        {
+                                                            document.getElementById("bowAttack").play()
+                                                        }    
+                                                        else if(characterStorage[l][k].weaponName=="絕無之書" || "落雷之符")        
+                                                        {
+                                                            document.getElementById("magicAttack").play()
+                                                        }
+
 
                                                         //attacker 的技能
                                                         if(attacker.skill1Name == "渾沌學")
@@ -2839,7 +2890,7 @@
                         }                         
                     }
                 }
-                document.getElementById("turn").innerHTML="我方回合 剩餘可行動單位 : "+playerAction
+                $("turn").innerHTML="我方回合 剩餘可行動單位 : "+playerAction
             }
 
             function updateBattlePanel(attackerX,attackerY,defenderX,defenderY)
